@@ -1,0 +1,18 @@
+1. 在 META-INF/context.xml 里配置
+    <Context>
+        <Resource name="jdbcmysql" auth="Container" type="javax.sql.DataSource"
+                  maxActive="100" maxIdle="30" maxWait="1000"
+                  username="root" password="root1991"
+                  driverClassName="com.mysql.jdbc.Driver"
+                  url="jdbc:mysql://localhost:3306/servlethomework2"/>
+    </Context>
+2. 在 WEB-INF/web.xml 里配置
+    <resource-ref>
+        <description>dataSource</description>
+        <res-ref-name>jdbcmysql</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+3. 初始化javax.sql.DataSource对象
+    Context context = new InitialContext();
+    DATA_SOURCE = (DataSource) context.lookup("java:/comp/env/jdbcmysql");

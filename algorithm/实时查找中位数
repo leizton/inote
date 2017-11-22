@@ -1,0 +1,27 @@
+输入是一个int型的数据流, 每次读入一个int数, 给出读入后当前的中位数.
+
+方法1, O(n^2)
+	数据结构: 一个有序数组.
+	每读入一个数使用插入排序放进数组中.
+	从数组中获取中位数是O(1), 插入排序是O(n)共n次, 所以是O(n^2).
+
+方法2, O(nlogn)
+	数据结构: 一个最小堆(minHeap)和一个最大堆(maxHeap).
+	两个条件:
+		1. minHeap和maxHeap的元素个数差值不超过1;
+		2. minHeap堆顶元素比maxHeap堆顶大, 即 minHeap.top > maxHeap.top,
+		所以中位数是minHeap.top, 或maxHeap.top, 或两者的平均数.
+	minHeap和maxHeap把集合被分成两部分.
+	插入过程如下: 设读入是newNum,
+		1. 当 minHeap.size > maxHeap.size
+			Math.max(newNum, minHeap.top) 插入 minHeap
+			Math.min(newNum, minHeap.top) 插入 maxHeap
+			完成后 minHeap.size == maxHeap.size
+		2. 当 minHeap.size < maxHeap.size
+			Math.max(newNum, maxHeap.top) 插入 minHeap
+			Math.min(newNum, maxHeap.top) 插入 maxHeap
+			完成后 minHeap.size == maxHeap.size
+		3. 当 minHeap.size == maxHeap.size
+			if newNum > minHeap.size, newNum 插入 minHeap;
+			else newNum 插入 maxHeap.
+	堆的插入是O(logn), 所以是O(nlogn).

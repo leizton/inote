@@ -1,0 +1,16 @@
+// proto3不再支持default，原因是当序列化和反序列化设置的默认值不同时，容易造成数据不一致
+syntax = "proto3";
+
+message Student {
+    string name = 1;
+    int32 age = 2;
+
+    enum Gender {
+        UNKNOW = 0;
+        BOY = 1;
+        GIRL = 2;
+    }
+    Gender gender = 3;
+
+    repeated string hobbies = 4;
+}

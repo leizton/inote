@@ -1,0 +1,34 @@
++ ~/.workline
+    - .curr_repo
+    - .curr_wline
+    + repo_name
+        - linename1
+        - linename2
+
+//
+workline init 'repo-url'
+workline curr-repo
+workline status
+workline pull
+workline push
+
+//
+workline switch 'wline-name'  // create or switch
+workline curr-wline
+workline rename ['old-line-name'] 'new-line-name'
+workline ls-wline  // show wline list in this repo
+
+// todo
+workline create 'task-name'                   // 1 [2017-10-01 00:00:00] create task-name
+workline mark   'task-id'  ['mark-content']   // 1 [2017-10-01 00:01:00] mark   task-name  mark-content
+workline start  'task-id'  ['start-content']  // 1 [2017-10-01 00:02:00] start  task-name  start-content
+workline mark   'task-id'  ['mark-content']   // 1 [2017-10-01 00:03:00] mark   task-name  mark-content
+workline done   'task-id'  ['done-content']   // 1 [2017-10-01 00:04:00] done   task-name  done-content
+workline end    'task-id'  ['end-content']    // 1 [2017-10-01 00:05:00] end    task-name  end-content
+
+//
+workline ls            // todo & doing
+workline ll 'task-id'
+workline ls-todo
+workline ls-doing
+workline ls-done

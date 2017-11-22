@@ -1,0 +1,9 @@
+1. 洛必达法则
+lim f(x)/g(x) = lim f`(x)/g`(x)
+
+2. 换元法
+$f(x)dx = $f(g(t))g`(t)dt, 有x=g(t)
+
+3. 分部积分法
+$uv`dx = uv| - $u`vdx
+由(uv)` = u`v + uv`两边求积分推得

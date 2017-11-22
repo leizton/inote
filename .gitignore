@@ -1,0 +1,5 @@
+tmp*
+.DS_store
+*.swp
+.vscode/*
+.idea/*

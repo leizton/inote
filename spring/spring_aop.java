@@ -1,0 +1,6 @@
+同一个bean中，方法methodA调用methodB，
+如果methodB是aop增强方法，那么methodA调用它时aop不起作用。
+
+如果methodB用了事务注解，那么最好是不允许methodA调用methodB，或者在methodA上也加事务注解。
+
+结论: 不要在本类其它方法中调用带有事务注解的方法。

@@ -1,0 +1,152 @@
+maven scope
+    runtime(运行时范围)
+	runtime依赖在运行和测试系统的时候需要, 但在编译的时候不需要. 比如你可能在编译的时候只需要JDBC-api的JAR, 而只有在运行的时候才需要JDBC驱动实现.
+
+
+maven工程中, 父module的pom中定义的依赖项(不在<dependencyManagement>里的<dependencies>里的<dependency>)会让子module依赖.
+某个子module(称作subA)依赖了另一个子module(称作subB), subA不会依赖subB的pom里定义的依赖项.
+
+maven生命周期有三套
+	1. Clean Lifecycle的3个phase(阶段)
+		pre-clean clean post-clean
+	2. Default Lifecycle的主要phase
+		validate(验证所有资源是否可用) compile test package integration-test verify install deploy
+	3. Site Lifecycle的4个phase
+		pre-site site(生成项目站点文档) post-site deploy-site(把项目站点发布到服务器)
+
+$ mvn clean install
+install 包括 build 和 test
+
+dependencyManagement, 对jar包版本进行管理
+	dependencyManagement出现在项目最顶层的父pom中, 使得子项目无须写出依赖的版本号,
+	maven会沿着父子pom找到dependencyManagement, 使用其中的版本号
+
+当maven项目中有依赖子module时, 需要先运行mvn clean install(或mvn -X clean install)安装当前项目,
+安装后在~/.m2/repository下有当前项目的jar包, 如此后运行mvn dependency:tree就没有问题了.
+
+
+重复类
+例如, 以下两个依赖, 由于junit-4.11.pom中依赖了hamcrest, 导致org.hamcrest.*.jar包中有重复类
+	<dependency><groupId>junit</groupId><artifactId>junit</artifactId></dependency>
+	<dependency><groupId>org.hamcrest</groupId><artifactId>hamcrest-all</artifactId></dependency>
+$ mvn enforcer:enforce  检查是否有依赖冲突或重复类
+$ mvn dependency:tree -Dverbose  查看依赖树, 如下
+	[INFO] +- junit:junit:jar:4.11:compile
+	[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
+	[INFO] \- org.hamcrest:hamcrest-all:jar:1.3:compile
+解决方法, 去掉hamcrest-all的依赖, 或去掉junit对hamcrest-core的依赖, 不推荐该方法, 在父pom.xml里指定版本号来解决.
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.11</version>
+		<exclusions>
+			<exclusion>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>  <!-- junit-4.11.pom中有该项依赖, 现在去掉 -->
+			</exclusion>
+		</exclusions>
+	</dependency>
+
+
+依赖冲突
+同级依赖下的就近原则, 不同层级下选择层级高的.
+	情况1 相同层级: A依赖C-1.0, B依赖C-2.0, A和B在同一级, 则C-1.0被引入, 因为A在B的前面定义
+	情况2 不同层级: A依赖B, B依赖C-1.0, D依赖C-2.0, A和D在同一级, 则C-2.0被引入, 因为D层级比B高
+	同级依赖的例子, dubbo依赖netty-3.2.5.FINAL版本, async-http-client依赖netty-3.2.4.FINAL版本
+		按照就近原则, dubbo在async-http-client前面, 所以最终引入的是3.2.5.FINAL版本
+		<dependency><groupId>com.alibaba</groupId><artifactId>dubbo</artifactId></dependency>
+		<dependency><groupId>com.ning</groupId><artifactId>async-http-client</artifactId></dependency>
+
+
+定义变量
+	<properties>
+		<guava.version>19.0</guava.version>  <!-- 定义变量 -->
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>  <!-- 使用变量 -->
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+父pom
+	<parent>
+		<groupId></groupId>
+		<artifactId></artifactId>
+		<version></version>
+	</parent>
+
+pom的resources
+	<build>
+		<resources>
+			<resource>
+				<directory>resources.${deploy.type}</directory>
+				<includes>
+                    <include>*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	<profiles>
+		<profile>
+			<id>local</id>
+			<properties>
+				<deploy.type>local</deploy.type>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<deploy.type>dev</deploy.type>
+			</properties>
+		</profile>
+	</profiles>
+	$ maven package -Plocal (-P是profiles, 此处使用id是local的)
+	在idea intellij的maven面板中Profile选择local
+
+
+设置jdk版本
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+tomcat7插件
+<plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+        <port>8080</port>
+        <path>/</path>
+    </configuration>
+</plugin>
+$ mvn tomcat7:run
+
+
+jetty插件
+<plugin>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-maven-plugin</artifactId>
+    <version>9.2.14.v20151106</version>
+    <configuration>
+        <webApp>
+            <contextPath>/</contextPath>
+        </webApp>
+    </configuration>
+</plugin>
+$ mvn jetty:run

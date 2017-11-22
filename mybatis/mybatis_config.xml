@@ -1,0 +1,20 @@
+<!-- 文件 "mybatis-config.xml" -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeHandlers>
+		<!-- Money的处理 -->
+        <typeHandler handler="com.qunar.fresh.common.mybatistypehandler.MoneyTypeHandler"
+                     javaType="qunar.api.pojo.Money"/>
+    </typeHandlers>
+	
+	<plugins>
+		<plugin interceptor="com.qunar.base.meerkat.orm.mybatis.support.StatementHandlerInterceptor"/>
+		<plugin interceptor="com.qunar.base.meerkat.orm.mybatis.support.ResultSetHandlerInterceptor"/>
+	</plugins>
+
+</configuration>

@@ -1,0 +1,5 @@
+<!-- 这也是一个bean -->
+<util:properties id="userInfo" location="classpath:user.properties"/>
+
+@Value("userInfo")            // 上面的id
+private Properties userInfo;  // 可以拿到所有的键值对

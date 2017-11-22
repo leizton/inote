@@ -1,0 +1,35 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 17,
+    "editor.lineHeight": 23,
+    "editor.fontFamily": "monofur, FZLanTingYuanS-L-GB",
+    "editor.fontWeight": "normal",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderIndentGuides": true,
+    "editor.renderControlCharacters": true,
+    "editor.minimap.enabled": false,
+    "editor.cursorStyle": "underline",
+    //
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.cursorStyle": "underline",
+    //
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.visible": false,
+    "workbench.iconTheme": "ayu",
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.startupEditor": "welcomePage",
+    //
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    //
+    "extensions.ignoreRecommendations": false,
+    //
+    "C_Cpp.errorSquiggles": "Disabled",
+    "typescript.check.npmIsInstalled": false,
+    "window.zoomLevel": 0
+}
+
+快捷键
+Alt + Shift + f    格式化代码
