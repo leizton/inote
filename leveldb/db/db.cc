@@ -48,7 +48,7 @@ class DBImpl : public DB
     versions_(dbname_, &options_, table_cache_, &internal_comparator_):VersionSet
 > NewMemTable():MemTable*
     return new MemTable(internal_comparator_).Ref()
-> Recover(VersionEdit* edit, out bool save_manifest)
+> Recover(out VersionEdit edit, out bool save_manifest)
     env_.CreateDir(dbname_)
     env_.LockFile(dbname_+"/LOCK", &db_lock_)
     if !env_.FileExists(dbname_+"/CURRENT")
