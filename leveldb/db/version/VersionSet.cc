@@ -11,7 +11,8 @@ class VersionSet
     descriptor_file_(NULL), descriptor_log_(NULL)
     dummy_versions_(this):Version  // versions循环双链表的head
     current_(NULL):Version*        // 等于dummy_versions_.prev_
-    this.AppendVersion(new Version(this))  // 初始化current_, 并插入链表
+    // 初始化current_, 并插入链表
+    this.AppendVersion(new Version(this))
 > AppendVersion(Version* v)
     if current_ != NULL, current_.Unref()
     current_ = v
