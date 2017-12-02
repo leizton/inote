@@ -7,7 +7,7 @@ class Writer
     size_t left = s.size
     bool begin = true
     while left > 0
-        const int leftover = kBlockSize - block_offset_
+        const int leftover = kBlockSize - block_offset_  // kBlockSize=32768
         if leftover < kHeaderSize
             // 当前block剩下的写空间不够kHeaderSize
             if leftover > 0

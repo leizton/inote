@@ -32,7 +32,7 @@ class Version
     next_(this):Version*
     prev_(this):Version*
     refs_(0):int
-    files_[kNumLevels]:vector<FileMetaData*>  // 每层当前的FileMetaData
+    files_[kNumLevels]:vector<FileMetaData*>  // 二维数组, 每层当前的所有FileMetaDatas
     file_to_compact_:FileMetaData*
     file_to_compact_level_:int
     compaction_score_(-1):double  // score>=1时, 须做压缩

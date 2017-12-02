@@ -5,9 +5,9 @@ class VersionEdit
     has_prev_log_number_(false),   prev_log_number_(0)
     has_last_sequence_(false),     last_sequence_(0)
     has_next_file_number_(false),  next_file_number_(0)
-    // 以下pair的first是level
+    // 以下pair.first都是level
     compact_pointers_ :vector<pair<int, InternalKey>>
-    deleted_files_    :set<pair<int, uint64_t>>
+    deleted_files_    :set<pair<int, uint64_t>>  // pair.second是FileMetaData::number
     new_files_        :vector<pair<int, FileMetaData>>
 > SetLogNumber(uint64_t num)
     has_log_number_ = true

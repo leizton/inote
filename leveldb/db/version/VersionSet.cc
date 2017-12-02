@@ -17,29 +17,28 @@ class VersionSet
     if current_ != NULL, current_.Unref()
     current_ = v
     v.Ref()
-    // 插入循环双链表的尾部, 即head前面
+    // 插入循环双链表的尾部, 即head(dummy_versions_)前面
     v.prev_ = dummy_versions_.prev_
     v.next_ = &dummy_versions_
     v.prev_.next_ = v
     v.next_.prev_ = v
 > Finalize(Version* v)
-    // 遍历每层, 找出最需要compact的层
+    // 遍历每层, 找出v当前最需要compact的层
     int best_level = 0
-    double best_score = v.files_[0].size / kL0_CompactionTrigger
+    double best_score = v.files_[0].size / kL0_CompactionTrigger  // kL0_CompactionTrigger=4
     for level_i = 1:(kNumLevels-1)
-        double score = Version::TotalFileSize(v.files_[level_i]) / (2^20 * 10^level_i)
+        double score = Version::TotalFileSize(v.files_[level_i]) / (10^level_i MB)  // 10MB 100MB 1000MB
         if score > best_score
-            best_level = level_i, best_score = score
-    v.compaction_level_ = best_level
-    v.compaction_score_ = best_score
+            best_level, best_score = level_i, score
+    v.compaction_level_, v.compaction_score_ = best_level, best_score
 > Recover(bool* save_manifest)
     // 获取当前manifest的文件名
-    ReadFileToString(env_, CurrentFileName(dbname_), out string current)  // env.cc
+    ReadFileToString(env_, CurrentFileName(dbname_), out string current_desc_filename)  // env.cc
     // 读取当前manifest文件保存的Record
-    env_.NewSequentialFile(dbname_+"/"+current, out SequentialFile* file)
+    env_.NewSequentialFile(dbname_+"/"+current_desc_filename, out SequentialFile* file)
     log::Reader reader(file)  // Reader.cc
     VersionSet::Builder builder(this, current_)
-    while reader.ReadRecord(out Slice record,string assist)
+    while reader.ReadRecord(out Slice record, string assist)
         VersionEdit edit.DecodeFrom(record)
         builder.Apply(&edit)
         if edit.has_log_number_,        log_number_ = edit.log_number_
@@ -51,12 +50,12 @@ class VersionSet
     builder.SaveTo(v)
     Finalize(v)
     AppendVersion(v)
-    *save_manifest = !ReuseManifest(dbname_+"/"+current, current)
-> ReuseManifest(string dscFullname, string dscname)
+    *save_manifest = !ReuseManifest(current_desc_filename)
+> ReuseManifest(string dscname)
     env_.GetFileSize(dscname, out uint64_t manifest_size)
     if manifest_size > options.max_file_size
         return false
-    env_.NewAppendableFile(dscFullname, out descriptor_file_)
+    env_.NewAppendableFile(dbname_+"/"+dscname, out descriptor_file_)
     descriptor_log_ = new log::Writer(descriptor_file_, manifest_size)
     ParseFileName(dscname, out uint64_t manifest_num, ...)  // filename.cc
     manifest_file_number_ = manifest_num
@@ -154,11 +153,11 @@ class Builder
             return r!=0 ? r<0 : f1.number<f2.number
     struct LevelState
         deleted_files :set<uint64_t>
-        added_files   :set<FileMetaData*, BySmallestKey>*
+        added_files   :set<FileMetaData*, BySmallestKey>*  // 指定比较器的set
 > (VersionSet* vset, Version* base)
     vset_(vset)
     base_(base)  // builder前已有的Version
-    levels_[kNumLevels]:LevelState  // kNumLevels在config.cc里定义
+    levels_[kNumLevels]:LevelState
     base_.Ref()
     for level_i = 0:kNumLevels
         levels[level_i].added_files = new set<FileMetaData*, BySmallestKey>(BySmallestKey cmp)
@@ -177,18 +176,20 @@ class Builder
         levels_[np.first].deleted_files.erase(f.number)
         levels_[np.first].added_files.insert(f)
 > SaveTo(Version* version)
-    for level_i = 0:(kNumLevels)
-        auto base_files = base_.files_[level_i]
-        auto added_files = levels_[level_i].added_files
+    for level_i = 0:kNumLevels
+        vector<FileMetaData*>& base_files = base_.files_[level_i]
+        set<FileMetaData*>& added_files = levels_[level_i].added_files
         version.files_[level_i].reserve(base_files.size + added_files.size)
-        int baseIdx = 0, baseIdxEnd = base_files.size
+        // 合并base_files和added_files
+        int baseIdx = 0
         for FileMetaData* f : added_files
-            while baseIdx < baseIdxEnd && base_files[baseIdx] < f  // 比较器: BySmallestKey
-                MaybeAddFile(version, level_i, base_files[baseIdx++])
+            while baseIdx < base_files.size && base_files[baseIdx] < f  // 用BySmallestKey比较两个FileMetaData
+                MaybeAddFile(version, level_i, base_files[baseIdx])
+                ++baseIdx
             MaybeAddFile(version, level_i, f)
-        while baseIdx < baseIdxEnd
+        while baseIdx < base_files.size
             MaybeAddFile(version, level_i, base_files[baseIdx++])
 > MaybeAddFile(Version* version, int level_i, FileMetaData* f)
     if levles_[level_i].deleted_files.count(f.number) <= 0  // 没有被删除
-        f.refs++
+        ++f.refs
         version.files_[level_i].push_back(f)
