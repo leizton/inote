@@ -131,7 +131,7 @@ class DBImpl : public DB
     return fmeta
 //
 > Write(WriteOptions opt, WriteBatch* batch)
-    Writer* w = new(batch, opt.sync, &mutex_)
+    w = new DBImpl::Writer(batch, opt.sync, &mutex_)
     MutexLock l(&mutex_)
     writers_.push_back(w)
     while w != writers_.front && !w.done
@@ -165,7 +165,7 @@ class DBImpl : public DB
             break
     if !writers_.empty
         writers_.front.cv.Signal()
-> BuildBatchGroup(Writer*& last_w):WriteBatch*
+> BuildBatchGroup(Writer** last_w):WriteBatch*
     // 把当前writes_的WriteBatch合并成一个
     auto const first = writers_.front  // first不能是NULL
     size_t size = first.batch.rep_.size
@@ -198,7 +198,7 @@ class DBImpl : public DB
             return
         if imm_ != NULL || versions_.NumLevelFiles(0) >= kL0_SlowdownWritesTrigger
             bg_cv_.Wait()
-        else
+        else  // imm_==NULL && versions_.NumLevelFiles(0) < kL0_SlowdownWritesTrigger
             uint64_t new_log_number = versions_.NewFileNumber
             env_.NewWritableFile(dbname_+new_log_number+"log", out WritableFile* logfile)
             delete log_, logfile_

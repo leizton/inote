@@ -6,7 +6,7 @@ class SkipList<Key, Comparator>
     compare_(cmp)  // compare_比较时只比较前面的key
     arena_(arena)  // 一个内存池
     head_(this.NewNode(0, kMaxHeight))
-    max_height_(reinterpret_cast<void*>(1)):AtomicPointer  // skiplist的高度, 实际是整数值的指针
+    max_height_(reinterpret_cast<void*>(1)):AtomicPointer  // skiplist的高度, 实际是整数值的指针, 可用atomic<int>
     rand_:Random
 > NewNode(Key& key, int height)
     char* p = arena_->AllocateAligned(sizeof(Node) + sizeof(AtomicPointer) * (height-1))
@@ -26,12 +26,12 @@ class SkipList<Key, Comparator>
         for i = max_height_:height
             prev[i] = head_
         max_height_.NoBarrier_Store(reinterpret_cast<void*>(height))
-    //
+    // 插入new_node
     Node* new_node = NewNode(key, height)
     for i = 0:height
         new_node.NoBarrier_SetNext(i, prev[i].NoBarrier_Next(i))
         prev[i].SetNext(i, new_node)
-> FindGreaterOrEqual(Key& key, Node** prev)
+> FindGreaterOrEqual(Key& key, Node** prev):Node*
     Node* p = head_
     int level = max_height_ - 1  // 从最高层开始查找
     while true
@@ -50,7 +50,7 @@ class SkipList<Key, Comparator>
 class Node
 > (Key& k)
     key(k)  // 垂直方向上的key是同一个
-    next_[1]:AtomicPointer  // 占位数组
+    next_[1]:AtomicPointer  // 占位数组, 实际长度在NewNode()时确定
 > Next(int h):Node* = next_[h].Acquire_Load()
 > SetNext(int h, Node* x) = next_[h].Release_Store(x)
 > NoBarrier_Next(int h):Node* = next_[h].NoBarrier_Load()
