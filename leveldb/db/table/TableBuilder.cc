@@ -53,8 +53,8 @@ class BlockBuilder
     options_(opt)
     buffer_:string
     restarts_:vector<uint32_t>  // 记录每个start的偏移
-    add_counter_:int
-    last_key_:string
+    add_counter_:int  // 重置key share的计数器
+    last_key_:string  // 用于key的share
 > Add(Slice key, Slice value)
     size_t shared = 0  // 当前key和上一个key的可共享长度
     if add_counter_ < options_.block_restart_interval
@@ -65,11 +65,10 @@ class BlockBuilder
         restarts_.push_back(buffer_.size)
         add_counter_ = 0
     size_t non_shared = key.size - shared
-    // shared | non_shared | value_size
+    // shared_key_size | unshared_key_size | value_size | delta_key | value
     PutVarint32(&buffer_, shared)
     PutVarint32(&buffer_, non_shared)
     PutVarint32(&buffer_, value.size)
-    // delta key | value
     buffer_.append(key.data + shared, non_shared)
     buffer_.append(value.data, value.size)
     // 更新状态
