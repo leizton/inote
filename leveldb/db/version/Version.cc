@@ -42,20 +42,20 @@ class Version
     if OverlapInLevel(0, min_key, max_key), return 0
     InternalKey begin(min_key, kMaxSequenceNumber, kTypeValue)
     InternalKey end(max_key, 0, kTypeDeletion)
-    for int level = 0; level < kMaxMemCompactLevel; ++level
+    for int level = 0; level < kMaxMemCompactLevel; ++level  // kMaxMemCompactLevel == 2
         if OverlapInLevel(level+1, min_key, max_key)
             return level
         if level + 2 < kNumLevels
-        GetOverlappingInputs(level + 2, &begin, &end, out vector<FileMetaData*> overlaps)
-        if TotalFileSize(overlaps) > 10 * vset_->options_.max_file_size
-            return level
+            GetOverlappingInputs(level + 2, &begin, &end, out vector<FileMetaData*> overlaps)
+            if TotalFileSize(overlaps) > 10 * vset_->options_.max_file_size
+                return level
     return kMaxMemCompactLevel - 1
 > OverlapInLevel(int level, Slice min_key, Slice max_key)
     return Version::SomeFileOverlapsRange(level > 0, files_[level], min_key, max_key)
-> GetOverlappingInputs(int levle, InternalKey* begin, InternalKey* end, vector<FileMetaData*>& ret)
+> GetOverlappingInputs(const int level, InternalKey* begin, InternalKey* end, vector<FileMetaData*>& ret)
     // 获取第level层的文件中有key在[begin, end]上的文件
     Slice user_begin, end_begin = begin.user_key, end.user_key
-    for i = 0; i < files_[levle].size;
+    for i = 0; i < files_[level].size;
         FileMetaData* f : files_[level][i++]
         Slice file_begin, file_end = f.smallest.user_key, f.largest.user_key
         if file_end < user_begin || file_begin > end_begin
