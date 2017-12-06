@@ -95,6 +95,10 @@ class VersionSet
     if !new_manifest_file.empty
         SetCurrentFile(env_, dbname_, manifest_file_number_)  // filename.cc
     mu.Lock()
+    // 添加新创建的version
+    AppendVersion(v)
+    log_number_ = edit.log_number_
+    prev_log_number_ = edit.prev_log_number_
 //
 > PickCompaction():Compaction*
     Compaction* c
