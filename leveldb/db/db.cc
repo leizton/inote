@@ -317,6 +317,7 @@ class DBImpl : public DB
             FinishCompactionOutputFile(compact, input)  // 当文件太大时, 写入文件
     if compact.builder != NULL
         FinishCompactionOutputFile(compact, input)
+    InstallCompactionResults(compact)  // 更新version`
     mutex_.Lock()
 > OpenCompactionOutputFile(CompactionState* compact)
     mutex_.Lock()
