@@ -22,3 +22,9 @@ docker images nginx
 docker login  // 先登录
 docker tag nginx:v0.2 whiker/nginx:v0.2  // 修改作者
 docker push whiker/nginx:v0.2
+
+# 挂载一个主机目录作为volume
+docker run -dit --name network --mount type=bind,source=/Users/whiker/sky/practice,target=/opt/practice ubuntu:16.04 /bin/bash
+
+# 安装vim时出现：Unable to locate package vim
+执行apt update, 同步/etc/apt/sources.list和/etc/apt/sources.list.d
