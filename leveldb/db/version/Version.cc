@@ -42,7 +42,7 @@ class Version
     if OverlapInLevel(0, min_key, max_key), return 0
     InternalKey begin(min_key, kMaxSequenceNumber, kTypeValue)
     InternalKey end(max_key, 0, kTypeDeletion)
-    for int level = 0; level < kMaxMemCompactLevel; ++level  // kMaxMemCompactLevel == 2
+    for level = 0:kMaxMemCompactLevel  // kMaxMemCompactLevel == 2
         if OverlapInLevel(level+1, min_key, max_key)
             return level
         if level + 2 < kNumLevels
