@@ -53,7 +53,7 @@ AtomicReferenceFieldUpdater<T, V>
 	构造器
 		AtomicReferenceFieldUpdaterImpl(tclass, vclass, fieldName, caller) {
 			final Class<?> fieldClass
-			try
+			try {
 				// 获取tclass的Field引用
 				Field field = AccessController.doPrivileged(
 					new PrivilegedExceptionAction<Field>() {
@@ -70,16 +70,20 @@ AtomicReferenceFieldUpdater<T, V>
 				if ccl != null && ccl != cl && ( cl == null | !isAncestor(cl, ccl) )
 					sun.reflect.misc.ReflectUtil.checkPackageAccess(tclass)
 				fieldClass = field.getType()
-			catch PrivilegedActionException Exception
+			} catch PrivilegedActionException Exception {
 				throw new RuntimeException()
-			
-			if vclass != fieldClass
+			}
+
+			if vclass != fieldClass {
 				throw new ClassCastException()
-			if vclass.isPrimitive()
+			}
+			if vclass.isPrimitive() {
 				throw new IllegalArgumentException("Must be reference type")
-			if ! Modifier.isVolatile(modifiers)
+			}
+			if ! Modifier.isVolatile(modifiers) {
 				throw new IllegalArgumentException("Must be volatile type")
-			
+			}
+
 			this.tclass = tclass
 			this.vclass = vclass != Object.class ? vclass : null
 			this.cclass = (Modifier.isProtected(modifiers) && caller != tclass) ? caller : null

@@ -59,14 +59,15 @@ BlockingQueue<E> extends Queue<E>
 > ArrayBlockingQueue::offer(E e):boolean
     final ReentrantLock lock = this.lock
     lock.lock()
-    try
+    try {
         if this.count == this.items.length
             return false
         else
             this.enqueue(e)
             return true
-    finally
+    } finally {
         lock.unlock()
+    }
 > ArrayBlockingQueue::enqueue(E e)
     items[putIndex] = e
     if ++putIndex == items.length
