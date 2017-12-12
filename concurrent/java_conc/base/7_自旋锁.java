@@ -8,13 +8,13 @@
 class SpinLock {
 	- AtomicReference<Thread> spin
 	
-	void lock() {
+	lock() {
 		Thread currentThread = Thread.currentThread()
 		// 直到其他线程unlock()把spin设成null，才跳出循环
 		while !spin.compareAndSet(null, currentThread);
 	}
 	
-	void unlock() {
+	unlock() {
 		Thread currentThread = Thread.currentThread()
 		spin.compareAndSet(currentThread, null)
 	}
@@ -30,23 +30,22 @@ class TicketLock {
 	- AtomicInteger ticketCounter = new AtomicInteger();  // 票号计数器
 	- static final ThreadLocal<Integer> localTicket = new ThreadLocal();  // 当前线程的票号
 	
-	void lock() {
-		int ticket = ticketCounter.getAndIncrement()  // 售票
+	lock() {
+		int ticket = ticketCounter.getAndIncrement()  // 售票, 原子增长的票号使得访问有序
 		localTicket.set(ticket)  // ThreadLocal的set/get开销不小
-		// 票号有效时跳出循环, 或者说轮到自己时跳出.
+		// 票号有效时(轮到自己了)跳出循环
 		while ticket != currentTicket.get();
 	}
 	
 	/**
 	 * 当ticketCounter.get()==Integer.MAX_VALUE时,
 	 * 执行ticketCounter.getAndIncrement()后, 变成Integer.MIN_VALUE,
-	 * 溢出也没有关系.
+	 * 不受溢出的影响.
 	 */
 	
 	unlock() {
 		int ticket = localTicket.get()
-		/* 让拿着第ticket+1号票的线程加锁成功.
-		 * 其实等效于validTicket.getAndIncrement() */
+		// 让拿着第ticket+1号票的线程可以加锁成功.
 		currentTicket.compareAndSet(ticket, ticket + 1)
 	}
 }
@@ -54,19 +53,22 @@ class TicketLock {
 
 /**
  * 采用链表形式实现自旋公平锁.
+ * CLH: Craig, Landin, and Hagersten
  */
 class CLHLock {
 	static class CLHLockNode {
 		- volatile boolean isLocked = true
 	}
 	
-	- volatile CLHLockNode tail
-	- static final ThreadLocal<CLHLockNode> LOCAL = new ThreadLocal()
-	- static final AtomicReferenceFieldUpdater<CLHLock, CLHLockNode> UPDATER = new (CLHLock.class, "tail")
+	- volatile CLHLockNode tail;
+	- static final ThreadLocal<CLHLockNode> LOCAL = new ThreadLocal();
+	
+	// 原子地修改对象的某个字段, ARFUpdater<对象类型, 字段类型>
+	- static final AtomicReferenceFieldUpdater<CLHLock, CLHLockNode> UPDATER = new (CLHLock.class, "tail");
 	
 	lock() {
-		CLHLockNode node = new CLHLockNode()
-		LOCAL.set(node)
+		CLHLockNode node = new CLHLockNode();
+		LOCAL.set(node);
 		
 		// 多个线程一个接一个原子地改变tail, 形成链表
 		// tail存放最近来加锁的线程的node
@@ -74,17 +76,13 @@ class CLHLock {
 		
 		if prevNode != null
 			while prevNode.isLocked;  // 前一个线程unlock后, 退出循环
-			prevNode = null
 	}
 	
 	unlock() {
 		CLHLockNode node = LOCAL.get(node)
 		if ! UPDATER.compareAndSet(this, node, null)
-			/**
-			 * tail改变了, 说明有其他线程调用了UPDATER.getAndSet(),
-			 * 别的线程在lock()中阻塞在 while prevNode.isLocked;
-			 */
+			// tail改变了, 说明有其他线程调用了UPDATER.getAndSet()
+			// 别的线程在lock()中阻塞在 while(prevNode.isLocked)
 			node.isLocked = false
-		node = null
 	}
 }
