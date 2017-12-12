@@ -1,0 +1,1 @@
+1. volatile int 和 AtomicInteger 区别是: 后者支持compareAndSet, 前者不支持, 所以当不需要cas操作时尽量使用前者, 以提高性能。
