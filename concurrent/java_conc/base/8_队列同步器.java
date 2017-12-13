@@ -1,5 +1,12 @@
 ReentrantLock
 // example
+- sync  Sync
+> ReentrantLock()
+    sync = new NonfairSync()
+> lock()
+    sync.lock()
+> unlock()
+    sync.release(1)
 
 ReentrantLock::Sync extends AbstractQueuedSynchronizer
 > nonfairTryAcquire(int acquires):boolean  // 返回是否成功占锁
@@ -80,16 +87,16 @@ AbstractQueuedSynchronizer
                 p.next = null  // help gc
                 isFail = false
                 return isInterrupted
-            if shouldParkAfterFailedAcquire(p, node) && parkAndCheckInterrupt()
-                isInterrupted = true
+            if shouldParkAfterFailedAcquire(p, node)
+                isInterrupted |= parkAndCheckInterrupt()
     } finally {
         if isFail, cancelAcquire(node)
     }
 > setHead(Node node)
     head = node
-    node.thread = null
-    node.prev = null
-> shouldParkAfterFailedAcquire(Node prev, Node node)
+    node.thread = node.prev = null
+> shouldParkAfterFailedAcquire(Node prev, Node node):boolean
+    // 返回当前线程是否应该休眠(park)
     int st = prev.waitStatus
     if st == Node.SIGNAL
         return true
@@ -103,7 +110,30 @@ AbstractQueuedSynchronizer
         // st == 0 or PROPAGATE
         prev.compareAndSetWaitStatus(st, Node.SIGNAL)
     return false
+> parkAndCheckInterrupt():boolean
+    LockSupport.park(this)  // 阻塞直到被unpark
+    return Thread.interrupted()
 
+> release(int arg):boolean
+    if tryRelease(arg)  // tryRelease()由子类实现
+        // 完全释放锁了
+        h = head
+        // 如果h.waitStatus==0, h.next不会进入park, 在acquireQueued里继续tryAcquire
+        if h != null && h.waitStatus != 0
+            unparkSuccessor(h)  // unpark后继节点
+        return true
+    return false
+> unparkSuccessor(Node node)
+    st = node.waitStatus
+    if st < 0
+        node.compareAndSetWaitStatus(st, 0)
+    nx = node.next
+    if nx == null || nx.waitStatus > 0
+        nx = null  // 这个nx是null, 或已经cancelled了, 所以无需关系这个后继节点
+        for t = tail;  t != null && t != node;  t = t.prev
+            if t.waitStatus <= 0, nx = t  // t未cancelled
+    if nx != null
+        LockSupport.unpark(nx.thread)
 
 AbstractQueuedSynchronizer::Node
 // 占锁mode
@@ -111,11 +141,11 @@ AbstractQueuedSynchronizer::Node
 - EXCLUSIVE   Node    static final  = null;
 // waitStatus取值
 - CANCELLED   int     = 1
-- SIGNAL      int     = -1
+- SIGNAL      int     = -1      通知下一个节点可以进入休眠等待
 - CONDITION   int     = -2
 - PROPAGATE   int     = -3
 //
-- waitStatus  int     volatile
+- waitStatus  int     volatile  取值0表示next节点无需park, 直接tryAcquire
 - prev        Node    volatile
 - next        Node    volatile
 - nextWaiter  Node    final
