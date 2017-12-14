@@ -4,9 +4,13 @@ ReentrantLock
 > ReentrantLock()
     sync = new NonfairSync()
 > lock()
-    sync.lock()
+    sync.acquire(1)
 > unlock()
     sync.release(1)
+> tryLock():boolean
+    return sync.nonfairTryAcquire(1)
+> tryLock(long timeout, TimeUnit unit):boolean throws InterruptedException
+    return tryAcquireNanos(1, unit.toNanos(timeout))
 > newCondition():Condition
     return sync.newCondition()
 
@@ -39,11 +43,6 @@ ReentrantLock::Sync extends AbstractQueuedSynchronizer
     return new ConditionObject()
 
 ReentrantLock::NonfairSync extends Sync
-> lock()
-    if compareAndSetState(0, 1)
-        setExclusiveOwnerThread(Thread.currentThread)
-    else
-        acquire(1)
 > tryAcquire(int acquires):boolean
     return nonfairTryAcquire(acquires)
 
@@ -57,49 +56,28 @@ AbstractOwnableSynchronizer
 
 AbstractQueuedSynchronizer
 // 实现同步阻塞锁和如信号量等同步器的框架
-- head   Node
+- head   Node  只在enq()和setHead()里被修改
 - tail   Node
 - state  int
-// 占锁
-> acquire(int arg)
-    // tryAcquire()由子类实现, 子类通过对state的cas修改实现
-    if tryAcquire(arg), return  // tryAcquire成功时, 不会入队
-    waiter = addWaiter(Node.EXCLUSIVE)
-    if !acquireQueued(waiter, arg), return
-    Thread.currentThread().interrupt()
 > addWaiter(Node mode):Node
     node = new Node(mode);
     enq(node)
     return node
-> enq(Node node):Node
+> enq(Node node):Node  // 无锁式入队尾
     while true
         t = tail
         if t == null
-            if compareAndSetHead(null, new Node())  // 初始化空的头节点
+            if compareAndSetHead(null, new Node())  // 初始化空的头结点
                 tail = head
         else
             node.prev = t
             if compareAndSetTail(t, node)
                 t.next = node
                 return t
-> acquireQueued(Node node, int arg):boolean
-    isFail = true, isInterrupted = false
-    try {
-        while true
-            p = node.prev
-            if p == head && tryAcquire(arg)  // 如果占锁且未入队的线程释放了锁, 这tryAcquire会成功
-                setHead(node)
-                p.next = null  // help gc
-                isFail = false
-                return isInterrupted
-            if shouldParkAfterFailedAcquire(p, node)
-                isInterrupted |= parkAndCheckInterrupt()
-    } finally {
-        if isFail, cancelAcquire(node)
-    }
 > setHead(Node node)
     head = node
-    node.thread = node.prev = null
+    node.thread = node.prev = null  // 头结点是空结点
+// 是否需要park
 > shouldParkAfterFailedAcquire(Node prev, Node node):boolean
     // 返回当前线程是否应该休眠(park)
     int st = prev.waitStatus
@@ -107,38 +85,98 @@ AbstractQueuedSynchronizer
         return true
     if st > 0
         // prev已经cancelled
-        do
+        while prev.isCancelled
             node.prev = prev = prev.prev
-        while prev.waitStatus > 0
         prev.next = node
     else
         // st == 0 or PROPAGATE
         prev.compareAndSetWaitStatus(st, Node.SIGNAL)
     return false
-> parkAndCheckInterrupt():boolean
-    LockSupport.park(this)  // 阻塞直到被unpark
-    return Thread.interrupted()
+// 占锁
+> acquire(int arg)
+    // tryAcquire()由子类实现, 子类通过对state的cas修改实现
+    if tryAcquire(arg)
+        return  // tryAcquire成功时, 不会入队
+    waiter = addWaiter(Node.EXCLUSIVE)
+    if acquireQueued(waiter, arg)
+        Thread.currentThread().interrupt()
+> acquireQueued(Node node, int arg):boolean
+    isInterrupted = false
+    while true
+        p = node.prev
+        if p == head && tryAcquire(arg)  // 如果占锁且未入队的线程释放了锁, 这tryAcquire会成功
+            setHead(node)
+            p.next = null  // help gc
+            return isInterrupted
+        if shouldParkAfterFailedAcquire(p, node)
+            LockSupport.park(this)  // 阻塞直到被unpark
+            isInterrupted |= Thread.interrupted()
 // 释放锁
 > release(int arg):boolean
     if tryRelease(arg)  // tryRelease()由子类实现
-        // 完全释放锁了
+        // 完全释放了锁, state==0
         h = head
         // 如果h.waitStatus==0, h.next不会进入park, 在acquireQueued里继续tryAcquire
         if h != null && h.waitStatus != 0
-            unparkSuccessor(h)  // unpark后继节点
+            unparkSuccessor(h)  // unpark h的后继结点(maybe h.next or h.next.next ...)
         return true
     return false
 > unparkSuccessor(Node node)
     st = node.waitStatus
     if st < 0
-        node.compareAndSetWaitStatus(st, 0)
+        node.compareAndSetWaitStatus(st, 0)  // 表示node.next无需park
     nx = node.next
-    if nx == null || nx.waitStatus > 0
-        nx = null  // 这个nx是null, 或已经cancelled了, 所以无需关系这个后继节点
+    if nx == null || nx.isCancelled
+        nx = null  // 无需关心这个后继结点
         for t = tail;  t != null && t != node;  t = t.prev
-            if t.waitStatus <= 0, nx = t  // t未cancelled
+            if t.waitStatus <= 0
+                nx = t  // t未cancelled
     if nx != null
         LockSupport.unpark(nx.thread)
+// 超时占锁
+> tryAcquireNanos(int arg, long nanosTimeout):boolean throws InterruptedException
+    if Thread.interrupted()  throw InterruptedException
+    if tryAcquire(arg)       return true     // 对于超时的实现, 应该至少尝试一次
+    if nanosTimeout <= 0     return false    // check argument
+    deadline = System.nanoTime() + nanosTimeout
+    node = addWaiter(Node.EXCLUSIVE)
+    while true
+        p = node.prev
+        if p == head && tryAcquire(arg)
+            setHead(node)
+            p.next = null
+            return true
+        leave = deadline - System.nanoTime()
+        if leave <= 0
+            cancelAcquire(node)
+            return false
+        if shouldParkAfterFailedAcquire(p, node) && leave > 1000  // 1ms
+            LockSupport.parkNanos(this, leave)
+        if Thread.interrupted()
+            cancelAcquire(node)
+            throw InterruptedException
+//
+> cancelAcquire(Node node)
+    node.thread = null
+    prev = node.prev
+    while prev.isCancelled
+        node.prev = prev = prev.prev
+    prevNext = prev.next
+    node.waitStatus = Node.CANCELLED
+    if node == tail && compareAndSetTail(node, prev)
+        // prev变成了tail
+        prev.compareAndSetNext(prevNext, null)  // 如果prev继续是tail, 则cas会成功
+        return
+    if prev != head &&
+       (st = prev.waitStatus) == Node.SIGNAL || (st <= 0 && prev.compareAndSetWaitStatus(st, Node.SIGNAL)) &&
+       prev.thread == null
+        next = node.next
+        if next != null && !next.isCancelled
+            prev.compareAndSetNext(prevNext, next)
+    else
+        unparkSuccessor(node)
+
+// 条件量
 
 AbstractQueuedSynchronizer::Node
 // 占锁mode
@@ -146,11 +184,11 @@ AbstractQueuedSynchronizer::Node
 - EXCLUSIVE   Node    static final  = null;
 // waitStatus取值
 - CANCELLED   int     = 1
-- SIGNAL      int     = -1      通知下一个节点可以进入休眠等待
+- SIGNAL      int     = -1      通知下一个结点可以进入休眠等待
 - CONDITION   int     = -2
 - PROPAGATE   int     = -3
 //
-- waitStatus  int     volatile  取值0表示next节点无需park, 直接tryAcquire
+- waitStatus  int     volatile  取值0表示next结点无需park, 直接tryAcquire
 - prev        Node    volatile
 - next        Node    volatile
 - nextWaiter  Node    final
@@ -166,3 +204,5 @@ AbstractQueuedSynchronizer::Node
     thread = Thread.currentThread()
 > isShared()
     return nextWaiter == SHARED
+> isCancelled()
+    return waitStatus > 0
