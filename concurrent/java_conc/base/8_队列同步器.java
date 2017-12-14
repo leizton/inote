@@ -7,6 +7,8 @@ ReentrantLock
     sync.lock()
 > unlock()
     sync.release(1)
+> newCondition():Condition
+    return sync.newCondition()
 
 ReentrantLock::Sync extends AbstractQueuedSynchronizer
 > nonfairTryAcquire(int acquires):boolean  // 返回是否成功占锁
@@ -33,6 +35,8 @@ ReentrantLock::Sync extends AbstractQueuedSynchronizer
     setState(nextState)
     return nextState == 0
 > lock() abstract
+> newCondition():ConditionObject
+    return new ConditionObject()
 
 ReentrantLock::NonfairSync extends Sync
 > lock()
@@ -56,6 +60,7 @@ AbstractQueuedSynchronizer
 - head   Node
 - tail   Node
 - state  int
+// 占锁
 > acquire(int arg)
     // tryAcquire()由子类实现, 子类通过对state的cas修改实现
     if tryAcquire(arg), return  // tryAcquire成功时, 不会入队
@@ -113,7 +118,7 @@ AbstractQueuedSynchronizer
 > parkAndCheckInterrupt():boolean
     LockSupport.park(this)  // 阻塞直到被unpark
     return Thread.interrupted()
-
+// 释放锁
 > release(int arg):boolean
     if tryRelease(arg)  // tryRelease()由子类实现
         // 完全释放锁了
