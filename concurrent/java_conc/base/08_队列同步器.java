@@ -135,9 +135,8 @@ AbstractQueuedSynchronizer
         LockSupport.unpark(nx.thread)
 // 超时占锁
 > tryAcquireNanos(int arg, long nanosTimeout):boolean throws InterruptedException
-    if Thread.interrupted()  throw InterruptedException
-    if tryAcquire(arg)       return true     // 对于超时的实现, 应该至少尝试一次
-    if nanosTimeout <= 0     return false    // check argument
+    if tryAcquire(arg)    return true   // 对于超时的实现, 应该至少尝试一次
+    if nanosTimeout <= 0  return false  // check argument
     deadline = System.nanoTime() + nanosTimeout
     node = addWaiter(Node.EXCLUSIVE)
     while true
@@ -170,13 +169,12 @@ AbstractQueuedSynchronizer
     if prev != head &&
        (st = prev.waitStatus) == Node.SIGNAL || (st <= 0 && prev.compareAndSetWaitStatus(st, Node.SIGNAL)) &&
        prev.thread == null
+        // prev是一个有效的等待结点
         next = node.next
         if next != null && !next.isCancelled
             prev.compareAndSetNext(prevNext, next)
     else
         unparkSuccessor(node)
-
-// 条件量
 
 AbstractQueuedSynchronizer::Node
 // 占锁mode
@@ -206,3 +204,7 @@ AbstractQueuedSynchronizer::Node
     return nextWaiter == SHARED
 > isCancelled()
     return waitStatus > 0
+
+AbstractQueuedSynchronizer::ConditionObject
+// 条件量, 非static类
+> await()
