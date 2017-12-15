@@ -25,6 +25,9 @@ Minor Gc 在YoungGen区
 5. others
 
 
+# 查看java进程堆大小
+sudo jmap -heap ${PID}
+
 # gc日志
 
 ## 例子
