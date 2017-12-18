@@ -1,3 +1,9 @@
+# tag
+git tag                              # 列出当前所有的tag
+git checkout tagA                    # reset --hard到tagA的最新提交
+git tag -a 'v0.1' -m 'version 0.1'   # 创建tag
+git log --pretty=oneline ^tagA tagB  # 查看两个tag间的commit
+
 # github验证用户权限
 ssh -T git@github.com
 

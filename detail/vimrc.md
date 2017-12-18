@@ -17,9 +17,9 @@ syntax on           "语法高亮
 # 文本替换
 格式：[行范围选择]s/源字符串/目标字符串[/g]
 例如：
-- s/hello/hi         当前行的第一个hello替换成hi
-- s/hello/hi/g       当前行的所有hello替换成hi
-- 3,7s/hello/hi/g    第3~7行
-- 3,$s/hello/hi/g    第3行~最后一行
-- .,7s/hello/hi/g    当前行~第7行
-- %s/hello/hi/g      %表示整个文件，等效于1,$
+- :s/hello/hi         当前行的第一个hello替换成hi
+- :s/hello/hi/g       当前行的所有hello替换成hi
+- :3,7s/hello/hi/g    第3~7行
+- :3,$s/hello/hi/g    第3行~最后一行
+- :.,7s/hello/hi/g    当前行~第7行
+- :%s/hello/hi/g      %表示整个文件，等效于1,$
