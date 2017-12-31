@@ -1,4 +1,8 @@
-# 读取用户输入
+# 比较运算符
+-eq -ne -lt -gt -le -ge
+
+# 交互
+## 读取用户输入
 ```sh
 # a.sh
 echo -e "input name:\c"  # -e表示启用转义字符
@@ -7,8 +11,7 @@ echo -e "input password:\c"
 read password
 echo "{name=$name, pwd=$password}"
 ```
-
-# 当shell中执行某个有输入yes类似交互的命令时，可以用重定向输入来解决
+## 当shell中执行某个有输入yes类似交互的命令时，可以用重定向输入来解决
 例如：
 ```sh
 $ echo -e "abc\n123" > a.input
