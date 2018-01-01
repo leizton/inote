@@ -1,7 +1,5 @@
 # ref
 - https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy1/index.html
-- https://www.ibm.com/developerworks/cn/linux/l-cn-directio/
-- https://www.ibm.com/developerworks/cn/linux/l-async/
 
 # 发送磁盘文件到网络的过程:
 1. 判断内核的缓冲区内是否有该文件的数据, 如果没有则从磁盘读到内核的缓冲区

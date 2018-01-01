@@ -1,3 +1,7 @@
+# ref
+- https://www.ibm.com/developerworks/cn/linux/l-cn-directio/
+- https://www.ibm.com/developerworks/cn/linux/l-async/
+
 # 标准IO(缓存IO)的优缺点
 优点: 如果数据已经在内核缓冲里, 则可以减少读盘次数
 缺点: DMA方式不能让数据直接在用户地址空间和磁盘之间传输, 数据拷贝有额外消耗
