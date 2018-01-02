@@ -21,7 +21,7 @@ CyclicBarrier
 > 和CountDownLatch类似，用于同步threadNum个线程
   但可以指定一个runner(实现了Runnable接口的对象)，在所有线程到达同步点后执行runner的run()方法
 > new CyclicBarrier(threadNum, runner)
-  cyclicBarrier.await()  // 当前线性在此处等待其他线程到达同步点
+> cyclicBarrier.await()  // 当前线程在此处等待其他线程到达同步点
 
 Phaser
 > 实现并发线程的多阶段(多点)同步。在每一步的结束位置同步所有线程
