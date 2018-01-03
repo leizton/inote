@@ -56,7 +56,7 @@ int fd = open("a.dat", O_RDONLY);
 aiocb acb;
 bzero(&acb, sizeof(aiocb));
 acb.aio_field = fd;
-acb.aio_buf = malloc(1024);
+acb.aio_buf = malloc(1024+1);
 acb.aio_nbytes = 1024;
 acb.aio_offset = 0;
 aio_read(&acb);
