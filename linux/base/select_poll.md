@@ -13,3 +13,12 @@ FD_ZERO(fd_set* fds)         // 清空fds
 ```
 
 # poll()
+```c
+#include <sys/poll.h>
+struct pollfd {
+    int fd;
+    short events;   // 需要监听的事件
+    short revents;  // poll返回时触发的事件
+};
+int poll(pollfd* fds, uint fds_num, int timeout);
+```
