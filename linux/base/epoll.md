@@ -1,8 +1,11 @@
-** epoll资源描述符
+# epoll资源描述符
+```c
 // EpollSize: 指定内核监听数目
 int epfd = epoll_create(EpollSize);
+```
 
-** epoll_data_t和epoll_event
+# epoll_data_t和epoll_event
+```c
 union epoll_data_t {
     void* ptr;
     int fd;
@@ -18,21 +21,27 @@ struct epoll_event {
 epoll_event newEvent;
 newEvent.events = EPOLLIN | EPOLLOUT;
 newEvent.data = socketFd;
+```
 
-** 向epfd注册、修改、删除事件
+# 向epfd注册、修改、删除事件
+```c
 // op:       EPOLL_CTL_ADD/MOD/DEL, 指定本次对epfd操作的类型
 // socketFd: 被监听的socket描述符
 int ret = epoll_ctl(epfd, op, socketFd, &newEvent);
+```
 
-** 等待epoll
+# 等待epoll
+```c
 epoll_event events[EpollSize];
 // events:    用于接收内核返回的事件集合
 // EpollSize: events数组的大小
 // waitTime:  -1,永久阻塞; 0,立即返回; >0,等待的微秒数
 // eventNum:  >=0,内核返回的事件数; -1,发生错误,errno查看错误
 int eventNum = epoll_wait(epfd, events, EpollSize, waitTime);
+```
 
-** epoll编程框架
+# example
+```c
 int listenFd = socket(AF_INET, SOCKET_STREAM, 0);  // 创建套接字
 bind(listenFd, (sockaddr*) &serverAddr, sizeof(serverAddr));
 listen(listenFd, 10)
@@ -57,8 +66,9 @@ while (true) {
         }
     }
 }
+```
 
-** 触发模式
+# 触发模式
 1. 水平触发
 2. 边缘触发
 内核的事件会拷贝到用户空间

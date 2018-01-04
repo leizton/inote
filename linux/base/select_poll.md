@@ -2,18 +2,20 @@
 select()和poll()都是水平触发, 不支持边沿触发
 
 # select()
+## api
 ```c
+#include <sys/select.h>
+// http://man7.org/linux/man-pages/man2/select.2.html
 // excepts包括异常或带外数据
 // 成功时select()返回IO就绪的fd数目, 超时返回0, 失败返回-1(错误码在errno)
-#include <sys/select.h>
-int select(int maxfd_plus_one, fd_set* reads, fd_set* writes, fd_set* excepts, timeval* timeout)
+int select(int maxfd_plus_one, fd_set* reads, fd_set* writes, fd_set* excepts, timeval* timeout);
 FD_SET(int fd, fd_set* fds)    // 把fd加到fds中
 FD_CLR(int fd, fd_set* fds)    // 从fds中移除fd
 FD_ISSET(int fd, fd_set* fds)  // 判断fd是否在fds中
 FD_ZERO(struct fd_set* fds)    // 清空fds
 ```
+## example
 ```c
-// example
 const int fd = STDIN_FILENO;
 fd_set reads;
 FD_SET(fd, reads);
@@ -32,12 +34,22 @@ if (num < 0) {
 }
 ```
 
-# poll()```c
+# poll()
+## api
+```c
 #include <sys/poll.h>
 struct pollfd {
     int fd;
-    short events;   // 需要监听的事件
-    short revents;  // poll返回时触发的事件
+    short events;   // 要监听的事件mask
+    short revents;  // poll返回时触发的事件mask
 };
+// http://man7.org/linux/man-pages/man2/poll.2.html
+// 每次调用poll时, 内核会自动清空revents
 int poll(pollfd* fds, uint fds_num, int timeout);
 ```
+## revents
+- POLLIN                            读不会阻塞
+- POLLRDNORM, POLLRDBAND, POLLPRI   普通数据/带外数据/紧急数据可读
+- POLLIN|POLLPRI                    等同于select()的读事件
+- POLLOUT                           写不会阻塞, 等同于select()的写事件
+- POLLWRNORM, POLLWRBAND
