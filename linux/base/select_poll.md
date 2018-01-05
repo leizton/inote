@@ -25,8 +25,8 @@ if (num < 0) {
     printf("select error: %d", errno);
 } else if (num > 0) {
     if (FD_ISSET(fd, &reads)) {
-        char buf[BUF_LEN + 1];
-        int len = read(fd, buf, BUF_LEN);
+        char buf[kBufSize];
+        int len = read(fd, buf, kBufSize);
         if (len < 0) {
             printf("read error: %d", errno);
         }
@@ -58,8 +58,8 @@ int poll(pollfd* fds, uint fds_num, int timeout_millis);
 pollfd fds[2];
 fds[0].fd = STDIN_FILENO,  fds[0].events = POLLIN;
 fds[1].fd = STDOUT_FILENO, fds[1].events = POLLOUT;
-char buf[] = new char[BUF_SIZE];
-int r_idx = 0, w_idx = 0;
+char buf[] = new char[kBufSize];
+int ridx = 0, widx = 0;
 for (;;) {
     int ret = poll(fds, 2, 1000);
     if (ret < 0) {
