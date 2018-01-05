@@ -45,7 +45,7 @@ struct pollfd {
 };
 // http://man7.org/linux/man-pages/man2/poll.2.html
 // 每次调用poll时, 内核会自动清空revents
-int poll(pollfd* fds, uint fds_num, int timeout);
+int poll(pollfd* fds, uint fds_num, int timeout_millis);
 ```
 ## revents
 - POLLIN                            读不会阻塞
@@ -53,3 +53,24 @@ int poll(pollfd* fds, uint fds_num, int timeout);
 - POLLIN|POLLPRI                    等同于select()的读事件
 - POLLOUT                           写不会阻塞, 等同于select()的写事件
 - POLLWRNORM, POLLWRBAND
+## example
+```c
+pollfd fds[2];
+fds[0].fd = STDIN_FILENO,  fds[0].events = POLLIN;
+fds[1].fd = STDOUT_FILENO, fds[1].events = POLLOUT;
+char buf[] = new char[BUF_SIZE];
+int r_idx = 0, w_idx = 0;
+for (;;) {
+    int ret = poll(fds, 2, 1000);
+    if (ret < 0) {
+        printf("poll error: %d", errno);
+        break;
+    } else if (ret == 0) {
+        continue;
+    }
+    if (fds[0].revents & POLLIN) {
+    }
+    if (fds[1].revents & POLLOUT) {
+    }
+}
+```
