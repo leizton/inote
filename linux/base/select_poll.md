@@ -3,7 +3,7 @@ select()和poll()都是水平触发, 不支持边沿触发
 
 # select()
 ## api
-```c
+```js
 #include <sys/select.h>
 // http://man7.org/linux/man-pages/man2/select.2.html
 // excepts包括异常或带外数据
@@ -15,7 +15,7 @@ FD_ISSET(int fd, fd_set* fds)  // 判断fd是否在fds中
 FD_ZERO(struct fd_set* fds)    // 清空fds
 ```
 ## example
-```c
+```js
 const int fd = STDIN_FILENO;
 fd_set reads;
 FD_SET(fd, reads);
@@ -36,7 +36,7 @@ if (num < 0) {
 
 # poll()
 ## api
-```c
+```js
 #include <sys/poll.h>
 struct pollfd {
     int fd;
@@ -54,7 +54,7 @@ int poll(pollfd* fds, uint fds_num, int timeout_millis);
 - POLLOUT                           写不会阻塞, 等同于select()的写事件
 - POLLWRNORM, POLLWRBAND
 ## example
-```c
+```js
 pollfd fds[2];
 fds[0].fd = STDIN_FILENO,  fds[0].events = POLLIN;
 fds[1].fd = STDOUT_FILENO, fds[1].events = POLLOUT;
