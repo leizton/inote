@@ -62,6 +62,7 @@ void event_get_assignment(event*, event_base**,
 创建并add只调度一次的事件
 形参表和`event_new()`类似, 只是增加了`event_add()`用到的timeout
 ```js
+// @return  0,success;-1,error  返回类型不是event*, 所以无需手动调用event_free()
 int event_base_once(event_base*, evutil_socket_t, short, event_callback_fn, void*, timeval*);
 ```
 
@@ -82,6 +83,11 @@ void event_active(event *ev, int revents, short ncalls);
 ```
 
 # 优化timeout
-
+libevent使用二叉堆(binary heap, 完全二叉树)记录事件的超时, add/del操作是O(log n)时间
+如果有很多超时时间相同的超时事件, 可以通过`event_base_init_common_timeout()`来优化, 使得这些事件的add操作是O(1)时间
+```js
+// @duration  执行event_add()后过多久触发回调
+timeval* event_base_init_common_timeout(event_base*, timeval* duration);
+```
 
 # 事件(event)的生命周期
