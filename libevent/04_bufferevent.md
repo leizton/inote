@@ -27,7 +27,10 @@ bufferevent* bufferevent_socket_new(event_base* ev_base, evutil_socket_t fd, enu
 
 # set/get回调
 ```js
-void bufferevent_setcb(bufferevent*, bufferevent_data_cb read_cb, bufferevent_data_cb write_cb,
+typedef void (*bufferevent_data_cb)(bufferevent* bufev, void* arg);
+typedef void (*bufferevent_event_cb)(bufferevent* bufev, short revents, void* arg);
+
+void bufferevent_setcb(bufferevent* bufev, bufferevent_data_cb read_cb, bufferevent_data_cb write_cb,
                        bufferevent_event_cb event_cb, void* arg);
 
 void bufferevent_getcb(bufferevent*, bufferevent_data_cb*, bufferevent_data_cb*, bufferevent_event_cb*, void**);
@@ -52,4 +55,40 @@ void bufferevent_enable(bufferevent* bufev, short events);
 void bufferevent_disable(bufferevent* bufev, short events);
 
 short bufferevent_get_enabled(bufferevent *bufev);
+```
+
+# api
+```js
+// 设置水位线
+// high_mark设成0表示unlimited
+void bufferevent_setwatermark(bufferevent* bufev, short events, size_t low_mark, size_t high_mark);
+
+int bufferevent_setfd(bufferevent*, evutil_socket_t);
+evutil_socket_t bufferevent_getfd(bufferevent*);
+
+void bufferevent_lock(bufferevent*);
+void bufferevent_unlock(bufferevent*);
+
+evbuffer* bufferevent_get_input(bufferevent*);
+evbuffer* bufferevent_get_output(bufferevent*);
+
+// 写[buf, buf+size)上的数据
+// @return  写成功返回0, 否则返回-1
+int bufferevent_write(bufferevent*, char* data, size_t size);
+// @return  实际读到的字节数
+int bufferevent_read(bufferevent*, char* data, size_t size);
+
+// @return 0,success; -1,error
+int bufferevent_write(bufferevent*, evbuffer*);
+// @return 0,success; -1,error
+int bufferevent_read(bufferevent*, evbuffer*);
+
+// 设置读写超时时间, 在这段时间里如果bufev上没有成功地读写数据,
+// 则回调event_cb, revents是BEV_EVENT_TIMEOUT|BEV_EVENT_READING, 或BEV_EVENT_TIMEOUT|BEV_EVENT_WRITING
+void bufferevent_set_timeouts(bufferevent*, timeval* read_timeout, timeval* write_timeout);
+
+// 刷新读写, 尽可能读或写最多的数据到underlying transport
+// @io_type     取值EV_READ,EV_WRITE,EV_READ|EV_WRITE
+// @flush_mode  取值BEV_FINISHED表示没有更多数据写了
+int bufferevent_flush(bufferevent*, short io_type, enum bufferevent_flush_mode flush_mode);
 ```
