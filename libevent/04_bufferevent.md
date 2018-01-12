@@ -92,3 +92,19 @@ void bufferevent_set_timeouts(bufferevent*, timeval* read_timeout, timeval* writ
 // @flush_mode  取值BEV_FINISHED表示没有更多数据写了
 int bufferevent_flush(bufferevent*, short io_type, enum bufferevent_flush_mode flush_mode);
 ```
+
+# bufferevent 过滤器
+```js
+enum bufferevent_filter_result { BEV_OK, BEV_NEED_MORE, BEV_ERROR };
+
+// @dst_limit  写到dst的数据量的上限, -1表示无限
+// @ctx        调用bufferevent_filter_new()时传入的参数
+// @return     BEV_OK,成功写数据到dst
+typedef bufferevent_filter_result (*bufferevent_filter_cb)(
+    evbuffer* src, evbuffer* dst, ev_ssize_t dst_limit, bufferevent_flush_mode mode, void* ctx);
+
+// 在一个bufferevent的基础上创建一个带过滤器的bufferevent
+bufferevent* bufferevent_filter_new(bufferevent* underlying,
+    bufferevent_filter_cb input_filter, bufferevent_filter_cb output_filter,
+    int opts, void (*free_context)(void* ctx), void* ctx);
+```
