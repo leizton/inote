@@ -121,4 +121,39 @@ ev_token_bucket_cfg* ev_token_bucket_cfg_new(size_t read_rate, size_t read_burst
 int bufferevent_set_rate_limit(bufferevent*, ev_token_bucket_cfg*);
 
 void ev_token_bucket_cfg_free(ev_token_bucket_cfg*);
+
+// ssize表示有符号
+ev_ssize_t bufferevent_get_read_limit(bufferevent*);
+ev_ssize_t bufferevent_get_write_limit(bufferevent*);
+
+// 增加或减少rate-limit
+// @dec  <0表示increment
+int bufferevent_decrement_read_limit(bufferevent*, ev_ssize_t dec);
+int bufferevent_decrement_write_limit(bufferevent*, ev_ssize_t dec);
+
+// 对event_base限流, 限制event_base上注册的bufferevent的rate总和
+// 创建并应用到event_base上
+bufferevent_rate_limit_group* bufferevent_rate_limit_group_new(event_base*, ev_token_bucket_cfg*);
+
+// 修改rate_limit_group的设置
+int bufferevent_rate_limit_group_set_cfg(bufferevent_rate_limit_group*, ev_token_bucket_cfg*);
+```
+
+# ssl
+Secure Sockets Layer. IETF将SSL标准化, 即RFC-2246, 并命名成TSL(Transport Security Layer). TSL1.0相对SSL3.0有细小的升级.
+ref: https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660_.htm
+```js
+enum bufferevent_ssl_state {
+    BUFFEREVENT_SSL_OPEN,        // 由于已完成ssl握手的bufferevent
+    BUFFEREVENT_SSL_CONNECTING,  // 用于客户端connect server时
+    BUFFEREVENT_SSL_ACCEPTING    // 用于服务端accept client时
+};
+
+// 创建带ssl的socket-based bufferevent
+// 当握手完成时, 回调bufferevent_event_cb, revents设置BEV_EVENT_CONNECTED
+bufferevent* bufferevent_openssl_socket_new(event_base*, evutil_socket_t, SSL*, bufferevent_ssl_state, int opts);
+
+bufferevent* bufferevent_openssl_filter_new(event_base*, bufferevent*, SSL*, bufferevent_ssl_state, int opts);
+
+SSL* bufferevent_openssl_get_ssl(bufferevent*);
 ```
