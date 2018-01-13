@@ -108,3 +108,17 @@ bufferevent* bufferevent_filter_new(bufferevent* underlying,
     bufferevent_filter_cb input_filter, bufferevent_filter_cb output_filter,
     int opts, void (*free_context)(void* ctx), void* ctx);
 ```
+
+# rate limit
+令牌桶算法
+```js
+// @read_rate   每个tick放入read_rate个令牌, 每个令牌对应一个byte
+//              example: 当tick=100ms, read_rate=300, 读限流3000B/s
+// @read_burst  read_rate是平均最大速率, read_burst是实际最大速率
+ev_token_bucket_cfg* ev_token_bucket_cfg_new(size_t read_rate, size_t read_burst,
+    size_t write_rate, size_t write_burst, timeval* tick);
+
+int bufferevent_set_rate_limit(bufferevent*, ev_token_bucket_cfg*);
+
+void ev_token_bucket_cfg_free(ev_token_bucket_cfg*);
+```
