@@ -25,3 +25,10 @@ int evutil_make_listen_socket_reuseable(evutil_socket_t);
 // 以exec开头的系统调用函数族, fork子进程执行某个可执行文件
 int evutil_make_socket_closeonexec(evutil_socket_t);
 ```
+
+# errno
+```js
+#define EVUTIL_SOCKET_ERROR() errno
+#define evutil_socket_geterror(sock) errno
+#define evutil_socket_error_to_string(errcode) (strerror(errcode))
+```

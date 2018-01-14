@@ -9,21 +9,20 @@
   4. 写高水位  当bufferevent变成另一个bufferevent的underlying transport时才用到
 
 # create socket-based bufferevent
+## api
 ```js
 // @fd  必须是non-blocking, 设置非阻塞的辅助函数evutil_make_socket_nonblocking()
 //      fd也可以传-1, 交给后续代码设置
-bufferevent* bufferevent_socket_new(event_base* ev_base, evutil_socket_t fd, enum bufferevent_options opts);
-```
+bufferevent* bufferevent_socket_new(event_base*, evutil_socket_t fd, bufferevent_options opts);
 
-# 创建bufferevent时可设置的options
-- `BEV_OPT_CLOSE_ON_FREE`
-  free时关闭底层的传输层
-- `BEV_OPT_DEFER_CALLBACKS`
-  设置后, 回调函数不会立即执行, 而是放到loop中排队执行
-  可避免在bufferevent间存在复杂的依赖时有调用栈溢出的风险
-- `BEV_OPT_THREADSAFE`
-- `BEV_OPT_UNLOCK_CALLBACKS`
-  bufferevent默认是回调函数加锁来保证线程安全, 设置后不加锁
+enum bufferevent_options {
+  BEV_OPT_CLOSE_ON_FREE,    // free时关闭底层的传输层
+  BEV_OPT_DEFER_CALLBACKS,  // 设置后, 回调函数不会立即执行, 而是放到loop中排队执行
+                            // 可避免在bufferevent间存在复杂的依赖时有调用栈溢出的风险
+  BEV_OPT_THREADSAFE,       // 默认设置
+  BEV_OPT_UNLOCK_CALLBACKS  // bufferevent默认是回调函数加锁来保证线程安全, 设置后不加锁
+}
+```
 
 # set/get回调
 ```js
