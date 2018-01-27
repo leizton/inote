@@ -55,8 +55,10 @@ git log --graph --oneline
 # diff
 git diff                       # 默认工作区和暂存区的差别
 git diff --cached(或--staged)  # 暂存区和本地仓库的差别
-git diff version1 version2     # 两个commit版本version1和version2的差别
-git diff master branch1        # 两个分支的差别
+git show commit1               # 查看commit1的提交内容
+git diff commit1^              # 效果同上, 比较commit1和commit1的前一次提交
+git diff commit1 commit2       # 显示两次提交间的差别
+git diff master branch1        # 两个分支间的差别
 
 # push
 git push -u origin branch1     # 绑定远程仓库的branch1分支, 以后直接push会推到branch1分支
