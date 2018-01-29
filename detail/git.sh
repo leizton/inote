@@ -97,7 +97,7 @@ git reset --mixed HEAD~  # 把本地仓库的HEAD~_commit copy to staged区
 git reset --hard  HEAD~  # 把本地仓库的HEAD~_commit copy to工作区和staged区, 覆盖了当前修改
 
 # revert
-git revert HEAD~2  # 和git reset --hard HEAD~2的区别是: revert会保留HEAD HEAD~提交, reset --hard不会保留
+git revert HEAD~2  # 和git reset --hard HEAD~2的区别是: revert会保留HEAD HEAD~这两次commit然后创建新的commit来恢复, reset --hard不会保留
 
 # cherry-pick
 git cherry-pick commitID  # 把其他分支的某个提交应用到当前分支, 仅应用这一个提交
