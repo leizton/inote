@@ -17,6 +17,10 @@ netstat   -at显示listen外的tcp端口, -lt显示监听端口, -r显示路由�
 xargs     -i重定义输入位置, {}是占位符, 例如find . -name "*.csv" | xargs -i cp {} ~/data
 top       M 按使用内存排序, P 按使用cpu排序
 
+kill      kill pid 即 kill -s 15 pid, 向进程发送SIGTERM信号, 进程收到后会释放资源然后停止.
+          kill -9 pid 即 kill -s 9 pid, 强制进程立即停止.
+          某次kill -9某进程后发现zk节点未被删除, 导致重启时注册失败, 使用kill会执行@PreDestory注解的方法从而删除zk节点.
+
 pkg-config
   安装完某个库后，如安装libevent后，会在安装目录的lib/pkgconfig里有后缀名是.pc的文件
   export PKG_CONFIG_PATH=/Users/whiker/bin/libevent/lib/pkgconfig:$PKG_CONFIG_PATH
