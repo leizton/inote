@@ -26,3 +26,5 @@ pkg-config
   export PKG_CONFIG_PATH=/Users/whiker/bin/libevent/lib/pkgconfig:$PKG_CONFIG_PATH
   执行命令: pkg-config --libs --cflags libevent
     输出 "-I/Users/whiker/bin/libevent/include -L/Users/whiker/bin/libevent/lib -levent"
+
+lsof
