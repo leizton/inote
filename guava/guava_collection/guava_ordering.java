@@ -28,9 +28,10 @@ Ordering<T>
 			list.trimToSize()
 			return Collections.unmodifiableList(list)
 		
-		/* 实现平均复杂度是O(n + klogk)的TopK算法.
+		/* 
+		 * 实现平均复杂度是O(n + klogk)的TopK算法.
 		 * 用到了在无序数组中查找大小是第k个元素的算法, 平均时间复杂度O(n),
-		 *    最坏时间O(n^2), 参考《算法导论》第9章.
+		 * 最坏时间O(n^2), 参考《算法导论》第9章.
 		 */
 		 final int bufCap = k * 2
 		 E[] buf = (E[]) new Object[bufCap]
@@ -48,21 +49,20 @@ Ordering<T>
 			if compare(e, threshold) >= 0  // e >= threshold
 				continue
 			buf[bufSize++] = e
-			if bufSize == bufCap  // 放满了 k*2 个元素
+			if bufSize == bufCap  // 放满了k*2个元素
+				// 这个if条件最多成立(n/k)次, 每次平均时间复杂度O(k), 故总体是O(n)
 				int left = 0, right = bufCap - 1
-				minThresholdPosition = 0
+				int minPositionOfThreshold = 0  // 阈值可能出现位置的最小值
+				// 查找第k个元素, 让pivotIdx==k, 平均时间复杂度O(2k)
 				while left < right
-					int pivotIndex = (left + right + 1) >>> 1
-					// partition()的时间复杂度是O(n)
-					int pivotNewIndex = partition(buf, left, right, pivotIndex)
-					if pivotIndex > k
-						right = pivotIndex - 1
-					else if pivotIndex < k
-						left = Math.max(pivotNewIndex, left+1)  // pivotNewIndex可能就是left
-						/* minThresholdPosition: 阈值位置的最小值
-						 * 新的阈值元素出现在minThresholdPosition的右边
-						 */
-						minThresholdPosition = pivotNewIndex
+					int pivotIdx = partition(buf, left, right, (left + right + 1) >>> 1)
+					// partition()后较小的元素在左边
+					if pivotIdx > k
+						right = pivotIdx - 1
+					else if pivotIdx < k
+						left = Math.max(pivotIdx, left+1)
+						// 新的阈值元素出现在minPositionOfThreshold的右边
+						minPositionOfThreshold = pivotIdx
 					else
 						break
 				bufSize = k
@@ -70,7 +70,7 @@ Ordering<T>
 				threshold = buf[minThresholdPosition]
 				for i = minThresholdPosition + 1; i < k; i++
 					threshold = max(threshold, buf[i])
-		// end while elements.hasNext()
+		// end-while
 		Arrays.sort(buf, 0, bufSize, this)  // 这里排序占用O(klogk), Ordering实现了Comparator接口
 		bufSize = Math.min(bufSize, k)
 		return Collections.unmodifiableList(
@@ -79,18 +79,16 @@ Ordering<T>
 	// 快排的Partition
 	partition(E[] values, int left, int right, int pivotIndex):int {
 		E pivotValue = values[pivotIndex]
-		ObjectArrays.swap(values, pivotIndex, right)  // 交换数组的 第pivotIndex 和 第right 这两个元素
+		ObjectArrays.swap(values, pivotIndex, right)  // 交换数组的第pivotIndex和第right这两个元素
 		
-		int storeIndex = left
+		int splitIdx = left  // 最终的分割位置
 		for i = left; i < right; i++
-			if compare(values[i], pivotValue) < 0  // values[i] < pivotValue
-				// [left, storeIndex)区间上的元素比pivotValue小
-				// [storeIndex, right)区间上的元素比pivotValue大
-				// 此时values[right]是pivotValue
-				ObjectArrays.swap(values, i, storeIndex)
-				storeIndex++
-		ObjectArrays.swap(values, right, storeIndex)
-		return storeIndex
+			if compare(values[i], pivotValue) < 0
+				// [left, splitIdx)元素 < pivotValue, [splitIdx, right)元素 >= pivotValue, [right]是pivotValue
+				ObjectArrays.swap(values, i, splitIdx)
+				splitIdx++
+		ObjectArrays.swap(values, right, splitIdx)
+		return splitIdx
 	}
 	// 自然顺序
 	static <C extends Comparable> natural():Ordering<C> {
