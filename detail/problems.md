@@ -10,3 +10,7 @@
    解决: 重试
 5. 做.net-client时发现msg里设置浮点数(float double)时, 由于使用toString序列化, 导致接收时==比较结果是false(如传递double.MAX_VALUE), 把double值转成long表示才能使==比较结果是true
    经验: float和double应设置精度, 相等比较通过绝对差值是否小于精度实现.
+6. [12:46:20] find lost ack messages consumer:XXX001, pullLogOffsetInConsumer:93570, pullLogOffsetInServer:93590, requestNum:20, result:PullMessageResult{, pullLogOffset=93571, bufferTotalSize=0, messageNum=0}
+   [12:46:21] lost ack count, consumer:XXX001, confirmedOffset:93570, firstPullOffset:93591
+   由于broker返回给consumer的[93571,93590]这段msg实际是空list(PullMessageResult.msgNum=0), consumer在ack上也就丢失了这段, 所以出现后面的'lost ack count'
+   broker取出空的msg时, 机器监控的磁盘出现iowait, 具体原因还需调查
