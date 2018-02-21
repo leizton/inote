@@ -3,15 +3,15 @@
 队列
 Queue<E>
     // 入队
-    put(E e)            阻塞; if 调用线程被interrupted, throw InterruptedException
-    offer(E e):boolean  非阻塞; if 队列满, return false; if success, return true
-    // add(E e):boolean    用offer替代; 非阻塞; if 队列满, throw IllegalStateException; if success, return true
+    put(E e)             阻塞; if 调用线程被interrupted, throw InterruptedException
+    offer(E e):boolean   非阻塞; if 队列满, return false; if success, return true
+    // add(E e):boolean  用offer替代; 非阻塞; if 队列满, throw IllegalStateException; if success, return true
     // 出队
-    take():E            阻塞; if 调用线程被interrupted, throw InterruptedException
-    poll():E            非阻塞; if 队列非空, 返回并删除队列的头元素; else 队列空, 返回null
+    take():E             阻塞; if 调用线程被interrupted, throw InterruptedException
+    poll():E             非阻塞; if 队列非空, 返回并删除队列的头元素; else 队列空, 返回null
     //
-    peek():E            if 队列非空, 返回队列的头元素, 但不删除; else 队列空, 返回null
-    // element():E         用peek替代; if 队列非空, 返回队列的头元素, 但不删除; else 队列空, throw NoSuchElementException
+    peek():E             if 队列非空, 返回队列的头元素, 但不删除; else 队列空, 返回null
+    // element():E       用peek替代; if 队列非空, 返回队列的头元素, 但不删除; else 队列空, throw NoSuchElementException
 
 双端队列
 Deque<E>
