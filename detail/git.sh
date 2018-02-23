@@ -122,3 +122,7 @@ git config credential.helper store
 
 # 忽略文件权限
 git config core.filemode false
+
+# 设置和取消代理
+git config --global http.proxy socks5://127.0.0.1:1081 && git config --global https.proxy socks5://127.0.0.1:1081
+git config --global --unset http.proxy && git config --global --unset https.proxy
