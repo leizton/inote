@@ -81,21 +81,22 @@ Proxy
 		// 这个apply()是jdk动态代理实现的关键代码
 		@Override apply(ClassLoader loader, Class<?>[] interfaces):Class<?> {
 			Map<Class<?>, Boolean> interfaceSet = new IdentityHashMap<>(interfaces.length)
-			/* 对要代理的service接口检查 */
-			for Class<?> ci : interfaces
+			// 对要代理的service接口检查
+			for Class<?> ci : interfaces {
 				// 确保类对象可从loader中获取
 				Class<?> c = null
-				try  c = Class.forName(ci.getName(), false, loader)
-				catch ClassNotFoundException  // 吞掉异常
+				try { c = Class.forName(ci.getName(), false, loader) }
+				catch (ClassNotFoundException)  { 吞掉异常 }
 				if c != ci
 					throw "不能从loader获取ci"
 				// ci必须是接口
-				if ! c.isInterface()
+				if !c.isInterface()
 					throw "不是接口"
 				// 把c放入集合中
 				if interfaceSet.put(c, Boolean.TRUE) != null
 					throw "interfaces有重复的接口"
-			/* 代理类的包名 */
+			}
+			// 代理类的包名
 			String proxyPkg = null  // service接口所在的包名
 			for Class<?> ci : interfaces
 				if ! Modifier.isPublic(ci.getModifiers())
@@ -107,12 +108,11 @@ Proxy
 						throw "non-public不是在同一个包下"
 			if proxyPkg == null  // service接口都是public
 				proxyPkg = "com.sun.proxy."
-			/* 代理类的类名 */
+			// 代理类的类名
 			long num = nextUniqueNumber.getAndIncrement()
 			String proxyName = proxyPkg + "$Proxy" + num
-			/* 动态编译生成指定的代理类 */
-			byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
-					proxyName, interfaces, accessFlags)  // 字节码
+			// 动态编译生成指定的代理类
+			byte[] proxyClassFile = ProxyGenerator.generateProxyClass(proxyName, interfaces, accessFlags)  // 字节码
 			return defineClass0(loader, proxyName, proxyClassFile, 0, proxyClassFile.length);
 		}
 静态字段
@@ -122,19 +122,18 @@ Proxy
 静态方法
 	newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler handler):Object {
 		Class<?> cl = getProxyClass0(loader, interfaces)  // 从proxyClassCache中找到或生成代理类
-		try
-			Constructor<?> cons = cl.getConstructor(constructorParams)
-			/* Modifier.isPublic(int)用于判断输入状态编码是否是public
-			 * Field[] fs = Foo.class.getDeclaredFields(),
-			 * Modifier.isPublic(fs[0])  判断fs[0]是否是public字段. */
-			if ! Modifier.isPublic( cl.getModifiers() )  // cl不是"public class"时, 成立.
-				AccessController.doPrivileged( new PrivilegedAction<Void>() {
-					run():Void {
-						cons.setAccessible(true)
-						return null
-					}
-				})
-			return cons.newInstance(new Object[] { handler })
+		Constructor<?> cons = cl.getConstructor(constructorParams)
+		// Modifier.isPublic(int)用于判断输入状态编码是否是public
+		// 例如: Field[] fs = Foo.class.getDeclaredFields(), Modifier.isPublic(fs[0])  判断fs[0]是否是public字段
+		if !Modifier.isPublic(cl.getModifiers())
+			// cl不是"public class"时, 设置成可访问
+			AccessController.doPrivileged( new PrivilegedAction<Void>() {
+				run():Void {
+					cons.setAccessible(true)
+					return null
+				}
+			})
+		return cons.newInstance(new Object[] { handler })
 	}
 	getProxyClass0(ClassLoader loader, Class<?>... interfaces):Class<?> {
 		return proxyClassCache.get(loader, interfaces)
