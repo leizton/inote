@@ -100,3 +100,16 @@ void shuffle(T a[], int begin, int end) {
         }
     }
 }
+int main() {
+    const int N = 5, TEST = 100000;
+    const double SUM_TARGET = N * (N-1) / 4.0;
+    int a[N];
+    double sum;
+    for (int k = 0; k < TEST; ++k) {
+        for (int i = 0; i < N; ++i) a[i] = i+1;
+        shuffle<int>(a, 0, N);
+        sum += numOfInvertedPairs<int>(a, 0, N);
+    }
+    assert(abs(sum/TEST - SUM_TARGET) < 0.01);
+    return 0;
+}
