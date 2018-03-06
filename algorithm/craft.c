@@ -5,8 +5,7 @@ int seventh = (n >> 3) + (n >> 6) + 1;  // n * 9/64 + 1
 int ret = Arrays.binarySearch(arr, target);
 if (ret < 0) {
     // 设pos是target插入的位置, pos>=0, 则ret是(-pos-1)
-	// pos求反加1是-pos, 则ret=(-pos-1)是pos求反
-	// 所以~ret是post
+	// pos求反加1是-pos, 则pos求反是(-pos-1)即ret, 所以~ret是pos
     ret = ~ret;
 }
 
@@ -93,6 +92,7 @@ void shuffle(T a[], int begin, int end) {
 
     for (int i = begin + 1; i < end; ++i) {
         // 只跟自己前面的元素交换
+        // 归纳法: 假设a[begin,i)已经shuffle好了, 现在新增a[i], 就是与前面一个元素随机交换
         std::uniform_int_distribution<int> rnd(begin, i);
         j = rnd(rndGen);
         if (j != i) {
