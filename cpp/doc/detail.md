@@ -16,3 +16,20 @@
 # STDIN_FILENO stdin
 STDIN_FILE 是<unistd.h>里定义的宏, 类型是int
 stdin 类型是FILE*
+
+# 可变参数
+c函数参数是从右往左入栈, 所以可变参数先于固定参数入栈, 可变参数在高地址
+最后一个固定参数的下一个栈底元素就是第一个可变参数, 这是va_start()的实现原理
+```c++
+typedef void* va_list;
+
+//sizeof(n)/sizeof(int)向上取整乘sizeof(int)
+#define _INTSIZEOF(n)   ((sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1));
+
+#define va_start(ap,v)  (ap = (va_list)&v + _INTSIZEOF(v))
+
+//获得ap的原值并使ap往后移_INTSIZEOF(type)
+#define va_arg(ap,type) (*(type*)( (ap+=_INTSIZEOF(type)) - _INTSIZEOF(type) ))
+
+#define va_end(ap)      (ap = (va_list)0)
+```
