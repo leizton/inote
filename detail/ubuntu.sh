@@ -31,3 +31,13 @@ $ sudo apt-get update | grep Failed
   # 查找出过期的源
   # 例如: http://ppa.launchpad.net/fcitx-team/nightly/ubuntu artful Release
 $ sudo add-apt-repository --remove ppa:fcitx-team/nightly
+
+# gcc降级
+apt-get install gcc-4.9
+apt-get install g++-4.9
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 20
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 10    # gcc-5分配更低的优先级
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10
+update-alternatives --config gcc  # 选择版本
+update-alternatives --config g++

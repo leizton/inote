@@ -32,3 +32,9 @@ lsof
   lsof $file      与文件相关
   lsof -c mysql   与进程相关
   lsof -i         网络连接, '-i tcp'只列出tcp, '-i :3306'指定端口号
+
+update-alternatives
+  --install <link> <name> <path> <priority>
+  --config   选择版本
+  --display  显示可选版本
+  --remove
