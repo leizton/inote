@@ -25,6 +25,9 @@ def str2Tm(str):
 
 def display(time):
   ts = tm.mktime(time)
+  tsec,tms = numstr2Tm(str(ts))
+  print(tsec)
+  print('%d%03d' % (tsec, tms))
   print(ts)
   print(tm2Str(time))
 
