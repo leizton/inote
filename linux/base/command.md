@@ -6,6 +6,7 @@ ln        -s         建立软链接, 不加-s是硬链接
 stat      filename   显示文件详情
 du        -hs dir    目录大小
 df        -h         各分区使用情况
+wc        -l         -l只统计行数, 去掉-l统计字符数, "find . -name '*.c' | xargs wc -l"
 
 scp       whiker@localhost:~/data /tmp
 nohup     ./start.sh >/dev/null 2>&1 &
