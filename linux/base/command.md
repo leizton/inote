@@ -39,3 +39,5 @@ update-alternatives
   --config   选择版本
   --display  显示可选版本
   --remove
+
+od -N${num} -t x1 ${file}  `显示文件前num个字节的16进制`

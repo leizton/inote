@@ -43,6 +43,8 @@ public class LocalPropertiesUtil {
     if (loader == null) {
       loader = LocalPropertiesUtil.class.getClassLoader();
     }
+    // jar包里的a.conf, 用loader.getResource()得到的url是file://xxx.jar!/a.conf
+    // 路径的jar!不能直接用new File打开, 所以改用getResourceAsStream()
     return loader != null ? loader.getResourceAsStream(resourceName) : null;
   }
 }

@@ -22,3 +22,7 @@ O                在新页面打开链接, 或书签
 alt + Home       打开主页
 
 ctrl + d         收藏当前页面
+
+:set nonu  关闭行号  //复制时
+:set nosi  关闭smart-indent  //粘贴时
+:set noai  关闭auto-indent   //粘贴时
