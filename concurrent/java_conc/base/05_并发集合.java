@@ -26,24 +26,40 @@ Deque<E>
     peekFirst/peekLast():E
 
 非阻塞并发队列
-ConcurrentLinkedQueue<T> implements Queue<E>
+ConcurrentLinkedQueue<E> implements Queue<E>
+// 不推荐使用该无锁队列
+// 推荐使用SingleProducerMultiConsumer或MultiProducerSingleConsumer的无锁队列
+- head:Node<E> volatile
+- tail:Node<E> volatile
+> ConcurrentLinkedQueue()
+    $head = $tail = new Node
+> Node
+    - item:E volatile
+    - next:Node<E> volatile
 > offer(E e):boolean
     checkNotNull(e)
     newNode = new Node<E>(e)
-    // this.tail并不是总是指向尾节点
-    for Node<E> t = this.tail, p = t; ;
+    // $tail并不是总是指向尾节点
+    t = $tail; p = t
+    while 1
         q = p.next
-        if q == null  // p是尾节点
+        if q == null
             if p.casNext(null, newNode)
-                if p != t  // tail距离实际尾节点较远，所以更新tail
-                    casTail(t, newNode)
+                // cas成功后的一瞬间newNode是实际尾节点, 因为这一瞬间前p.next是null, p是实际尾节点
+                // 所以cas成功就表示newNode入队成功
+                if p != t
+                    casTail(t, newNode)  // tail距离实际尾节点较远，所以更新tail
                 return true
-        else if p == q  // 跑飞了，需要从head开始
-            p = (t != (t = tail)) ? t : head
+        else if p != q
+            if p == t
+                p = q  // q!=null => p大概率下不是实际尾节点 => p往后移动
+            else if t != (t = $tail)
+                p = t  // $tail有更新, p取新的$tail
+            else
+                p = q
         else
-            // 如果p==t，由于q!=null所以p不是实际尾节点，p应该向后移(p = q)
-            // 如果p!=t，如果tail有更新(即t!=(t=tail))，把p设成更靠近尾节点的tail(t)，否则设成p.next(q)
-            p = (p != t && t != (t = tail)) ? t : q
+            // p == q
+            p = (t != (t = tail)) ? t : head
 
 非阻塞并发双端队列
 ConcurrentLinkedDeque<T> implements Deque<E>
