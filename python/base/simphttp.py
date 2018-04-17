@@ -47,7 +47,7 @@ class SimpHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         except:
             out = None
         if not out:
-            send_result(500, "open exception")
+            self.send_result(500, "open exception")
             return
         # write
         try:
@@ -55,18 +55,18 @@ class SimpHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             while remain > 0:
                 line = self.rfile.readline()
                 remain -= len(line)
-            out.write(line)
+                out.write(line)
         except:
-            send_result(500, "write exception")
+            self.send_result(500, "write exception")
             return
         # close
         try:
             out.close()
-            send_result(200, "ok")
+            self.send_result(200, "ok")
         except:
-            send_result(500, "close exception")
+            self.send_result(500, "close exception")
 
-    def send_result(code, info):
+    def send_result(self, code, info):
         f = StringIO()
         f.write(info)
         self.send_response(code)
