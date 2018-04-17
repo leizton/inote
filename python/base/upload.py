@@ -10,6 +10,7 @@ def upload(host, port, srcfile):
   print resp.status, resp.reason
 
 
+# python upload.py data/user.dat
 if __name__ == '__main__':
   if len(sys.argv) != 2:
     print('invalid argv')

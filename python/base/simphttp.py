@@ -259,6 +259,7 @@ class SimpHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         })
 
 
+# nohup python simphttp.py 8000 &
 if __name__ == '__main__':
   port = 10000
   if len(sys.argv) > 1:
