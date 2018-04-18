@@ -53,9 +53,9 @@ class SimpHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         try:
             remain = int(self.headers['content-length'])
             while remain > 0:
-                line = self.rfile.readline()
-                remain -= len(line)
-                out.write(line)
+                buf = self.rfile.read(min(remain, 1024))
+                remain -= len(buf)
+                out.write(buf)
         except:
             self.send_result(500, "write exception")
             return

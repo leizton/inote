@@ -40,4 +40,4 @@ update-alternatives
   --display  显示可选版本
   --remove
 
-od -N${num} -t x1 ${file}  `显示文件前num个字节的16进制`
+od -N ${num} -t x1 ${file}  `显示文件前num个字节的16进制, num可以大于文件大小`
