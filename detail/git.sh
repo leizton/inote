@@ -2,6 +2,10 @@
 1. unable to access 'https://github.com/user/project.git': The requested URL returned error: 403
    把远程仓库url改成'https://user@github.com/user/project.git'
 
+# 合并commit
+https://www.jianshu.com/p/964de879904a
+合并完成后用 git push --force 提交到远程分支上
+
 # tag
 git tag                              # 列出当前所有的tag
 git checkout -b newBranch tagA       # 从tagA检出新分支
