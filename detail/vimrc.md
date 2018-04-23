@@ -1,3 +1,5 @@
+> 如果vi出问题, 直接sudo apt-get install vim
+
 # 配置
 在home目录下创建.vimrc, 写入如下内容
 set nu              "行号
@@ -8,8 +10,6 @@ set autoindent      "自动缩进
 set encoding=utf-8  "UTF-8编码
 set hlsearch        "高亮查询结果
 syntax on           "语法高亮
-
-> 如果vi出问题, 直接sudo apt-get install vim
 
 # 基本命令
 - u       撤销
@@ -23,3 +23,8 @@ syntax on           "语法高亮
 - :3,$s/hello/hi/g    第3行~最后一行
 - :.,7s/hello/hi/g    当前行~第7行
 - :%s/hello/hi/g      %表示整个文件，等效于1,$
+
+#
+:set nonu  关闭行号  //复制时
+:set nosi  关闭smart-indent  //粘贴时
+:set noai  关闭auto-indent   //粘贴时
