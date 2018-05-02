@@ -1,0 +1,12 @@
+arch
+  protocol(协议)
+    TBinaryProtocol TCompactProtocol TDenseProtocol TJSONProtocol TDebugProtocol
+  transport(传输层)
+    TFramedTransport
+    TSocket TServerSocket
+    TMemoryTransport(内存映射) TFileTransport
+    TZlibTransport(连接另一个transport提供压缩功能)
+  server(服务提供者)
+    TNonblockingServer 多线程非阻塞io
+    TThreadPoolServer 多线程阻塞io
+    TSimpleServer 单线程阻塞io, 用于测试
