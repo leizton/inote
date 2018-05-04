@@ -6,7 +6,7 @@
 ::           attribute or field, replaced by '.'
 :            variable's type(no blank space)
              introduction(with a blank space after symbol)
-$            this.
+`#`          this.
 ->           dependency or call
 =>           next step
 ~>           implements
