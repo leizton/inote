@@ -6,6 +6,10 @@
 https://www.jianshu.com/p/964de879904a
 合并完成后用 git push --force 提交到远程分支上
 
+# 变基合并master的方法
+git rebase master
+git push --force
+
 # tag
 git tag                              # 列出当前所有的tag
 git checkout -b newBranch tagA       # 从tagA检出新分支
