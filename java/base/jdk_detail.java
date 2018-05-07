@@ -18,6 +18,12 @@ getCanonicalName() => package.Foo.Inner
 // 行分割符
 System.getProperty("line.separator")
 
-// BigDecimal Impl
-intCompact:long, intVal:BigInteger
-precision:int, scale:int
+// Buffer
+abstract
+- 字段
+	// mark <= position <= limit <= capacity
+	// position和limit之间是未读数据, limit之后是可写区域
+	int mark, position, limit, capacity;
+- 实现子类
+	ByteBuffer  CharBuffer   ShortBuffer  IntBuffer
+	LongBuffer  FloatBuffer  DoubleBuffer

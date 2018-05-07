@@ -1,6 +1,9 @@
 // 用String而不是double类型来初始化BigDecimal
 new BigDecimal(1.22)    // 1.219999
 new BigDecimal("1.22")  // 1.22
+- BigDecimal Impl
+	intCompact:long, intVal:BigInteger
+	precision:int, scale:int
 
 // BigDecimal和String一样是不可变变量
 d = new BigDecimal("1.22")
