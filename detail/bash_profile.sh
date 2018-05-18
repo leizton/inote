@@ -1,3 +1,4 @@
+export PS1='\[\033[1;31m\]\t \w]$(parse_git_branch) \$\[\033[0;m\] '
 export USER_NAME="leizton"
 export USER_HOME="~"
 
@@ -59,6 +60,13 @@ alias gith="git reset --hard HEAD";
 alias gituser="git config user.name";
 alias gitemail="git config user.email";
 alias gitconf="git config user.name fanyaoqun && git config user.email fanyaoqun@bytedance.com";
+function parse_git_branch() {
+  b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ -n "$b" ]; then
+    b=" $b"
+  fi
+  echo "$b"
+}
 function gitc() {
   git commit -m "$1"
 }

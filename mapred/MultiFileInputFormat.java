@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 2018/5/17
  */
-@SuppressWarnings({"WeakerAccess", "RedundantThrows", "unused"})
+@SuppressWarnings({"WeakerAccess", "RedundantThrows"})
 public class MultiFileInputFormat extends FileInputFormat<LongWritable, Text> {
   private static final Logger LOG = LoggerFactory.getLogger(MultiFileInputFormat.class);
   private static final int BATCH_NUM = 5;
@@ -47,13 +47,14 @@ public class MultiFileInputFormat extends FileInputFormat<LongWritable, Text> {
     if (!(split instanceof MultiInputSplit)) {
       throw new IOException("split not MultiInputSplit");
     }
-    return new MultiFileLineRecordReader((MultiInputSplit) split);
+    return new OneByOneLineReader((MultiInputSplit) split);
   }
 
   public static final class MultiInputSplit extends InputSplit implements Writable {
 
     private List<FileSplit> splits;
 
+    @SuppressWarnings("unused")
     public MultiInputSplit() {
     }
 
@@ -98,7 +99,77 @@ public class MultiFileInputFormat extends FileInputFormat<LongWritable, Text> {
     }
   }
 
-  public static final class MultiFileLineRecordReader extends RecordReader<LongWritable, Text> {
+  public static final class OneByOneLineReader extends RecordReader<LongWritable, Text> {
+
+    private final MultiInputSplit input;
+    private List<LineRecordReader> readers;
+    private int currReaderPos;
+    private LineRecordReader currReader;
+
+    public OneByOneLineReader(MultiInputSplit input) {
+      this.input = input;
+    }
+
+    @Override
+    public void initialize(InputSplit split, TaskAttemptContext context) throws IOException, InterruptedException {
+      readers = new ArrayList<>(input.splits.size());
+      for (FileSplit split1 : input.splits) {
+        LineRecordReader reader = new LineRecordReader();
+        reader.initialize(split1, context);
+        readers.add(reader);
+      }
+      currReaderPos = 0;
+      currReader = readers.isEmpty() ? null : readers.get(currReaderPos);
+    }
+
+    @Override
+    public boolean nextKeyValue() throws IOException, InterruptedException {
+      if (currReader == null) {
+        return false;
+      }
+      if (currReader.nextKeyValue()) {
+        return true;
+      }
+      if (currReaderPos < readers.size() - 1) {
+        currReader.close();
+        readers.set(currReaderPos, null);
+        currReader = readers.get(++currReaderPos);
+        return currReader.nextKeyValue();
+      }
+      currReaderPos++;
+      currReader = null;
+      return false;
+    }
+
+    @Override
+    public LongWritable getCurrentKey() throws IOException, InterruptedException {
+      return currReader.getCurrentKey();
+    }
+
+    @Override
+    public Text getCurrentValue() throws IOException, InterruptedException {
+      return currReader.getCurrentValue();
+    }
+
+    @Override
+    public float getProgress() throws IOException, InterruptedException {
+      if (currReader != null) {
+        return (currReaderPos + currReader.getProgress()) / BATCH_NUM;
+      }
+      return 1;
+    }
+
+    @Override
+    public void close() throws IOException {
+      for (LineRecordReader reader : readers) {
+        if (reader != null) {
+          reader.close();
+        }
+      }
+    }
+  }
+
+  public static final class RoundLineReader extends RecordReader<LongWritable, Text> {
     private static final LongWritable one = new LongWritable(1);
 
     private final MultiInputSplit input;
@@ -107,7 +178,7 @@ public class MultiFileInputFormat extends FileInputFormat<LongWritable, Text> {
     private int index;
     private Text nextValue;
 
-    public MultiFileLineRecordReader(MultiInputSplit input) {
+    public RoundLineReader(MultiInputSplit input) {
       this.input = input;
     }
 

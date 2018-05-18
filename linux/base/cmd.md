@@ -17,6 +17,7 @@ grep      [opt] file  -v不包含不匹配, -r递归目录, -i忽略大小写, -
 netstat   -at显示listen外的tcp端口, -lt显示监听端口, -r显示路由表
 xargs     -i重定义输入位置, {}是占位符, 例如find . -name "*.csv" | xargs -i cp {} ~/data
 top       M 按使用内存排序, P 按使用cpu排序
+strace    trace进程的某个系统调用
 
 kill
   kill pid 即 kill -s 15 pid, 向进程发送SIGTERM信号, 进程收到后会释放资源然后停止.
