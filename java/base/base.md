@@ -64,3 +64,14 @@ $ java Main        // 找到类名是Main的类, 运行其静态main()方法
 package com.wh.learn.jdk10;
 $ javac -d target src/com/wh/learn/jdk10/Main.java  // 生成target/com/wh/learn/jdk10/Main.class
 $ java -cp target 'com.wh.learn.jdk10.Main'         // 此时类名需要带上包名
+
+# 常用调试命令
+- jstat
+jstat -gc <pid> 2000
+- jstack
+jstack <pid> > <outfile>
+- jmap, jhap
+jmap -dump:live,file=<outfile> <pid>
+jhat <outfile>
+- jps
+查看当前java进程
