@@ -73,5 +73,6 @@ jstack <pid> > <outfile>
 - jmap, jhap
 jmap -dump:live,file=<outfile> <pid>
 jhat <outfile>
+$JAVA_HOME/bin/jvisualvm
 - jps
 查看当前java进程
