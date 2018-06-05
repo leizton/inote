@@ -2,7 +2,7 @@
     "files.autoSave": "afterDelay",
     "editor.fontSize": 16,
     "editor.lineHeight": 22,
-    "editor.fontFamily": "SF Mono, Tensentype-AiQingJF",
+    "editor.fontFamily": "SF Mono, PingFang-SC",
     "editor.fontWeight": "500",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
@@ -12,6 +12,10 @@
     "editor.renderControlCharacters": true,
     "editor.minimap.enabled": false,
     "editor.cursorStyle": "underline",
+    "editor.cursorBlinking": "phase",
+    "editor.roundedSelection": true,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelScrollSensitivity": 1.5,
     //
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.cursorStyle": "underline",
@@ -34,9 +38,11 @@
     "window.zoomLevel": 0,
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
-    "workbench.colorTheme": "Darcula Theme from IntelliJ",
     //
-    "terminal.integrated.shellArgs.osx": [ "-l" ]
+    "terminal.integrated.shellArgs.osx": [
+        "-l"
+    ],
+    "workbench.colorTheme": "Darcula Theme from IntelliJ"
 }
 
 快捷键
