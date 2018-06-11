@@ -10,3 +10,6 @@ ls -l /proc/$pid/cwd
 
 # 进程标准输出
 vi /proc/$pid/fd/2
+
+# 查看进程关联的socket
+lsof -p $pid -nP | grep TCP
