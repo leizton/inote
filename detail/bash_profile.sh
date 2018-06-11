@@ -50,7 +50,6 @@ alias gits="git status";
 alias gitl="git log --oneline";
 alias gita="git add -A .";
 alias gitph="git push";
-alias gitphf="git push --force";
 alias gitpl="git pull";
 alias gitplr="git pull --rebase";
 alias gitb="git branch";
