@@ -1,10 +1,12 @@
-# 约束条件
-charset = 'ascii'
-metricName.length < 128
-tagKey/tagValue.length < 64
-tagsNum <= 10
+# constraint condition
+- charset = 'ascii'
+- metricName.length < 128
+- tagKey/tagValue.length < 64
+- tagsNum <= 10
 
-# 功能
-lru memory cache
-reversed indexes + bitmap
-sql query
+# feature
+- lru memory cache
+- reversed indexes + bitmap
+- sql query
+- query: preagg, archive, segment-query
+- qps: first derivative of values versus time, zero-fill or constant-interpolation
