@@ -9,6 +9,12 @@ $ tmux attach-session -t 1  进入1号会话
 s  session, 以菜单方式选择会话
 d  退出当前会话
 
+# 配置
+vi ~/.tmux.conf
+```
+set -g mouse on
+```
+
 # 窗口
 c  创建新窗口
 w  窗口列表
