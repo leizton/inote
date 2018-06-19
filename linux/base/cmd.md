@@ -1,3 +1,7 @@
+# reference
+http://linuxtools-rst.readthedocs.io/zh_CN/latest/base/03_text_processing.html
+
+
 cd        -          返回最近一次cd前的目录
 tree      -L 2       最多显示2层
 which     exe        查找可执行文件位置
@@ -23,6 +27,7 @@ kill
   kill pid 即 kill -s 15 pid, 向进程发送SIGTERM信号, 进程收到后会释放资源然后停止.
   kill -9 pid 即 kill -s 9 pid, 强制进程立即停止.
   某次kill -9某进程后发现zk节点未被删除, 导致重启时注册失败, 使用kill会执行@PreDestory注解的方法从而删除zk节点.
+  所以最好不要加-9
 
 pkg-config
   安装完某个库后，如安装libevent后，会在安装目录的lib/pkgconfig里有后缀名是.pc的文件
@@ -42,3 +47,6 @@ update-alternatives
   --remove
 
 od -N ${num} -t x1 ${file}  `显示文件前num个字节的16进制, num可以大于文件大小`
+
+ifstat       `查看网络流量`
+iostat 5     `查看磁盘流量, 每5秒一次`
