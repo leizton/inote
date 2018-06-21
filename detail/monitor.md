@@ -12,3 +12,4 @@
 - qps: first derivative of values versus time, zero-fill or constant-interpolation
 - metrics manager: uid, quota plan
 - aggregate function: avg sum median min max percentile
+- represent series by wavelet transform
