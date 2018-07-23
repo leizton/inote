@@ -10,8 +10,8 @@ class SocketServer(val config: KafkaConfig,
 	/**
 	 * 每个{endpoint} 有 1个{acceptor}, {numProcessorThreads}个{processor}
 	 * 总共有{totalProcessorThreads}个{processor}
+	 * 所有的{processor}共用同一个{requestChannel}
 	 */
-
 	val requestChannel = new RequestChannel(totalProcessorThreads, config.queuedMaxRequests)
 	val processors = new Array[Processor](totalProcessorThreads)
 	val acceptors = mutable.Map[EndPoint, Acceptor]()  // acceptor和endpoint是一对一的关系
@@ -31,7 +31,9 @@ class SocketServer(val config: KafkaConfig,
 					// 每个endpoint都有numProcessorThreads个processor
 					for i <- 0 until this.numProcessorThreads
 						var id = begin + i
-						this.processors(id) = new Processor(id, ...)
+						processor = new Processor(id, ..., $.requestChannel, ...)
+						$.processors(id) = processor
+						$.requestChannel.addProcessor(processor)
 					begin += this.numProcessorThreads
 
 					// 创建acceptor

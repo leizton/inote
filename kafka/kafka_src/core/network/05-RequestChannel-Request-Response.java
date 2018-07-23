@@ -3,9 +3,13 @@ RequestChannel
     (numProcessors: Int, queueSize: Int)
 
 > 字段
+    processors = new ConcurrentHashMap[Int, Processor]
     requestQueue = new ArrayBlockingQueue[RequestChannel.Request](queueSize)
     // 每个{processor}有一个BlockingQueue的responseQueue
     responseQueues = new Array[ BlockingQueue[RequestChannel.Response] ](numProcessors)
+
+> addProcessor(Processor p)
+    $.processors.put(p.id, p)
 
 // Processor::processCompletedReceives()调用，添加新的请求
 // KafkaRequestHandler::shutdown()调用，添加结束标志请求{RequestChannel.AllDone}，在AllDone后面的请求都不会再被处理

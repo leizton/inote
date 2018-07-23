@@ -13,6 +13,7 @@ df        -h         各分区使用情况
 wc        -l         -l只统计行数, 去掉-l统计字符数, "find . -name '*.c' | xargs wc -l"
 
 scp       whiker@localhost:~/data /tmp
+          scp -l 10000 $src $dst  限速1Mps
 nohup     ./start.sh >/dev/null 2>&1 &
 env       环境变量
 echo      '\n'输出\n字符串和换行符(echo默认追加), -e '\n'输出两行, -e用于转义字符

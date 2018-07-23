@@ -12,7 +12,7 @@ KafkaServer
 	if !isStartingUp.compareAndSet(false, true)
 		return  // 有线程正在启动
 	brokerState.newState(Starting)
-	kafkaScheduler.startup()
+	kafkaScheduler.startup()  // replicaManager里用到
 	zkUtils = initZk()
 	//
 	_clusterId = getOrGenerateClusterId(zkUtils)  // 会在zk上创建持久节点

@@ -48,6 +48,8 @@ class Processor (processorId: Int,
 			// 用<localHost, localPort, remoteHost, remotePort>(套接字)构成一个连接的唯一标识
 			val connectionId: String = ConnectionId(localHost, remoteHost, ...).toString
 			this.selector.register(connectionId, socketChannel)
+				this.selector.registerChannel(connectionId, socketChannel, SelectionKey.OP_READ)
+					this.selector.channels.put(connectionId, socketChannel)
 	}
 
 	/**
@@ -57,16 +59,20 @@ class Processor (processorId: Int,
 	def processCompletedReceives() {
 		this.selector.completedReceives.foreach(NetworkReceive receive)
 			String kChannelId = receive.source
-			try
+			try {
 				val channel = selector.channels.get(kChannelId)
-				if channel == null: channel = selector.closingChannels.get(kChannelId)
-				val req = RequestChannel.Request(processor=this.processorId,
-												 connectionId=receive.source,
-												 buffer=receive.buffer, ...)
-				requestChannel.requestQueue.put(req)
-				this.selector.mute(receive.source)  // kafkaChannel.mute()，暂停接收数据
-			catch Exception e
+				if channel == null, channel = selector.closingChannels.get(kChannelId)
+				val req = new RequestChannel.Request(
+										processor=this.processorId,
+										connectionId=kChannelId,
+										buffer=receive.buffer, ...)
+				requestChannel.sendRequest(req)
+					requestChannel.requestQueue.put(req)
+				this.selector.mute(kChannelId)  // kafkaChannel.mute()，暂停接收数据
+			}
+			catch Exception e {
 				this.close(kChannelId)
+			}
 	}
 
 	/**

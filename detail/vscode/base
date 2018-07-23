@@ -1,0 +1,49 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 16,
+    "editor.lineHeight": 22,
+    "editor.fontFamily": "SF Mono, PingFang-SC",
+    "editor.fontWeight": "500",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.autoIndent": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderIndentGuides": true,
+    "editor.renderControlCharacters": true,
+    "editor.minimap.enabled": false,
+    "editor.cursorStyle": "underline",
+    "editor.cursorBlinking": "phase",
+    "editor.roundedSelection": true,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelScrollSensitivity": 1.5,
+    //
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.cursorStyle": "underline",
+    //
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.visible": false,
+    "workbench.iconTheme": "ayu",
+    "workbench.startupEditor": "welcomePage",
+    //
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.decorations.enabled": false,
+    //
+    "extensions.ignoreRecommendations": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pylintPath": "/Users/whiker/Library/Python/3.5/lib/python/site-packages/pylint",
+    //
+    "C_Cpp.errorSquiggles": "Disabled",
+    "typescript.check.npmIsInstalled": false,
+    "window.zoomLevel": 0,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    //
+    "terminal.integrated.shellArgs.osx": [
+        "-l"
+    ],
+    "workbench.colorTheme": "Darcula Theme from IntelliJ"
+}
+
+快捷键
+cmd+alt+l    格式化代码

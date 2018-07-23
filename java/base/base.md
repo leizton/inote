@@ -71,6 +71,7 @@ jstat -gc <pid> 2000
 - jstack
 jstack <pid> > <outfile>
 - jmap, jhap
+jmap -histo:live <pid> > <resultfile>  // 直方图, 加live选项过滤出'live objects'
 jmap -dump:live,file=<outfile> <pid>
 jhat <outfile>
 $JAVA_HOME/bin/jvisualvm
