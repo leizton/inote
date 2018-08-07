@@ -4,7 +4,8 @@ import time as tm
 def help():
   print('timest               # current time')
   print('timest 946656000     # time-num of seconds')
-  print('timest 946656000.0   # time-num with millisecond')
+  print('timest 946656000000  # time-num of milliseconds')
+  print('timest 946656000.0   # float time-num with millisecond')
   print('2000-01-01 00:00:00  # time-str')
 
 def now():
@@ -13,7 +14,11 @@ def now():
 def numstr2Tm(str):
   idx = str.find('.')
   if idx < 0:
-    return long(str), 0
+    ts = long(str)
+    if ts < 2**32:
+      return ts, 0
+    else:
+      return ts / 1000, ts % 1000
   else:
     return long(str[0:idx]), long(str[(idx+1):len(str)])
 

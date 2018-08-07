@@ -56,4 +56,6 @@ F7 进入方法
 F8 单步执行
 F9 跳到下一个断点
 
+
 Settings | Editor | General | Appearance
+Settings | Editor | General | Appearance | Show hard wrap guide  // 显示右对齐线

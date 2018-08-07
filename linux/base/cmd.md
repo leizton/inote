@@ -13,7 +13,7 @@ df        -h         各分区使用情况
 wc        -l         -l只统计行数, 去掉-l统计字符数, "find . -name '*.c' | xargs wc -l"
 
 scp       whiker@localhost:~/data /tmp
-          scp -l 10000 $src $dst  限速1Mps
+          scp -l 8000 $src $dst  限速1MBps, 单位Kbit/s
 nohup     ./start.sh >/dev/null 2>&1 &
 env       环境变量
 echo      '\n'输出\n字符串和换行符(echo默认追加), -e '\n'输出两行, -e用于转义字符
@@ -52,3 +52,8 @@ od -N ${num} -t x1 ${file}  `显示文件前num个字节的16进制, num可以�
 ifstat       `查看网络流量`
 iostat 5     `查看磁盘流量, 每5秒一次`
 ethtool eth0 `查看网卡速率 Speed: 10000MB/s` 
+
+物理cpu数            `cat /proc/cpuinfo | grep "physical id" | sort | uniq| wc -l`
+逻辑cpu数            `cat /proc/cpuinfo | grep "processor" | wc -l`
+每个逻辑cpu的core数  `cat /proc/cpuinfo | grep "cpu cores"`
+> 一个物理cpu有多核，即多个逻辑cpu

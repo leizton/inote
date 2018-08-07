@@ -25,6 +25,9 @@ syntax on           "语法高亮
 - :%s/hello/hi/g      %表示整个文件，等效于1,$
 
 #
-:set nonu  关闭行号  //复制时
-:set nosi  关闭smart-indent  //粘贴时
-:set noai  关闭auto-indent   //粘贴时
+:set nonu  关闭行号
+
+# 粘贴时不自动缩进
+- :set paste            //进入粘贴模式
+  :set nopaste          //退出粘贴模式
+- set pastetoggle=<F9>  //设置按F9切换粘贴和非粘贴模式
