@@ -12,3 +12,4 @@ $.           this.
 ~>           implements / extends
 cond?=       if(cond) assign
 CMFLAG_      flag prefix
+%{num}       the step num
