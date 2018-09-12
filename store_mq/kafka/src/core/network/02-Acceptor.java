@@ -33,7 +33,8 @@ class Acceptor(endPoint: EndPoint,
 				val key = it.next()
 				it.remove()
 				if key.isAcceptable()
-					this.accept(key, processors(currentProcessor))  // processors来自构造方法的输入参数
+					// processors来自构造方法的输入参数, 轮流使用processor
+					this.accept(key, processors(currentProcessor))
 				else
 					throw new IllegalStateException("unknown key state")
 				currentProcessor = (currentProcessor + 1) % processors.length
@@ -41,7 +42,7 @@ class Acceptor(endPoint: EndPoint,
 
 	def accept(key: SelectionKey, processor: Processor) {
 		val serverSocketChannel = key.channel().asInstanceOf[ServerSocketChannel]
-		val socketChannel = serverSocketChannel.accept()
+		val socketChannel = serverSocketChannel.accept()  // client channel
 		try {
 			// 检查这个客户端是否有过多的连接
 			// {connectionQuotas}是{SocketServer}的字段

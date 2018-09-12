@@ -1,6 +1,6 @@
 #
 1. 由于是构造一个简单的pojo对象, 所以没有try-catch这个对象的构造的异常, 最终抛异常后导致Schedule线程池的任务不再定时执行了. 这个线程池会吞掉异常且没有日志等输出, 并且停止调度. 
-  经验: 尽量多try-catch
+  经验: 尽量多try-catch. 交给线程池执行的run()里必须try-catch
 2. DefaultPullConsumer里由于PlainPullEntry的pull方法的参数size定义不明确(变量名取得不合适), 使得写调用该方法的代码时传入的参数多减了output.size.
   经验: 方法名和参数名应该做到足够表达含义, 否则必须加足够的注释说明. 调用一个方法时, 应该明确参数的含义, 如果不能通过参数名获知, 应该看代码实现来了解
 3. store会定时删除messageLog而不清理consumeLog, 当pull message时, server端拿到consumeLogOffset和messageLogOffset后不能find到message, 并且store返回的查找结果是success, 导致server把空的SelectSegmentBufferResult写到channel.

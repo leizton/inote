@@ -4,7 +4,9 @@ public class ProxyTest {
     public void test() {
         InvocationHandler proxy = new PrintServiceProxy(new PrintServiceImpl());
         PrintService service = (PrintService) Proxy.newProxyInstance(
-				this.getClass().getClassLoader(), new Class<?>[] { PrintService.class }, proxy);
+				this.getClass().getClassLoader(),
+				new Class<?>[] { PrintService.class },  // 指定代理了哪些接口
+				proxy);
         System.out.println(service.hashCode());  // 和下面打印的hashCode()值相同
         service.print("hello");
 		/**
@@ -30,10 +32,12 @@ public class ProxyTest {
         }
     }
 
-    // service接口和实现
+    // service接口
     private interface PrintService {
         void print(String message);
     }
+ 
+	// service接口的impl
     private class PrintServiceImpl implements PrintService {
         public void print(String message) {
             System.out.println(message);

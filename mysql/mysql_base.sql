@@ -98,6 +98,7 @@ MyISAM相比InnoDB的缺点:
 		MVCC保存某个时间点的快照, 使同一事务中看到一致的数据视图, 避免加锁
 	MyISAM只能缓存索引, InnoDB能缓存索引和数据
 MyISAM由于不支持事务, 使其insert速度比InnoDB快
+MyISAM适用于只有读和插入操作, 极少update
 
 MyISAM型的表t2, t2.frm t2.MYD(存放数据) t2.MYI(存放索引)
 

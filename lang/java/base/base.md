@@ -77,3 +77,8 @@ jhat <outfile>
 $JAVA_HOME/bin/jvisualvm
 - jps
 查看当前java进程
+
+# jvm启动参数
+-Xmx 最大堆;  -Xms 初始堆;  -Xmn 年轻代(E S0 S1);  -Xss 栈大小
+-XX:NewRatio=n  年轻代:老年代是1:n
+-XX:SurvivorRatio=n  (S0+S1):Eden是2:n
