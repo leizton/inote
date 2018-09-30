@@ -296,10 +296,6 @@
         "when": "editorTextFocus"
     },
     {
-        "key": "cmd+f11",
-        "command": "bookmarks.listFromAllFiles"
-    },
-    {
         "key": "shift+cmd+w",
         "command": "workbench.action.newWindow"
     },
@@ -324,5 +320,9 @@
         "key": "cmd+p",
         "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
         "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "cmd+f11",
+        "command": "workbench.view.extension.bookmarks"
     }
 ]

@@ -1,14 +1,14 @@
 {
     "files.autoSave": "afterDelay",
-    "editor.fontSize": 16,
-    "editor.lineHeight": 22,
-    "editor.fontFamily": "SF Mono, PingFang-SC",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 20,
+    "editor.fontFamily": "Monaco, PingFang-SC",
     "editor.fontWeight": "500",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.autoIndent": true,
-    "editor.renderWhitespace": "none",
-    "editor.renderIndentGuides": true,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "gutter",
     "editor.renderControlCharacters": true,
     "editor.minimap.enabled": false,
     "editor.cursorStyle": "underline",
@@ -16,13 +16,12 @@
     "editor.roundedSelection": true,
     "editor.smoothScrolling": true,
     "editor.mouseWheelScrollSensitivity": 1.5,
+    "editor.foldingStrategy":"auto",
+    //
+    "editor.wordWrapColumn": 80,
     //
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.cursorStyle": "underline",
-    //
-    "workbench.statusBar.visible": false,
-    "workbench.activityBar.visible": false,
-    "workbench.iconTheme": "ayu",
     "workbench.startupEditor": "welcomePage",
     //
     "git.confirmSync": false,
@@ -39,11 +38,25 @@
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     //
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    //
     "terminal.integrated.shellArgs.osx": [
         "-l"
     ],
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "materialTheme.fixIconsRunning": false,
+    "workbench.iconTheme": "vscode-great-icons",
+    "editor.minimap.renderCharacters": false,
+    "workbench.enableExperiments": false,
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.tree.horizontalScrolling": true,
+    "window.titleBarStyle": "native",
+    "terminal.integrated.drawBoldTextInBrightColors": false,
     "workbench.colorTheme": "Darcula Theme from IntelliJ"
 }
-
-快捷键
-cmd+alt+l    格式化代码

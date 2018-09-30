@@ -11,5 +11,5 @@ $.           this.
 =>           next step / return
 ~>           implements / extends
 cond?=       if(cond) assign
-CMFLAG_      flag prefix
+_cmark_      flag prefix
 %{num}       the step num
