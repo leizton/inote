@@ -52,9 +52,6 @@ alias gitph="git push";
 alias gitpl="git pull";
 alias gitplr="git pull --rebase";
 alias gith="git reset --hard HEAD";
-alias gituser="git config user.name";
-alias gitemail="git config user.email";
-alias gitconf="git config user.name fanyaoqun && git config user.email fanyaoqun@bytedance.com";
 function parse_git_branch() {
   b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ -n "$b" ]; then
