@@ -1,9 +1,9 @@
 {
     "files.autoSave": "afterDelay",
-    "editor.fontSize": 14,
-    "editor.lineHeight": 20,
-    "editor.fontFamily": "Monaco, PingFang-SC",
-    "editor.fontWeight": "500",
+    "editor.fontSize": 16,
+    "editor.lineHeight": 22,
+    "editor.fontFamily": "Ubuntu Mono, PingFang-SC",
+    "editor.fontWeight": "normal",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.autoIndent": true,
@@ -11,16 +11,26 @@
     "editor.renderLineHighlight": "gutter",
     "editor.renderControlCharacters": true,
     "editor.minimap.enabled": false,
-    "editor.cursorStyle": "underline",
+    "editor.cursorStyle": "line",  // underline
     "editor.cursorBlinking": "phase",
     "editor.roundedSelection": true,
     "editor.smoothScrolling": true,
     "editor.mouseWheelScrollSensitivity": 1.5,
     "editor.foldingStrategy":"auto",
+    "editor.tabCompletion": "off",
     //
     "editor.wordWrapColumn": 80,
     //
-    "terminal.integrated.fontSize": 14,
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#5cb9f4",  // selection
+        "editor.selectionHighlightBackground": "#1777d1fa", // click match
+        //"editor.findMatchBackground": "#ff0000",
+        //"editor.findMatchHighlightBackground": "#5cb9f4",
+        //"editor.findRangeHighlightBackground": "#ff9900",
+    },
+    //
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontWeight": "normal",
     "terminal.integrated.cursorStyle": "underline",
     "workbench.startupEditor": "welcomePage",
     //
@@ -49,7 +59,6 @@
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
-    "materialTheme.fixIconsRunning": false,
     "workbench.iconTheme": "vscode-great-icons",
     "editor.minimap.renderCharacters": false,
     "workbench.enableExperiments": false,
@@ -58,5 +67,8 @@
     "workbench.tree.horizontalScrolling": true,
     "window.titleBarStyle": "native",
     "terminal.integrated.drawBoldTextInBrightColors": false,
-    "workbench.colorTheme": "Darcula Theme from IntelliJ"
+    "workbench.editor.showTabs": true,
+    "workbench.colorTheme": "Adapta Nokto",
+    "workbench.sideBar.location": "left",
+    "window.title": "${folderName}"
 }
