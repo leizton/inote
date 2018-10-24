@@ -3,7 +3,7 @@
 # 配置
 在home目录下创建.vimrc, 写入如下内容
 set nu              "行号
-set tabstop=4       "tab占4个空格
+set tabstop=2       "tab占2个空格
 set expandtab       "用空格代替tab
 set shiftwidth=4    "指定自动缩进时使用的空白长度, 和tabstop相同
 set autoindent      "自动缩进
