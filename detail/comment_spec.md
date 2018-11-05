@@ -6,6 +6,7 @@
              introduction(with a blank space after symbol)
              iterator
 $.           this.
+${}          方法形参
 ->{A}        dependency / call A
 {A}<-        be called by A
 =>           next step / return
