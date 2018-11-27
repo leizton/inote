@@ -2,6 +2,7 @@
 http://linuxtools-rst.readthedocs.io/zh_CN/latest/base/03_text_processing.html
 
 
+# base
 cd        -          返回最近一次cd前的目录
 tree      -L 2       最多显示2层
 which     exe        查找可执行文件位置
@@ -53,7 +54,48 @@ ifstat       `查看网络流量`
 iostat 5     `查看磁盘流量, 每5秒一次`
 ethtool eth0 `查看网卡速率 Speed: 10000MB/s` 
 
+
+# cpu num
 物理cpu数            `cat /proc/cpuinfo | grep "physical id" | sort | uniq| wc -l`
 逻辑cpu数            `cat /proc/cpuinfo | grep "processor" | wc -l`
 每个逻辑cpu的core数  `cat /proc/cpuinfo | grep "cpu cores"`
 > 一个物理cpu有多核，即多个逻辑cpu
+
+
+# detail
+## 查看发行版本
+cat /proc/version
+
+
+# top
+- 1, 展开每个cpu
+
+
+# 文本
+## awk
+默认按空白字符分割
+> example
+awk '{print $2}'
+
+
+# 网络
+## netstat
+-a 列出所有
+-n 数字形式的ip地址
+-t TCP
+-p pid
+-l LISTEN
+> example
+netstat -antp | grep LISTEN
+netstat -lntp
+## ss
+一般ss执行比netstat快
+> example
+ss -lntp
+
+
+# 进程函数栈
+for i in `ps -AL | grep $进程名 | awk '{print $2}'`; do \
+  echo === $i ===; \
+  gdb --q --n --ex bt --batch --pid $i; \
+done 2>&1 |tee /tmp/stacks.txt
