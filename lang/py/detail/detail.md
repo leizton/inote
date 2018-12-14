@@ -9,3 +9,13 @@ import socket
 import json
 obj = json.loads(jsonstr)
 jsonstr = json.dumps(obj)
+
+
+# 遍历词典
+for k in my_dict
+for k in my_dict.iterkeys()
+for k in my_dict.keys()
+for v in my_dict.itervalues()
+for v in my_dict.values()
+for k,v in my_dict.iteritems()
+for k,v in my_dict.items()
