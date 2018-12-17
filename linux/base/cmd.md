@@ -76,6 +76,14 @@ cat /proc/version
 默认按空白字符分割
 > example
 awk '{print $2}'
+## diff
+### git diff
+git config --global color.diff auto
+git diff a.txt b.txt
+### vim diff
+dp      把当前窗口的当前行替换到另一个窗口
+ctrl+w  切换窗口
+ref     https://www.ibm.com/developerworks/cn/linux/l-vimdiff/index.html
 
 
 # 网络
@@ -99,3 +107,12 @@ for i in `ps -AL | grep $进程名 | awk '{print $2}'`; do \
   echo === $i ===; \
   gdb --q --n --ex bt --batch --pid $i; \
 done 2>&1 |tee /tmp/stacks.txt
+
+
+# 常用
+## grep某个进程的pid
+- ps ax | grep 匹配串 | grep -v 'grep' | awk '{print $1}'
+- pgrep -fl 匹配串 | awk '{print $1}'
+  默认pgrep只会在前15个字符查找，加-f查找全部
+## 查看进程命令的绝对路径
+ls -l /proc/$pid/cwd
