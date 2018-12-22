@@ -19,3 +19,8 @@ for v in my_dict.itervalues()
 for v in my_dict.values()
 for k,v in my_dict.iteritems()
 for k,v in my_dict.items()
+
+
+# string
+## ','.join(lst)
+  lst的元素必须都是str类型，否则用','.join(str(e) for e in lst)
