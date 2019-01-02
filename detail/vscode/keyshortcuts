@@ -300,7 +300,7 @@
         "command": "-workbench.action.newWindow"
     },
     {
-        "key": "shift+cmd+n",
+        "key": "cmd+n",
         "command": "workbench.action.quickOpen"
     },
     {
@@ -383,5 +383,13 @@
     {
         "key": "cmd+1",
         "command": "-workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "shift+cmd+n",
+        "command": "workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "cmd+n",
+        "command": "-workbench.action.files.newUntitledFile"
     }
 ]
