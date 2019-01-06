@@ -22,8 +22,11 @@ tar       -zxvf a.tar.gz -C /tmp  其中-v显示解压出的文件名
 grep      [opt] file  -v不包含不匹配, -r递归目录, -i忽略大小写, -n显示行号, --include="*.cc"查找文件的类型是.cc
 netstat   -at显示listen外的tcp端口, -lt显示监听端口, -r显示路由表
 xargs     -i重定义输入位置, {}是占位符, 例如find . -name "*.csv" | xargs -i cp {} ~/data
-top       M 按使用内存排序, P 按使用cpu排序
 strace    trace进程的某个系统调用
+
+top
+  M 按使用内存排序, P 按使用cpu排序, 1 展开每个cpu核
+  TIME+ 分钟:秒.毫秒
 
 kill
   kill pid 即 kill -s 15 pid, 向进程发送SIGTERM信号, 进程收到后会释放资源然后停止.
@@ -65,10 +68,6 @@ ethtool eth0 `查看网卡速率 Speed: 10000MB/s`
 # detail
 ## 查看发行版本
 cat /proc/version
-
-
-# top
-- 1, 展开每个cpu
 
 
 # 文本
