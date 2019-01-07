@@ -9,6 +9,7 @@ set shiftwidth=4    "指定自动缩进时使用的空白长度, 和tabstop相�
 set autoindent      "自动缩进
 set encoding=utf-8  "UTF-8编码
 set hlsearch        "高亮查询结果
+set nowrap          "不自动换行
 syntax on           "语法高亮
 
 # 基本命令
