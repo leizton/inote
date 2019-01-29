@@ -2,6 +2,13 @@
 1. unable to access 'https://github.com/user/project.git': The requested URL returned error: 403
    把远程仓库url改成'https://user@github.com/user/project.git'
 
+# 同步fork源
+ref https://help.github.com/articles/syncing-a-fork/
+git remote add upstream https://github.com/xxx/xxx.git
+git checkout master
+git fetch upstream
+git merge upstream/master
+
 # 合并commit
 https://www.jianshu.com/p/964de879904a
 合并完成后用 git push --force 提交到远程分支上
