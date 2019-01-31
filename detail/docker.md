@@ -49,3 +49,11 @@ docker exec -it $container_name /bin/bash
 docker commit -a '$author_name $author_email' -m 'comment' $container_name $new_image_name:$new_image_tag
 docker login  &&  docker tag $image_name:$tag $user_name/$image_name:$tag  &&  docker push $user_name/$image_name:$tag
 docker attach $container_name
+
+# detail
+docker rmi IMAGE_ID  ; 删除镜像
+docker run -dit --net=host -p port1:port2 --name=CONTAINER_NAME IMAGE_NAME bash -c "...; tail -f /dev/null"
+  ; 启动容器. --net=host 让容器可以访问宿主机外的机器. -p 映射 宿主机端口:容器内端口
+docker exec -it CONTAINER_NAME /bin/bash  ; 登录容器, 不要用attach
+docker stop/rm CONTAINER_NAME
+docker rename OLD_CONTAINER_NAME NEW_CONTAINER_NAME
