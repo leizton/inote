@@ -11,6 +11,7 @@ ${}          方法形参
 ->{A}        dependency / call A
 {A}<-        be called by A
 =>           next step / return
+             case in switch block. equal then execute
 ~>           implements / extends
 cond?=       if(cond) assign
 return?      if return
