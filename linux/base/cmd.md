@@ -24,6 +24,8 @@ netstat   -at显示listen外的tcp端口, -lt显示监听端口, -r显示路由�
 xargs     -i重定义输入位置, {}是占位符, 例如find . -name "*.csv" | xargs -i cp {} ~/data
 strace    trace进程的某个系统调用
 
+sed       -n '3,6p' a.txt  ; 显示a.txt的[3,6]行
+
 top
   M 按使用内存排序, P 按使用cpu排序, 1 展开每个cpu核
   TIME+ 分钟:秒.毫秒
@@ -51,18 +53,18 @@ update-alternatives
   --display  显示可选版本
   --remove
 
-od -N ${num} -t x1 ${file}  `显示文件前num个字节的16进制, num可以大于文件大小`
+od        -N ${num} -t x1 ${file}  ;显示文件前num个字节的16进制, num可以大于文件大小
 
-ifstat       `查看网络流量`
-iostat 5     `查看磁盘流量, 每5秒一次`
-ethtool eth0 `查看网卡速率 Speed: 10000MB/s` 
+ifstat          ;查看网络流量
+iostat    5     ;查看磁盘流量, 每5秒一次
+ethtool   eth0  ;查看网卡速率 Speed: 10000MB/s
 
 
 # cpu num
 物理cpu数            `cat /proc/cpuinfo | grep "physical id" | sort | uniq| wc -l`
 逻辑cpu数            `cat /proc/cpuinfo | grep "processor" | wc -l`
 每个逻辑cpu的core数  `cat /proc/cpuinfo | grep "cpu cores"`
-> 一个物理cpu有多核，即多个逻辑cpu
+一个物理cpu有多核，即多个逻辑cpu
 
 
 # detail
