@@ -24,3 +24,11 @@ for k,v in my_dict.items()
 # string
 ## ','.join(lst)
   lst的元素必须都是str类型，否则用','.join(str(e) for e in lst)
+
+
+# read file
+f = open('dat', 'r')
+for l in f:
+  print(l)
+for l in f.readlines():
+  print(l)
