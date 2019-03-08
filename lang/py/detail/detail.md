@@ -32,3 +32,10 @@ for l in f:
   print(l)
 for l in f.readlines():
   print(l)
+
+
+# 打印当前函数栈
+import traceback
+s = ''
+for l in traceback.format_stack():
+  s += '\n  > ' + l.strip().replace('\n', '')
