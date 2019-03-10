@@ -1,3 +1,10 @@
+# 编码
+```py
+#!/usr/bin/env python
+#encoding=utf-8
+```
+
+
 # 获取本机ip
 ```py
 import socket
