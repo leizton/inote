@@ -21,3 +21,12 @@ crontab $file  // 启动
   */1 * * * * /tmp/run.sh > /tmp/run.log 2>&1
 /var/log/cron  // for debug
 ```
+
+# meminfo
+cat /proc/meminfo
+--
+buffers + cached = Active(file) + Inactive(file) + Shmem
+Active = Active(anon) + Active(file)
+Active(anon): 进程堆上的匿名内存
+Active(file): 磁盘高速缓存/文件映射等与磁盘文件相对应的内存空间
+Shmem: tmpfs(利用内存提供RAM磁盘)使用的内存

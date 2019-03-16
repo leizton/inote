@@ -59,6 +59,16 @@ ifstat          ;查看网络流量
 iostat    5     ;查看磁盘流量, 每5秒一次
 ethtool   eth0  ;查看网卡速率 Speed: 10000MB/s
 
+free -g
+```go
+// total = used + free
+// 第2行, used-(buffers+cached) free+(buffers+cached)
+             total       used       free     shared    buffers     cached
+Mem:        129161     127645       1515          0        491      60620
+-/+ buffers/cache:      66533      62627
+Swap:            0          0          0
+```
+
 
 # cpu num
 物理cpu数            `cat /proc/cpuinfo | grep "physical id" | sort | uniq| wc -l`
