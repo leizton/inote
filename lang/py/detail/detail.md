@@ -33,12 +33,16 @@ for k,v in my_dict.items()
   lst的元素必须都是str类型，否则用','.join(str(e) for e in lst)
 
 
-# read file
+# read/write file
 f = open('dat', 'r')
 for l in f:
   print(l)
 for l in f.readlines():
   print(l)
+with open('dat', 'r') as f:
+--
+f = open('test.txt', 'w')
+f.write(line)  ;自动追加\n
 
 
 # 打印当前函数栈
