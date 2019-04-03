@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "aa1d4806-4e9a-417e-b5f6-cb4e15e36935",
+		"name": "es",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create index 'test01'",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/test01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"test01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/_cat/indices?v",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create or overwrite doc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Doe 1\",\n\t\"age\": 100\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/test01/_doc/1?pretty",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"test01",
+						"_doc",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get doc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/test01/_doc/1?pretty",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"test01",
+						"_doc",
+						"1"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update doc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"doc\": {\n\t\t\"age\": 105\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/test01/_doc/1/_update?pretty",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"test01",
+						"_doc",
+						"1",
+						"_update"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete doc",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/test01/_doc/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"test01",
+						"_doc",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"from\": 0,\n\t\"size\": 10,\n\t\"query\": {\n\t\t\"match_all\": {}\n\t},\n\t\"sort\": [\n    \t{ \"balance\": \"desc\" }\n\t],\n\t\"_source\": [\n\t\t\"account_number\",\n\t\t\"balance\"\n\t]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/bank/_search",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"bank",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agg",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"size\": 0,\n  \"aggs\": {\n    \"group_by_state\": {\n      \"terms\": {\n        \"field\": \"state.keyword\",\n        \"order\": {\n          \"average_balance\": \"desc\"\n        }\n      },\n      \"aggs\": {\n        \"average_balance\": {\n          \"avg\": {\n            \"field\": \"balance\"\n          }\n        }\n      }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9200/bank/_search",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9200",
+					"path": [
+						"bank",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
