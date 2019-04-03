@@ -2,7 +2,7 @@
 <configuration>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder charset="UTF-8">
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
     </appender>
 
@@ -17,7 +17,7 @@
     <!-- Console -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
     </appender>
 
@@ -29,7 +29,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
         <!-- 只接受debug, 更高级别请用ThresholdFilter -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -45,7 +45,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
         <!-- 只接受info, 更高级别请用ThresholdFilter -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -61,7 +61,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
         <!-- 只接受warn, 更高级别请用ThresholdFilter -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -77,7 +77,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>[%d{yyMMdd-HH:mm:ss} %thread %-5p %c{1}:%L] %m%n</pattern>
+            <pattern>[%d{yyMMdd-HH:mm:ss.SSS} %thread %p %c{1.}:%L] %m%n</pattern>
         </encoder>
         <!-- 只接受error, 更高级别请用ThresholdFilter -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
