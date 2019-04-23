@@ -21,6 +21,7 @@ crontab $file  // 启动
   */1 * * * * /tmp/run.sh > /tmp/run.log 2>&1
 /var/log/cron  // for debug
 ```
+@ref https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
 
 # meminfo
 cat /proc/meminfo
