@@ -12,14 +12,18 @@ import socket
 ```
 
 
-# json
-import json
-obj = json.loads(jsonstr)
-jsonstr = json.dumps(obj)
+# string
+```py
+# ','.join(lst)
+  lst的元素必须都是str类型，否则用','.join(str(e) for e in lst)
+# 字符串对齐
+print '%s %s' % (s1.ljust(20), s2)  # s1左对齐, 不足20时补空格
+```
 
 
 # dict
-## 遍历
+```py
+# 遍历
 for k in my_dict
 for k in my_dict.iterkeys()
 for k in my_dict.keys()
@@ -27,13 +31,15 @@ for v in my_dict.itervalues()
 for v in my_dict.values()
 for k,v in my_dict.iteritems()
 for k,v in my_dict.items()
-## 删除
+# 删除
 del my_dict[k1]
+```
 
 
-# string
-## ','.join(lst)
-  lst的元素必须都是str类型，否则用','.join(str(e) for e in lst)
+# json
+import json
+obj = json.loads(jsonstr)
+jsonstr = json.dumps(obj)
 
 
 # read/write file
