@@ -21,6 +21,7 @@ crontab $file  // 启动
   */1 * * * * /tmp/run.sh > /tmp/run.log 2>&1
 /var/log/cron  // for debug
 ```
+`crontab -l`显示无结果，但`sudo crontab -l`可能有结果
 @ref https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
 
 # meminfo
