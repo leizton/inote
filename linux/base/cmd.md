@@ -98,6 +98,9 @@ ref     https://www.ibm.com/developerworks/cn/linux/l-vimdiff/index.html
 
 
 # 网络
+## lsof
+lsof -i tcp:$port
+  查看端口被哪个进程占用
 ## netstat
 -a 列出所有
 -n 数字形式的ip地址
