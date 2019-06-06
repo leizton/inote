@@ -130,3 +130,9 @@ done 2>&1 |tee /tmp/stacks.txt
   默认pgrep只会在前15个字符查找，加-f查找全部
 ## 查看进程命令的绝对路径
 ls -l /proc/$pid/cwd
+
+
+# debug
+## gdb
+- f 3  调到第3个栈上
+- p $varName  打印变量值
