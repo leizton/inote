@@ -136,3 +136,5 @@ ls -l /proc/$pid/cwd
 ## gdb
 - f 3  调到第3个栈上
 - p $varName  打印变量值
+## oom
+sudo grep -i "Out of memory" /var/log/messages | grep -v "grep"
