@@ -114,6 +114,8 @@ netstat -lntp
 一般ss执行比netstat快
 > example
 ss -lntp
+## 客户端随机占用ip端口的范围
+sysctl -a | grep range  // 让server占用端口在这之外, 否则容易监听失败
 
 
 # 进程函数栈
