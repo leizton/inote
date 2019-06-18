@@ -28,3 +28,28 @@ json是数据交换格式, jsonp是一种非官方跨域数据交互协议.
 </head>
 ...
 </html>
+
+通过 CORS 解决跨域更简单
+https://segmentfault.com/a/1190000015597029
+https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS
+```go
+router.Use(CORSMiddleware())
+
+func CORSMiddleware() gin.HandlerFunc {
+  return func(ctx *gin.Context) {
+    ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*XXX*")
+    ctx.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+    ctx.Writer.Header().Set("Access-Control-Allow-Headers",
+      "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, user"+
+          "Authorization, accept, origin, Cache-Control, X-Requested-With")
+    ctx.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+    ctx.Writer.Header().Set("Access-Control-Max-Age", common.AccessControlMaxAge)
+
+    if ctx.Request.Method == "OPTIONS" {  // 提供给浏览器的预检
+      ctx.AbortWithStatus(204)
+      return
+    }
+    ctx.Next()
+  }
+}
+```
