@@ -32,3 +32,12 @@ Active = Active(anon) + Active(file)
 Active(anon): 进程堆上的匿名内存
 Active(file): 磁盘高速缓存/文件映射等与磁盘文件相对应的内存空间
 Shmem: tmpfs(利用内存提供RAM磁盘)使用的内存
+
+# /proc/$pid/status
+VmSize    当前使用的虚拟内存大小
+VmPeak    VmSize的峰值
+VmRSS     当前使用的物理内存大小
+VmHWM     VmRSS的峰值
+VmData    数据段大小
+VmStk     栈大小
+@ref http://hutaow.com/blog/2014/08/28/display-process-memory-in-linux/
