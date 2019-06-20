@@ -41,3 +41,8 @@ VmHWM     VmRSS的峰值
 VmData    数据段大小
 VmStk     栈大小
 @ref http://hutaow.com/blog/2014/08/28/display-process-memory-in-linux/
+
+# /proc/$pid/stat
+utime  用户态cpu时钟数, 多核时会翻倍
+stime  内存态cpu时钟数
+@ref https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat
