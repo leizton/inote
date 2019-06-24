@@ -32,6 +32,7 @@ json是数据交换格式, jsonp是一种非官方跨域数据交互协议.
 通过 CORS 解决跨域更简单
 https://segmentfault.com/a/1190000015597029
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS
+https://harttle.land/2016/12/28/cors-with-cookie.html
 ```go
 router.Use(CORSMiddleware())
 
