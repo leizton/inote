@@ -51,7 +51,8 @@ for l in f.readlines():
 with open('dat', 'r') as f:
 --
 f = open('test.txt', 'w')
-f.write(line)  ;自动追加\n
+f.writelines(line)
+f.write('\n')
 
 
 # 打印当前函数栈
