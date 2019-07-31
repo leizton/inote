@@ -93,7 +93,7 @@ void shuffle(T a[], int begin, int end) {
     for (int i = begin + 1; i < end; ++i) {
         // 只跟自己前面的元素交换
         // 归纳法: 假设a[begin,i)已经shuffle好了, 现在新增a[i], 就是与前面一个元素随机交换
-        std::uniform_int_distribution<int> rnd(begin, i);
+        std::uniform_int_distribution<int> rnd(begin, i + 1);
         j = rnd(rndGen);
         if (j != i) {
             std::swap(a[i], a[j]);
