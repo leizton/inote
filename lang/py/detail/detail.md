@@ -42,16 +42,19 @@ obj = json.loads(jsonstr)
 jsonstr = json.dumps(obj)
 
 
-# read/write file
+# read file
 f = open('dat', 'r')
 for l in f:
   print(l)
 for l in f.readlines():
   print(l)
 with open('dat', 'r') as f:
---
+
+# write file
 f = open('test.txt', 'w')
-f.writelines(line)
+f.writelines(['l1'])
+f.write('\n')
+f.writelines(['l2'])
 f.write('\n')
 
 
