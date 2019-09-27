@@ -36,6 +36,15 @@ del my_dict[k1]
 ```
 
 
+# sort
+```py
+kv_pairs = my_dict.items()
+kv_pairs.sort()
+kv_pairs.sort(key=lambda e:e[1], reverse=True)  # 按val排序
+kv_pairs.sort(cmp=lambda x,y:my_cmp(x,y))
+```
+
+
 # json
 import json
 obj = json.loads(jsonstr)
