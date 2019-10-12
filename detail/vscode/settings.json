@@ -1,0 +1,114 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.fontFamily": "Fantasque Sans Mono, FZYouHei",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.autoIndent": true,
+    "editor.renderLineHighlight": "gutter",
+    "editor.renderControlCharacters": true,
+    "editor.minimap.enabled": false,
+    "editor.cursorBlinking": "solid",
+    "editor.roundedSelection": true,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelScrollSensitivity": 1.5,
+    "editor.foldingStrategy":"auto",
+    "editor.tabCompletion": "off",
+    //
+    //"editor.rulers": [90],
+    "workbench.editor.enablePreview": false,
+    //
+    "workbench.colorCustomizations": {
+        ///*
+        "editor.selectionBackground": "#5cb9f4",  // selection
+        "editor.selectionForeground": "#ffffff",
+        "editor.selectionHighlightBackground": "#1777d1fa", // click match
+        //*/
+
+        //*
+        "editor.background": "#fafafa",
+        "editor.foreground": "#404040",
+        "statusBar.foreground": "#303030",
+        "statusBar.background" : "#fafafa",
+        "statusBar.border": "#fafafa",
+        "sideBar.background": "#fafafa",
+        "sideBar.foreground": "#d0d0d0",
+        "sideBar.border": "#fafafa",
+        "sideBarSectionHeader.background": "#fafafa",
+        "tab.activeBackground": "#fafafa",
+        "tab.inactiveBackground": "#fafafa",
+        "tab.border": "#fafafa",
+        "editorCursor.foreground": "#222"
+        //*/
+
+        /*
+        "editor.background": "#2a2a2a",
+        "editor.foreground": "#d0d0d0",
+        "statusBar.background" : "#2a2a2a",
+        "statusBar.border": "#2a2a2a",
+        "sideBar.background": "#2a2a2a",
+        "sideBar.foreground": "#909090",
+        "sideBar.border": "#2a2a2a",
+        "sideBarSectionHeader.background": "#2a2a2a",
+        "tab.activeBackground": "#2a2a2a",
+        "tab.inactiveBackground": "#2a2a2a",
+        "tab.border": "#2a2a2a",
+        "editorCursor.foreground": "#eee"
+        //*/
+    },
+    "editor.autoClosingBrackets": "always",
+    //
+    "terminal.integrated.fontWeight": "normal",
+    // "terminal.integrated.cursorStyle": "underline",
+    "workbench.startupEditor": "newUntitledFile",
+    //
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.decorations.enabled": false,
+    //
+    "extensions.ignoreRecommendations": false,
+    //
+    "C_Cpp.errorSquiggles": "Disabled",
+    "typescript.check.npmIsInstalled": false,
+    "window.zoomLevel": 0,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    //
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    //
+    "terminal.integrated.shellArgs.osx": [
+        "-l"
+    ],
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": false
+    },
+    "editor.minimap.renderCharacters": true,
+    "workbench.enableExperiments": false,
+    "workbench.activityBar.visible": false,
+    "workbench.list.horizontalScrolling": true,
+    "window.titleBarStyle": "native",
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "workbench.editor.showTabs": false,
+    "workbench.sideBar.location": "left",
+    "C_Cpp.updateChannel": "Insiders",
+    "http.proxySupport": "off",
+    "editor.dragAndDrop": false,
+    "terminal.integrated.rendererType": "dom",
+    "editor.renderWhitespace": "none",
+    "workbench.statusBar.visible": true,
+    "gitlens.advanced.caching.enabled": false,
+    "gitlens.blame.highlight.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "editor.lineHeight": 18,
+    "debug.console.fontSize": 13,
+    "debug.console.lineHeight": 14,
+    "breadcrumbs.enabled": true,
+    "window.title": "${rootName}",
+    "gitlens.statusBar.alignment": "left",
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.statusBar.dateFormat": "YYYY-MM-DD",
+    "editor.fontSize": 14,
+    "workbench.colorTheme": "FlatUI Immersed",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, UseTab: Never, IndentWidth: 2, TabWidth: 2, ColumnLimit: 0 }",
+}

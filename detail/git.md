@@ -58,6 +58,9 @@ git pull origin master:master
 # 查看远程仓库设置
 git remote -v
 
+# commit
+git commit --allow-empty -m 'an empty commit'  # 提交一个空commit
+
 # clone
 git clone 地址 -b master  # 只clone下master分支
 
