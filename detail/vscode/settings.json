@@ -1,20 +1,20 @@
 {
     "files.autoSave": "afterDelay",
-    "editor.fontFamily": "Fantasque Sans Mono, FZYouHei",
+    "editor.fontFamily": "Fantasque Sans Mono",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.autoIndent": true,
     "editor.renderLineHighlight": "gutter",
     "editor.renderControlCharacters": true,
     "editor.minimap.enabled": false,
     "editor.cursorBlinking": "solid",
     "editor.roundedSelection": true,
     "editor.smoothScrolling": true,
-    "editor.mouseWheelScrollSensitivity": 1.5,
+    "editor.mouseWheelScrollSensitivity": 2.0,
     "editor.foldingStrategy":"auto",
     "editor.tabCompletion": "off",
+    "C_Cpp.enhancedColorization": "Enabled",
     //
-    //"editor.rulers": [90],
+    // "editor.rulers": [85],
     "workbench.editor.enablePreview": false,
     //
     "workbench.colorCustomizations": {
@@ -24,20 +24,23 @@
         "editor.selectionHighlightBackground": "#1777d1fa", // click match
         //*/
 
-        //*
-        "editor.background": "#fafafa",
-        "editor.foreground": "#404040",
+        //"editor.background": "#fcfcfc",
+        //"editor.foreground": "#000000",
+
+        /*
+        "editor.background": "#fcfcfc",
+        "editor.foreground": "#000",
         "statusBar.foreground": "#303030",
-        "statusBar.background" : "#fafafa",
-        "statusBar.border": "#fafafa",
-        "sideBar.background": "#fafafa",
-        "sideBar.foreground": "#d0d0d0",
-        "sideBar.border": "#fafafa",
-        "sideBarSectionHeader.background": "#fafafa",
-        "tab.activeBackground": "#fafafa",
-        "tab.inactiveBackground": "#fafafa",
-        "tab.border": "#fafafa",
-        "editorCursor.foreground": "#222"
+        "statusBar.background" : "#f9f9f9",
+        "statusBar.border": "#f9f9f9",
+        "sideBar.background": "#f9f9f9",
+        "sideBar.foreground": "#999",
+        "sideBar.border": "#f9f9f9",
+        "sideBarSectionHeader.background": "#f9f9f9",
+        "tab.activeBackground": "#f9f9f9",
+        "tab.inactiveBackground": "#f9f9f9",
+        "tab.border": "#f9f9f9",
+        "editorLineNumber.foreground": "#aaa"
         //*/
 
         /*
@@ -52,10 +55,8 @@
         "tab.activeBackground": "#2a2a2a",
         "tab.inactiveBackground": "#2a2a2a",
         "tab.border": "#2a2a2a",
-        "editorCursor.foreground": "#eee"
         //*/
     },
-    "editor.autoClosingBrackets": "always",
     //
     "terminal.integrated.fontWeight": "normal",
     // "terminal.integrated.cursorStyle": "underline",
@@ -100,15 +101,24 @@
     "gitlens.advanced.caching.enabled": false,
     "gitlens.blame.highlight.enabled": false,
     "gitlens.currentLine.enabled": false,
-    "editor.lineHeight": 18,
-    "debug.console.fontSize": 13,
-    "debug.console.lineHeight": 14,
-    "breadcrumbs.enabled": true,
+    "debug.console.fontSize": 14,
+    "breadcrumbs.enabled": false,
     "window.title": "${rootName}",
     "gitlens.statusBar.alignment": "left",
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.statusBar.dateFormat": "YYYY-MM-DD",
-    "editor.fontSize": 14,
-    "workbench.colorTheme": "FlatUI Immersed",
+    "workbench.iconTheme": "vscode-great-icons",
+    "editor.fontSize": 13,
+    "editor.lineHeight": 21,
+    "gitlens.blame.format": "${date}  ${author|8}",
+    "gitlens.blame.dateFormat": "YYYY-MM-DD",
+    "terminal.integrated.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+    "editor.renderIndentGuides": false,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.limit.value": 6,
+    "search.enableSearchEditorPreview": true,
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, UseTab: Never, IndentWidth: 2, TabWidth: 2, ColumnLimit: 0 }",
+    "workbench.colorTheme": "Default Light+"
 }
