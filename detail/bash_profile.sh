@@ -1,4 +1,4 @@
-export PS1='\[\033[1;31m\]\t \w]$(parse_git_branch)\[\033[0;m\] \n> '
+export PS1='\n\n\[\033[1;31m\]\t \w]$(parse_git_branch)\[\033[0;m\] \n> '
 
 # docker
 # docker ps -a
@@ -45,13 +45,24 @@ alias xxnetstop="ps ax | grep -i python | grep -i launch | grep start.py | awk '
 alias mysqli='mysql -uroot -proot123 -P3306 --prompt "\u:\d> "';
 
 # git
-alias gits="git status";
+alias gits='git status'
 alias gitl="git log --oneline";
-alias gita="git add -A .";
 alias gitph="git push";
+alias gitphf="git push --force";
 alias gitpl="git pull";
 alias gitplr="git pull --rebase";
 alias gith="git reset --hard HEAD";
+function gita() {
+  if [ $# -gt 0 ]; then
+    git add $@
+  else
+    git add -A .
+  fi
+}
+function gitphu() {
+  curr_branch=`parse_git_branch`
+  git push --set-upstream origin $curr_branch
+}
 function parse_git_branch() {
   b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ -n "$b" ]; then
@@ -64,10 +75,17 @@ function gitl1() {
   if [ $# -gt 0 ]; then
     num=$1
   fi
-  git log -$num --format="%H  %cn  %s"
+  git log -$num --format="%h %ci  %cn  %s"
 }
 function gitch() {
   git checkout $@
+}
+function gitchm() {
+  git checkout master
+}
+function gitlearn() {
+  b=`git branch | grep learn | sed 's/^[ \t\*]*//g'`
+  git checkout $b
 }
 function gitc() {
   git commit -m "$1"
@@ -78,8 +96,42 @@ function gitac() {
 function gitb() {
   git branch $@
 }
+function gitmr() {
+  git merge $@
+}
+function gitmrm() {
+  git merge master
+}
 function gitbd_remote() {
   git push origin --delete $1
+}
+function gitbrm() {
+  gitb -D $1
+  gitbd_remote $1
+}
+function gitreset() {
+  git reset --hard $1
+}
+function gitreset1() {
+  git reset --hard HEAD^
+}
+function gitrebase() {
+  git rebase -i $1
+}
+function gitrebase2() {
+  git rebase -i HEAD^^
+}
+function gittest() {
+  git commit --allow-empty -m '[feature-ok,ha3:master]'
+  git push
+}
+function gittest1() {
+  git commit --allow-empty -m '[feature-ok]'
+  git push
+}
+function gitlzuser() {
+  git config user.name 'leizton'
+  git config user.email 'leizton@126.com'
 }
 function gitbmst() {
   if [ $# -eq 1 -a $1 == '-h' ]; then
@@ -89,7 +141,6 @@ function gitbmst() {
     echo 'gitbmst *.java Jack.Huang'
     return
   fi
-
   if [ $# -eq 0 ]; then
     find . -name "*.java" | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort | uniq -c | sort -rn
   elif [ $# -eq 1 ]; then
