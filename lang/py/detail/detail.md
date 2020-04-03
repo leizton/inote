@@ -83,5 +83,21 @@ for l in traceback.format_stack():
   os.path.dirname(path)
 
 
+# 遍历目录
+```py
+def getAllFiles(dirpath):
+  total_dirs = []
+  total_files = []
+  for root, dirs, files in os.walk(dirpath):
+    for e in dirs:
+      assert(os.path.isdir(os.path.join(root, e)))
+      total_dirs += [os.path.join(root, e)]
+    for e in files:
+      assert(os.path.isfile(os.path.join(root, e)))
+      total_files += [os.path.join(root, e)]
+  return total_dirs, total_files
+```
+
+
 # class
 http://yangcongchufang.com/%E9%AB%98%E7%BA%A7python%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/python-object-class.html

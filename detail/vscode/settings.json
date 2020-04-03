@@ -12,6 +12,7 @@
     "editor.mouseWheelScrollSensitivity": 2.0,
     "editor.foldingStrategy":"auto",
     "editor.tabCompletion": "off",
+    "editor.cursorSmoothCaretAnimation": true,
     "C_Cpp.enhancedColorization": "Enabled",
     //
     // "editor.rulers": [85],
@@ -21,11 +22,8 @@
         ///*
         "editor.selectionBackground": "#5cb9f4",  // selection
         "editor.selectionForeground": "#ffffff",
-        "editor.selectionHighlightBackground": "#1777d1fa", // click match
+        "editor.selectionHighlightBackground": "#c1c1c1", // click match
         //*/
-
-        //"editor.background": "#fcfcfc",
-        //"editor.foreground": "#000000",
 
         /*
         "editor.background": "#fcfcfc",
@@ -59,7 +57,6 @@
     },
     //
     "terminal.integrated.fontWeight": "normal",
-    // "terminal.integrated.cursorStyle": "underline",
     "workbench.startupEditor": "newUntitledFile",
     //
     "git.confirmSync": false,
