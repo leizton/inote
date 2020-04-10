@@ -1,5 +1,56 @@
 export PS1='\n\n\[\033[1;31m\]\t \w]$(parse_git_branch)\[\033[0;m\] \n> '
 
+# ag
+agbin='/usr/local/bin/ag'
+function af() {
+  if [ $# -gt 1 ]; then
+    find "$1" -name "*$2*"
+  else
+    find . -name "*$1*"
+  fi
+}
+function def_m() {
+  $agbin "$1(<.*>)?::$2\("
+}
+function ag() {
+  $agbin -Q "$1"
+}
+function agi() {
+  $agbin -sQ "$1"
+}
+function agw() {
+  $agbin "\W$1\W"
+}
+function agwi() {
+  $agbin "\W$1\W"
+}
+function agr() {
+  $agbin "$1"
+}
+function agf() {
+  $agbin "$1" -G "$2"
+}
+function _agr_cpp() {
+  $agbin "$1" -G "h"
+  $agbin "$1" -G "cc"
+  $agbin "$1" -G "cpp"
+}
+function agclz() {
+  _agr_cpp "struct .*$1"
+  _agr_cpp "class .*$1"
+}
+function agd() {
+  _agr_cpp ": public $1\W"
+}
+function agm() {
+  _agr_cpp "\w+\->$1(<[\w:]+>)?\("
+  _agr_cpp "\w+\.$1(<[\w:]+>)?\("
+  _agr_cpp "^[\x20\t]+$1(<[\w:]+>)?\("
+}
+function weread() {
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --app="http://weread.qq.com"
+}
+
 # docker
 # docker ps -a
 # docker images
@@ -46,7 +97,6 @@ alias mysqli='mysql -uroot -proot123 -P3306 --prompt "\u:\d> "';
 
 # git
 alias gits='git status'
-alias gitl="git log --oneline";
 alias gitph="git push";
 alias gitphf="git push --force";
 alias gitpl="git pull";
@@ -75,7 +125,17 @@ function gitl1() {
   if [ $# -gt 0 ]; then
     num=$1
   fi
-  git log -$num --format="%h %ci  %cn  %s"
+  git log -$num --format="[%h %ci %cn] %s"
+}
+function gitl2() {
+  if [ $# -lt 1 ]; then
+    return 0
+  fi
+  num='5'
+  if [ $# -gt 1 ]; then
+    num=$2
+  fi
+  git log -$num --format="[%h %ci %cn] %s" -- $1
 }
 function gitch() {
   git checkout $@

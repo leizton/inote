@@ -54,6 +54,6 @@ docker attach $container_name
 docker rmi IMAGE_ID  ; 删除镜像
 docker run -dit --net=host -p port1:port2 --name=CONTAINER_NAME IMAGE_NAME bash -c "...; tail -f /dev/null"
   ; 启动容器. --net=host 让容器可以访问宿主机外的机器. -p 映射 宿主机端口:容器内端口
-docker exec -it CONTAINER_NAME /bin/bash  ; 登录容器, 不要用attach
+docker exec -it CONTAINER_NAME /bin/bash  ; 登录容器, 不要用attach, attach退出时会stop容器
 docker stop/rm CONTAINER_NAME
 docker rename OLD_CONTAINER_NAME NEW_CONTAINER_NAME
