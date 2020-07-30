@@ -181,6 +181,9 @@ function gitrebase() {
 function gitrebase2() {
   git rebase -i HEAD^^
 }
+function gitdiffst() {
+  git diff --stat $@
+}
 function gittest() {
   git commit --allow-empty -m '[feature-ok,ha3:master]'
   git push
