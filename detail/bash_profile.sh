@@ -1,5 +1,10 @@
 export PS1='\n\n\[\033[1;31m\]\t \w]$(parse_git_branch)\[\033[0;m\] \n> '
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export HISTFILESIZE=100000
+export HISTSIZE=10000
+shopt -s histappend
+
 # ag
 agbin='/usr/local/bin/ag'
 function af() {
