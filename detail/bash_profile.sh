@@ -6,7 +6,7 @@ export HISTSIZE=10000
 shopt -s histappend
 
 # ag
-agbin='/usr/local/bin/ag'
+agbin='/usr/local/bin/ag -u'
 function af() {
   if [ $# -gt 1 ]; then
     find "$1" -name "*$2*"
