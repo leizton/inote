@@ -1,6 +1,5 @@
 {
-  "files.autoSave": "afterDelay",
-  "editor.fontFamily": "Sometype Mono",
+  "editor.fontFamily": "Ubuntu Mono",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.renderLineHighlight": "gutter",
@@ -16,9 +15,6 @@
   "[cpp]": {
     "editor.quickSuggestions": true
   },
-  "[c]": {
-    "editor.quickSuggestions": true
-  },
   "C_Cpp.intelliSenseEngine": "Tag Parser",
   // "editor.rulers": [85],
   "workbench.editor.enablePreview": false,
@@ -26,8 +22,20 @@
     "editor.selectionBackground": "#5eadddd7", // selection
     "editor.selectionForeground": "#ffffff",
     "editor.selectionHighlightBackground": "#ebc167d0", // click match
-    //"editor.background": "#262626"
-    //"editor.background": "#f3f3f3"
+    /*
+    "editor.background": "#2e3037",
+    "statusBar.foreground": "#fff",
+    "statusBar.background": "#2e3037",
+    "sideBar.background": "#2e3037",
+    "sideBarSectionHeader.background": "#2e3037",
+    //*/
+    /*
+    "editor.background": "#fff",
+    "statusBar.foreground": "#2e3037",
+    "statusBar.background": "#fff",
+    "sideBar.background": "#fff",
+    "sideBarSectionHeader.background": "#fff",
+    //*/
   },
   "workbench.startupEditor": "newUntitledFile",
   "git.confirmSync": false,
@@ -81,7 +89,6 @@
   "editor.cursorSmoothCaretAnimation": true,
   "workbench.editor.tabCloseButton": "off",
   "debug.console.wordWrap": false,
-  "terminal.integrated.fontSize": 11,
   "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 2, TabWidth: 2, ColumnLimit: 0, NamespaceIndentation: None, PointerAlignment: Left }",
   "C_Cpp.intelliSenseEngineFallback": "Enabled",
   "C_Cpp.loggingLevel": "Information",
@@ -96,6 +103,11 @@
   "markdown.preview.lineHeight": 0.88,
   "C_Cpp.experimentalFeatures": "Enabled",
   "search.useIgnoreFiles": false,
-  "editor.fontWeight": "bold",
-  "workbench.colorTheme": "Default Light+",
+  "files.autoSave": "afterDelay",
+  "editor.lineHeight": 22,
+  "debug.console.fontFamily": "Sometype Mono",
+  "terminal.integrated.fontFamily": "Sometype Mono",
+  "terminal.integrated.fontSize": 11,
+  "editor.fontSize": 14,
+  "workbench.colorTheme": "Atom One Dark",
 }
