@@ -26,8 +26,11 @@ function agi() {
 function agw() {
   $agbin "\W$1\W"
 }
+function agwc() {
+  $agbin "\W$1[^a-zA-Z:]"
+}
 function agwi() {
-  $agbin "\W$1\W"
+  $agbin -sQ "\W$1\W"
 }
 function agr() {
   $agbin "$1"
