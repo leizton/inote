@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "Ubuntu Mono",
+  "editor.fontFamily": "Ubuntu Mono, STYuanti-SC-Light",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.renderLineHighlight": "gutter",
@@ -31,6 +31,7 @@
     //*/
     /*
     "editor.background": "#fff",
+    "editorLineNumber.foreground": "#aaa",
     "statusBar.foreground": "#2e3037",
     "statusBar.background": "#fff",
     "sideBar.background": "#fff",
@@ -93,7 +94,7 @@
   "C_Cpp.intelliSenseEngineFallback": "Enabled",
   "C_Cpp.loggingLevel": "Information",
   "C_Cpp.intelliSenseCacheSize": 10240,
-  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.fontWeight": "normal",
   "terminal.integrated.showExitAlert": false,
   "editor.cursorStyle": "underline",
   "editor.detectIndentation": false,
@@ -104,10 +105,10 @@
   "C_Cpp.experimentalFeatures": "Enabled",
   "search.useIgnoreFiles": false,
   "files.autoSave": "afterDelay",
-  "editor.lineHeight": 22,
-  "debug.console.fontFamily": "Sometype Mono",
-  "terminal.integrated.fontFamily": "Sometype Mono",
-  "terminal.integrated.fontSize": 11,
+  "debug.console.fontFamily": "Ubuntu Mono",
+  "terminal.integrated.fontFamily": "Ubuntu Mono",
+  "terminal.integrated.fontSize": 12,
   "editor.fontSize": 14,
-  "workbench.colorTheme": "Atom One Dark",
+  "terminal.integrated.shell.osx": "/bin/bash",
+  "workbench.colorTheme": "Default Light+",
 }

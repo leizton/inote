@@ -17,11 +17,11 @@
   },
   "Use Italic Font" : true,
   "Foreground Color" : {
-    "Red Component" : 0.891265869140625,
+    "Red Component" : 0.82659912109375,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.891265869140625,
+    "Blue Component" : 0.82388734724372625,
     "Alpha Component" : 1,
-    "Green Component" : 0.891265869140625
+    "Green Component" : 0.82388734724372625
   },
   "Right Option Key Sends" : 0,
   "Character Encoding" : 4,
@@ -328,8 +328,8 @@
     "Red Component" : 0
   },
   "Blur" : false,
-  "Vertical Spacing" : 1,
-  "Normal Font" : "SometypeMono-Regular 13",
+  "Vertical Spacing" : 1.03,
+  "Normal Font" : "UbuntuMono-Regular 15",
   "Ansi 7 Color" : {
     "Green Component" : 0.89001238346099854,
     "Blue Component" : 0.79781103134155273,

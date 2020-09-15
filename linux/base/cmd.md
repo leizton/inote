@@ -3,6 +3,7 @@ http://linuxtools-rst.readthedocs.io/zh_CN/latest/base/03_text_processing.html
 
 
 # base
+ps        -ef        PID  PPID  STIME(start_time)  TIME(run_time)  CMD
 cd        -          返回最近一次cd前的目录
 tree      -L 2       最多显示2层
 which     exe        查找可执行文件位置
