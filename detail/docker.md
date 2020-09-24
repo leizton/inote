@@ -6,10 +6,18 @@ docker images           // nginx:v0.1，v0.1是tag
 docker rmi ${image_id}  // 删除某个镜像
 
 # 启动，停止，删除一个容器
-docker run --name webserver -dp 80:80 nginx:v0.1  // 容器名是webserver，镜像是nginx:v0.1
-docker ps -a           // 查看所有容器, STATUS表示启动到现在经过的时间, 或者是Exited(已经stop了)
+docker run -dit -p 80:80 --net=host --name webserver nginx:v0.1 /bin/bash
+    容器名是webserver，镜像是nginx:v0.1
+    -p 宿主机端口:容器端口
+    --net=host 使容器内可以通过域名访问外网
+docker exec -it webserver /bin/bash
+docker ps -a  // 查看所有容器, STATUS表示启动到现在经过的时间, 或者是Exited(已经stop了)
 docker stop webserver
 docker rm webserver
+
+# 宿主机和容器间互相拷贝文件
+宿主机=>容器  docker cp a.txt $容器名:/opt/tar/
+容器=>宿主机  docker cp /opt/tar/a.txt $宿主机路径
 
 # 从容器构建镜像
 docker exec -it webserver bash  // -i:交互式，-t:终端方式
@@ -53,7 +61,7 @@ docker attach $container_name
 # detail
 docker rmi IMAGE_ID  ; 删除镜像
 docker run -dit --net=host -p port1:port2 --name=CONTAINER_NAME IMAGE_NAME bash -c "...; tail -f /dev/null"
-  ; 启动容器. --net=host 让容器可以访问宿主机外的机器. -p 映射 宿主机端口:容器内端口
+  ; 启动容器. --net=host 使容器内可以通过域名访问外网. -p 映射 宿主机端口:容器内端口
 docker exec -it CONTAINER_NAME /bin/bash  ; 登录容器, 不要用attach, attach退出时会stop容器
 docker stop/rm CONTAINER_NAME
 docker rename OLD_CONTAINER_NAME NEW_CONTAINER_NAME
