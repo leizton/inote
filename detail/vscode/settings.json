@@ -1,5 +1,6 @@
 {
-  "editor.fontFamily": "Ubuntu Mono, STYuanti-SC-Light",
+  "editor.fontFamily": "VictorMono-SemiBold, STYuanti-SC-Light",
+  "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.renderLineHighlight": "gutter",
@@ -24,6 +25,7 @@
     "editor.selectionHighlightBackground": "#ebc167d0", // click match
     /*
     "editor.background": "#2e3037",
+    "editor.foreground": "#ddd",
     "statusBar.foreground": "#fff",
     "statusBar.background": "#2e3037",
     "sideBar.background": "#2e3037",
@@ -108,7 +110,6 @@
   "debug.console.fontFamily": "Ubuntu Mono",
   "terminal.integrated.fontFamily": "Ubuntu Mono",
   "terminal.integrated.fontSize": 12,
-  "editor.fontSize": 14,
   "terminal.integrated.shell.osx": "/bin/bash",
-  "workbench.colorTheme": "Default Light+",
+  "editor.fontSize": 13,
 }
