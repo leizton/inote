@@ -304,7 +304,7 @@
       "when": "inFilesPicker && inQuickOpen"
   },
   {
-      "key": "f4",
+      "key": "ctrl+shift+b",
       "command": "workbench.view.extension.bookmarks"
   },
   {
@@ -544,7 +544,7 @@
       "when": "!inDebugMode && debugConfigurationType == 'node'"
   },
   {
-      "key": "f1",
+      "key": "ctrl+b",
       "command": "bookmarks.toggle"
   },
   {
@@ -553,11 +553,11 @@
       "when": "textInputFocus"
   },
   {
-      "key": "f2",
+      "key": "ctrl+c",
       "command": "bookmarks.jumpToPrevious"
   },
   {
-      "key": "f3",
+      "key": "ctrl+shift+c",
       "command": "bookmarks.jumpToNext"
   },
   {
@@ -745,6 +745,16 @@
       "key": "shift+f10",
       "command": "-editor.action.showContextMenu",
       "when": "textInputFocus"
+  },
+  {
+    "key": "shift+cmd+/",
+    "command": "editor.action.jumpToBracket",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+\\",
+    "command": "-editor.action.jumpToBracket",
+    "when": "editorTextFocus"
   },
   /*
   {
