@@ -304,10 +304,6 @@
       "when": "inFilesPicker && inQuickOpen"
   },
   {
-      "key": "ctrl+shift+b",
-      "command": "workbench.view.extension.bookmarks"
-  },
-  {
       "key": "shift+cmd+r",
       "command": "workbench.action.replaceInFiles"
   },
@@ -674,7 +670,7 @@
       "command": "-workbench.action.showCommands"
   },
   {
-      "key": "shift+cmd+t",
+      "key": "cmd+h",
       "command": "workbench.action.showAllSymbols"
   },
   {
@@ -755,6 +751,14 @@
     "key": "shift+cmd+\\",
     "command": "-editor.action.jumpToBracket",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+d",
+    "command": "editor.action.revealDeclaration"
+  },
+  {
+    "key": "ctrl+shift+b",
+    "command": "bookmarks.listFromAllFiles"
   },
   /*
   {
