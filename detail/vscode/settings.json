@@ -1,6 +1,8 @@
 {
   "editor.tokenColorCustomizations": {
-    "comments": "#777"
+    "comments": "#777",
+    "functions": "#a31515",
+    "strings": "#098658"
   },
   "editor.fontFamily": "VictorMono-semibold",
   "editor.fontLigatures": true,
