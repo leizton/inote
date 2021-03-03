@@ -1,8 +1,11 @@
 {
   "editor.tokenColorCustomizations": {
-    "comments": "#777",
-    "functions": "#a31515",
-    "strings": "#098658"
+    //*
+    "functions": "#b8400c",
+    "strings": "#222",
+    "keywords": "#0e5ebb",
+    "comments": "#777"
+    //*/
   },
   "editor.fontFamily": "VictorMono-semibold",
   "editor.fontLigatures": true,
