@@ -5,12 +5,7 @@
     "${workspaceFolder}/**"
   ],
   "C_Cpp.default.includePath": [
-    "/usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0",
-    "/Users/awk/ali/metrics_log_collector",
-    "/Users/awk/adev",
-    "/Users/awk/ali/reco-frame",
-    "/Users/awk/ali/libmonitor",
-    "/Users/awk/ali/ugraph_common_base"
+    "/usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0"
   ],
   "C_Cpp.enhancedColorization": "Enabled",
   "C_Cpp.errorSquiggles": "Disabled",
@@ -56,8 +51,7 @@
   "editor.smoothScrolling": true,
   "editor.suggest.localityBonus": true,
   "editor.tabCompletion": "on",
-  "editor.tabSize": 2,
-  "editor.tokenColorCustomizations": {
+  "editor.tokenColorCustomizations_w": {
     "comments": "#777",
     "functions": "#b8400c",
     "keywords": "#0e5ebb",
@@ -74,44 +68,7 @@
   },
   "files.autoSave": "afterDelay",
   "files.exclude": {
-    "/Library/*": true,
-    "/Users/awk/adev/reco/bizc/reco_index/**": true,
-    "/Users/awk/adev/reco/bizc/reco_index_ha3/news_index_ha3_old.cc": true,
-    "/Users/awk/adev/reco/bizc/reco_index_ha3/news_index_ha3_old.h": true,
-    "/Users/awk/adev/reco/serv/alpha/**": true,
-    "/Users/awk/adev/reco/serv/alpha_plugin/**": true,
-    "/Users/awk/adev/reco/serv/dict_server/**": true,
-    "/Users/awk/adev/reco/serv/doc_server/**": true,
-    "/Users/awk/adev/reco/serv/ha3_data_flow/**": true,
-    "/Users/awk/adev/reco/serv/idle_server/**": true,
-    "/Users/awk/adev/reco/serv/index_presort_alps/**": true,
-    "/Users/awk/adev/reco/serv/index_presort_server/**": true,
-    "/Users/awk/adev/reco/serv/meta_info_updater/**": true,
-    "/Users/awk/adev/reco/serv/nlp_server/**": true,
-    "/Users/awk/adev/reco/serv/offline_index/**": true,
-    "/Users/awk/adev/reco/serv/reco_comment_server/**": true,
-    "/Users/awk/adev/reco/serv/reco_filter/**": true,
-    "/Users/awk/adev/reco/serv/reco_leaf/**": true,
-    "/Users/awk/adev/reco/serv/reco_model/**": true,
-    "/Users/awk/adev/reco/serv/related_server/**": true,
-    "/Users/awk/adev/reco/serv/related_server_7u/**": true,
-    "/Users/awk/adev/reco/serv/scene_push_server_7u/**": true,
-    "/Users/awk/adev/reco/serv/search_server/**": true,
-    "/Users/awk/adev/reco/serv/semantic_item/**": true,
-    "/Users/awk/adev/reco/serv/sim_item/**": true,
-    "/Users/awk/adev/reco/serv/ssh.exe.stackdump/**": true,
-    "/Users/awk/adev/reco/serv/user_platform/**": true,
-    "/Users/awk/adev/reco/serv/user_profile_server/**": true,
-    "/Users/awk/adev/reco/serv/user_server/**": true,
-    "/Users/awk/adev/reco/serv/xss-reco-ops/**": true,
-    "/Users/awk/adev/workspace": true,
-    "/Users/awk/ali/reco-frame/examples/**": true,
-    "/Users/awk/ali/reco-frame/hello/*/*/*": true,
-    "/Users/awk/ali/reco-frame/test/**": true,
-    "/Users/awk/ali/reco-frame/test_ops/**": true,
-    "/Users/awk/ali/reco-frame/tools/**": true,
-    "reco/bizc/reco_index_ha3/news_index_ha3_old.cc": true,
-    "reco/bizc/reco_index_ha3/news_index_ha3_old.h": true
+    "/Library/*": true
   },
   "git.confirmSync": false,
   "git.decorations.enabled": false,
@@ -145,8 +102,7 @@
   "terminal.integrated.showExitAlert": false,
   "typescript.check.npmIsInstalled": false,
   "window.title": "${rootName}",
-  "workbench.activityBar.visible": false,
-  "workbench.colorCustomizations": {
+  "workbench.colorCustomizations_w": {
     "badge.background": "#e04949e0",
     "editor.background": "#f7f7f7",
     "editor.findMatchBackground": "#e04949e0",
@@ -170,7 +126,7 @@
     "titleBar.inactiveBackground": "#f7f7f7",
     "widget.shadow": "#f7f7f7"
   },
-  "workbench.colorCustomizations_b": {
+  "workbench.colorCustomizations": {
     "badge.background": "#e04949e0",
     "editor.background": "#282c2e",
     "editor.findMatchBackground": "#e04949e0",
@@ -193,8 +149,7 @@
     "titleBar.inactiveBackground": "#282c2e",
     "widget.shadow": "#282c2e"
   },
-  "workbench.colorTheme": "Default Light+",
-  "workbench.colorTheme_b": "Default Dark+",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.editor.enablePreview": false,
   "workbench.editor.limit.value": 110,
   "workbench.editor.showTabs": false,
@@ -210,5 +165,7 @@
   "workbench.productIconTheme": "fluent-icons",
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.statusBar.visible": true
+  "workbench.statusBar.visible": true,
+"editor.tabSize": 2,
+"workbench.activityBar.visible": false
 }
