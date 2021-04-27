@@ -107,9 +107,23 @@ alias mysqli='mysql -uroot -proot123 -P3306 --prompt "\u:\d> "';
 alias gits='git status'
 alias gitph="git push";
 alias gitphf="git push --force";
-alias gitpl="git pull";
-alias gitplr="git pull --rebase";
 alias gith="git reset --hard HEAD";
+function parse_git_branch() {
+  b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ -n "$b" ]; then
+    b=" $b"
+  fi
+  echo "$b"
+}
+function gitpl() {
+  if [ $# -gt 0 ]; then
+    git fetch origin $1
+    git checkout $1
+  else
+    curr_branch=`parse_git_branch`
+    git pull origin $curr_branch
+  fi
+}
 function gita() {
   if [ $# -gt 0 ]; then
     git add $@
@@ -120,13 +134,6 @@ function gita() {
 function gitphu() {
   curr_branch=`parse_git_branch`
   git push --set-upstream origin $curr_branch
-}
-function parse_git_branch() {
-  b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ -n "$b" ]; then
-    b=" $b"
-  fi
-  echo "$b"
 }
 function gitl1() {
   num='5'
@@ -139,11 +146,12 @@ function gitl2() {
   if [ $# -lt 1 ]; then
     return 0
   fi
+  file=$1
   num='5'
   if [ $# -gt 1 ]; then
     num=$2
   fi
-  git log -$num --format="[%h %ci %cn] %s" -- $1
+  git log -$num --format="[%h %ci %cn] %s" -- $file
 }
 function gitch() {
   git checkout $@
