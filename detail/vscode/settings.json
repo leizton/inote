@@ -1,10 +1,15 @@
 {
   "C_Cpp.autocomplete": "Default",
   "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, UseTab: Never, IndentWidth: 2, TabWidth: 2, ColumnLimit: 0, NamespaceIndentation: None, PointerAlignment: Left, AllowShortIfStatementsOnASingleLine: true, AllowShortCaseLabelsOnASingleLine: true, BreakConstructorInitializersBeforeComma: true }",
+  "C_Cpp.default.browse.path": [
+    "/usr/local/include",
+    "/usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0"
+  ],
   "C_Cpp.default.forcedInclude": [
     "${workspaceFolder}/**"
   ],
   "C_Cpp.default.includePath": [
+    "/usr/local/include",
     "/usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0"
   ],
   "C_Cpp.enhancedColorization": "Enabled",
