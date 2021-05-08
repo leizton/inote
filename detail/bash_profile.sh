@@ -5,6 +5,9 @@ export HISTFILESIZE=100000
 export HISTSIZE=10000
 shopt -s histappend
 
+alias vi_bash="vi ~/.bash_profile"
+alias new_bash="source ~/.bash_profile"
+
 # ag
 agbin='/usr/local/bin/ag -u'
 function af() {
@@ -75,10 +78,12 @@ function docker_mount() {
   dst="$4"
   docker run -dit --name $container_name --mount type=bind,source=$src,target=$dst $img_repo /bin/bash
 }
-
-# docker util
-function docker_practice() {
-  docker_mount 'practice' 'whiker/ubuntu18_dev:v1.0' '/Users/whiker/sky/practice' '/opt/practice'
+function docker_start_cpp() {
+  docker_mount cpp leizton/dev:0.8 $HOME/sky/practice/cpp /opt/cpp
+}
+function docker_in_cpp() {
+  container_id=`docker ps | grep cpp | awk -F ' ' '{print $1}'`
+  docker exec -it $container_id /bin/bash
 }
 
 # time
