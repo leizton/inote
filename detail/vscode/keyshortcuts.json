@@ -286,17 +286,12 @@
       "command": "-workbench.action.newWindow"
   },
   {
-      "key": "cmd+n",
+      "key": "shift+cmd+n",
       "command": "workbench.action.quickOpen"
   },
   {
       "key": "cmd+p",
       "command": "-workbench.action.quickOpen"
-  },
-  {
-      "key": "shift+cmd+n",
-      "command": "workbench.action.quickOpenNavigateNextInFilePicker",
-      "when": "inFilesPicker && inQuickOpen"
   },
   {
       "key": "cmd+p",
@@ -365,10 +360,6 @@
   {
       "key": "cmd+1",
       "command": "-workbench.action.focusFirstEditorGroup"
-  },
-  {
-      "key": "shift+cmd+n",
-      "command": "workbench.action.files.newUntitledFile"
   },
   {
       "key": "cmd+n",
@@ -873,11 +864,35 @@
     "key": "cmd+backspace",
     "command": "-deleteAllLeft",
     "when": "textInputFocus && !editorReadonly"
-  }
-  /*
+  },
   {
-      "key": "ctrl+cmd+w",
-      "command": "-workbench.action.toggleTabsVisibility"
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+f8",
+    "command": "-editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+f8",
+    "command": "-editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+alt+f8",
+    "command": "-testing.goToPreviousMessage",
+    "when": "editorFocus && testing.isPeekVisible"
+  },
+  {
+    "key": "alt+f8",
+    "command": "-testing.goToNextMessage",
+    "when": "editorFocus && testing.isPeekVisible"
+  },
+  {
+    "key": "shift+alt+f8",
+    "command": "-editor.action.marker.prev",
+    "when": "editorFocus"
   }
-  */
 ]

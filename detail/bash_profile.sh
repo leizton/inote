@@ -202,8 +202,11 @@ function gitrebase() {
 function gitrebase2() {
   git rebase -i HEAD^^
 }
-function gitdiffst() {
+function gitdf() {
   git diff --stat $@
+}
+function gitdfm() {
+  git diff --stat master
 }
 function gittest() {
   git commit --allow-empty -m '[feature-ok,ha3:master]'
