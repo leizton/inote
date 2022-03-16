@@ -8,6 +8,30 @@ shopt -s histappend
 alias vi_bash="vi ~/.bash_profile"
 alias new_bash="source ~/.bash_profile"
 
+# timestamp
+function now() {
+  code="import time;from datetime import datetime"
+  code="$code;t=int(time.time())"
+  code="$code;s=datetime.fromtimestamp(float(t))"
+  code="$code;s=s.strftime('%Y-%m-%d %H:%M:%S');print(t);print(s)"
+  python -c "$code"
+}
+function ts() {
+  code="import time;from datetime import datetime"
+  code="$code;t='$1';t=t[:-3] if len(t) > 11 else t"
+  code="$code;s=datetime.fromtimestamp(float(t))"
+  code="$code;s=s.strftime('%Y-%m-%d %H:%M:%S');print(t);print(s)"
+  python -c "$code"
+}
+function ts1() {
+  code="import time;from datetime import datetime"
+  code="$code;s='$1 $2';s=s[:-4] if len(s) > 19 else s"
+  code="$code;dt=datetime.strptime(s, '%Y-%m-%d %H:%M:%S')"
+  code="$code;t=int(time.mktime(dt.timetuple()))"
+  code="$code;print(t);print(s)"
+  python -c "$code"
+}
+
 # ag
 agbin='/usr/local/bin/ag -u'
 function af() {
