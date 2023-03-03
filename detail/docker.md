@@ -56,7 +56,6 @@ docker exec -it $container_name /bin/bash
   adduser dev, su dev
 docker commit -a '$author_name $author_email' -m 'comment' $container_name $new_image_name:$new_image_tag
 docker login  &&  docker tag $image_name:$tag $user_name/$image_name:$tag  &&  docker push $user_name/$image_name:$tag
-docker attach $container_name
 
 # detail
 docker rmi IMAGE_ID  ; 删除镜像

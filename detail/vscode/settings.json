@@ -1,7 +1,7 @@
 {
   // =========================================================================================================
   // white
-  ///*
+  /*
   "editor.tokenColorCustomizations": {
     "comments": "#777",
     "functions": "#c04611",
@@ -10,10 +10,11 @@
   },
   "workbench.colorCustomizations": {
     "tree.indentGuidesStroke": "#0e5ebb",
-    "editorIndentGuide.background": "#f7f7f7",
-    "editorIndentGuide.activeBackground": "#999",
-    "badge.background": "#e04949e0",
+    "editorIndentGuide.background1": "#f7f7f7",
+    "editorIndentGuide.activeBackground1": "#999",
+    "badge.background": "#7c7979e0",
     "bookmarks.lineBackground": "#73c1e6e0",
+    "editor.lineHighlightBackground": "#ff9f9f",
     "editor.background": "#f7f7f7",
     "editor.findMatchBackground": "#e04949e0",
     "editor.findMatchHighlightBackground": "#e04949e0",
@@ -40,72 +41,70 @@
   //*/
   // =========================================================================================================
   // black
-  /*
+  ///*
   "workbench.colorCustomizations": {
-    "editorIndentGuide.background": "#2c2c2c",
-    "editorIndentGuide.activeBackground": "#888",
+    "editorIndentGuide.background1": "#242424",
+    "editorIndentGuide.activeBackground1": "#888",
     "badge.background": "#e04949e0",
     "bookmarks.lineBackground": "#73c1e6e0",
-    "editor.background": "#2c2c2c",
+    "editor.lineHighlightBackground": "#752d2d",
+    "editor.background": "#242424",
     "editor.findMatchBackground": "#e04949e0",
     "editor.findMatchHighlightBackground": "#e04949e0",
     "editor.foreground": "#d3d3d3",
     "editor.selectionBackground": "#5eadddd7",
     "editor.selectionForeground": "#ffffff",
     "editor.selectionHighlightBackground": "#ebc177d0",
-    "list.activeSelectionBackground": "#2c2c2c",
-    "list.activeSelectionForeground": "#e04949e0",
-    "list.inactiveSelectionBackground": "#2c2c2c",
-    "list.inactiveSelectionForeground": "#e04949e0",
-    "scrollbar.shadow": "#2c2c2c",
-    "sideBar.background": "#2c2c2c",
-    "sideBarSectionHeader.background": "#2c2c2c",
-    "sideBarSectionHeader.border": "#2c2c2c",
-    "statusBar.background": "#2c2c2c",
+    "list.activeSelectionBackground": "#242424",
+    "list.activeSelectionForeground": "#fcaf27f8",
+    "list.inactiveSelectionBackground": "#242424",
+    "list.inactiveSelectionForeground": "#4cb4ff",
+    "scrollbar.shadow": "#242424",
+    "sideBar.background": "#242424",
+    "sideBarSectionHeader.background": "#242424",
+    "sideBarSectionHeader.border": "#242424",
+    "statusBar.background": "#242424",
     "statusBar.foreground": "#fff",
-    "titleBar.activeBackground": "#2c2c2c",
-    "titleBar.inactiveBackground": "#2c2c2c",
-    "widget.shadow": "#2c2c2c"
+    "titleBar.activeBackground": "#242424",
+    "titleBar.inactiveBackground": "#242424",
+    "widget.shadow": "#242424"
   },
   "workbench.colorTheme": "Default Dark+",
   //*/
-  ///*
   "files.autoSave": "afterDelay",
   "[markdown]": {
-    "editor.fontFamily": "Sarasa-Mono-SC-Regular",
-    "editor.fontSize": 14,
+    "editor.fontFamily": "JetBrains Mono,VictorMono-semibold,MiSans-regular,Sarasa-Mono-SC-Regular,Iosevka,Maple Mono SC NF,LXGWWenKaiMono-Bold",
+    "editor.fontWeight": "normal",
+    "editor.fontSize": 13,
     "editor.lineHeight": 1.5,
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "off",
+    "editor.rulers": [20000],
   },
-  "[yaml]": {
-    "editor.wordWrap": "off"
-  },
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 200,
-  "editor.fontFamily": "VictorMono-semibold,PingFangSC-regular",
-  "editor.fontSize": 14,
-  "editor.letterSpacing": -0.13,
+  "editor.fontFamily": "VictorMono-SemiBold,Fantasque Sans Mono,JetBrains Mono,MiSans-regular",
+  "editor.fontSize": 15,
   "editor.lineHeight": 1.7,
-  "terminal.integrated.fontFamily": "Sarasa-Mono-SC-Regular",
-  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontFamily": "VictorMono-SemiBold",
+  "terminal.integrated.fontSize": 12,
   "terminal.integrated.letterSpacing": -0.04,
   "C_Cpp.workspaceSymbols": "All",
   "C_Cpp.intelliSenseEngine": "Tag Parser",
   "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 2, TabWidth: 2, ColumnLimit: 0, NamespaceIndentation: None, PointerAlignment: Left, AllowShortIfStatementsOnASingleLine: true, AllowShortCaseLabelsOnASingleLine: true, BreakConstructorInitializersBeforeComma: true }",
   "C_Cpp.vcFormat.newLine.beforeElse": false,
   "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
-  "C_Cpp.enhancedColorization": "Enabled",
-  "C_Cpp.errorSquiggles": "Disabled",
-  "C_Cpp.experimentalFeatures": "Disabled",
+  "C_Cpp.enhancedColorization": "enabled",
+  "C_Cpp.errorSquiggles": "disabled",
+  "C_Cpp.experimentalFeatures": "enabled",
   "C_Cpp.intelliSenseCacheSize": 8192,
-  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.intelliSenseEngineFallback": "enabled",
   "C_Cpp.intelliSenseUpdateDelay": 3000,
   "C_Cpp.loggingLevel": "Information",
-  "C_Cpp.updateChannel": "Default",
   "[cpp]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools",
-    "editor.quickSuggestions": true
+    // "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
   },
   "[jsonc]": {
     "editor.quickSuggestions": {
@@ -116,7 +115,7 @@
   "breadcrumbs.enabled": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.cursorBlinking": "solid",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorWidth": 2,
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
@@ -128,11 +127,10 @@
   "editor.minimap.renderCharacters": true,
   "editor.mouseWheelScrollSensitivity": 2.0,
   "editor.renderControlCharacters": true,
-  "editor.renderLineHighlight": "line",
   "editor.renderWhitespace": "none",
   "editor.roundedSelection": true,
   "editor.rulers": [
-    110
+    200
   ],
   "editor.scrollbar.verticalScrollbarSize": 5,
   "editor.smoothScrolling": true,
@@ -161,10 +159,9 @@
   "terminal.integrated.showExitAlert": false,
   "typescript.check.npmIsInstalled": false,
   "window.title": "${rootName}",
-  "workbench.activityBar.visible": false,
   "workbench.editor.enablePreview": false,
   "workbench.editor.limit.value": 110,
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "workbench.editor.tabCloseButton": "off",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
@@ -178,8 +175,31 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "markdown.preview.lineHeight": 1.55,
+  "markdown.preview.lineHeight": 1.7,
   "editor.tabSize": 2,
   "redhat.telemetry.enabled": false,
-  "terminal.integrated.tabs.enabled": false
+  "terminal.integrated.tabs.enabled": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "window.commandCenter": true,
+  "workbench.layoutControl.enabled": false,
+  "editor.bracketPairColorization.enabled": false,
+  "gitlens.statusBar.format": "${author}  ${agoOrDate} ${' via 'pullRequest}",
+  "debug.console.fontSize": 11,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.currentLine.scrollable": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "editor.letterSpacing": -0.2,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.statusBar.enabled": false,
+  "prettier.printWidth": 110,
+  "git.openRepositoryInParentFolders": "always",
+  "diffEditor.wordWrap": "off",
+  "C_Cpp.vcFormat.wrap.preserveBlocks": "never",
+  "yaml.format.proseWrap": "never",
+  "editor.renderLineHighlight": "all",
+  "editor.wrappingIndent": "none",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "workbench.activityBar.location": "hidden"
 }
