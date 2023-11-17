@@ -9,6 +9,9 @@ function mypwd() {
   if expr "$a" : '~/acode/reco_leaf/*' > /dev/null; then
     a=`echo "${a:18}"`
   fi
+  if expr "$a" : '~/acode/reco_video/*' > /dev/null; then
+    a=`echo "${a:19}"`
+  fi
   echo $a
 }
 
@@ -20,7 +23,7 @@ shopt -s histappend
 alias vi_bash="vi ~/.bash_profile"
 alias new_bash="source ~/.bash_profile"
 
-export gcc_home="/usr/local/Cellar/gcc/10.2.0_4"
+export gcc_home="/usr/local/Cellar/gcc/13.1.0"
 export PATH="$gcc_home/bin:$PATH"
 
 export proto_home=/usr/local/protobuf
@@ -123,11 +126,25 @@ function docker_start_cpp() {
   docker run -dit --net=host --name cpp \
       --security-opt seccomp=unconfined \
       --mount type=bind,source="/Users/awk/sky/practice/cpp",target="/opt/cpp" \
-      leizton/dev:0.9.2 /bin/bash
+      leizton/udev:0.2 /bin/bash
 }
 function docker_in_cpp() {
   container_id=`docker ps | grep cpp | awk -F ' ' '{print $1}'`
   docker exec -it $container_id /bin/bash
+}
+function docker_start_torch() {
+  docker run -dit --net=host --name torch \
+      --security-opt seccomp=unconfined \
+      --mount type=bind,source="/Users/awk/sky/pytorch",target="/opt/pytorch" \
+      leizton/udev:0.2 /bin/bash
+}
+function docker_in_torch() {
+  container_id=`docker ps | grep torch | awk -F ' ' '{print $1}'`
+  docker exec -it $container_id /bin/bash
+}
+function docker_stop_torch() {
+  docker stop torch
+  docker rm torch
 }
 
 # util
@@ -202,10 +219,10 @@ function gitac() {
   git commit -a -m "$1"
 }
 function gitacm() {
-  git commit -a -m "mod"
+  git commit -a -m "compile"
 }
 function gitacmh() {
-  git commit -a -m "mod"
+  git commit -a -m "compile"
   git push
 }
 function gitb() {
@@ -222,6 +239,9 @@ function gitbd_remote() {
 }
 function gitreset() {
   git reset --hard $1
+}
+function gitreset1() {
+  git reset --hard HEAD^
 }
 function gitrebase() {
   git rebase -i $1
