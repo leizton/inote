@@ -73,15 +73,15 @@
   //*/
   "files.autoSave": "afterDelay",
   "[markdown]": {
-    "editor.fontFamily": "JetBrains Mono,VictorMono-semibold,MiSans-regular,Sarasa-Mono-SC-Regular,Iosevka,Maple Mono SC NF,LXGWWenKaiMono-Bold",
+    "editor.fontFamily": "JetBrains Mono,VictorMono-semibold,MiSans-Medium",
     "editor.fontWeight": "normal",
     "editor.fontSize": 13,
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "off",
     "editor.rulers": [20000],
   },
-  "editor.fontFamily": "VictorMono-SemiBold,Fantasque Sans Mono,JetBrains Mono,MiSans-regular",
-  "editor.fontSize": 15,
+  "editor.fontFamily": "VictorMono-SemiBold,Fantasque Sans Mono,JetBrains Mono,MiSans-Medium",
+  "editor.fontSize": 14,
   "editor.lineHeight": 1.7,
   "terminal.integrated.fontFamily": "VictorMono-SemiBold",
   "terminal.integrated.fontSize": 12,
