@@ -1,8 +1,7 @@
 export PS1='\n\n\[\033[1;31m\]\t $(mypwd)] $(parse_git_branch)\[\033[0;m\]\n> '
 
 function mypwd() {
-  a=`pwd`
-  echo $a
+  pwd
 }
 
 # util
@@ -109,8 +108,7 @@ function gitphu() {
   git push --set-upstream origin $curr_branch
 }
 function parse_git_branch() {
-  b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  echo "$b"
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 function gitl1() {
   num='5'
