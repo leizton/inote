@@ -1,7 +1,7 @@
 {
   // =========================================================================================================
   // white
-  /*
+  ///*
   "editor.tokenColorCustomizations": {
     "comments": "#777",
     "functions": "#c04611",
@@ -10,12 +10,12 @@
   },
   "workbench.colorCustomizations": {
     "tree.indentGuidesStroke": "#0e5ebb",
-    "editorIndentGuide.background1": "#f7f7f7",
+    "editorIndentGuide.background1": "#fcfcfc",
     "editorIndentGuide.activeBackground1": "#999",
     "badge.background": "#7c7979e0",
     "bookmarks.lineBackground": "#73c1e6e0",
     "editor.lineHighlightBackground": "#ff9f9f",
-    "editor.background": "#f7f7f7",
+    "editor.background": "#fcfcfc",
     "editor.findMatchBackground": "#e04949e0",
     "editor.findMatchHighlightBackground": "#e04949e0",
     "editor.foreground": "#222",
@@ -23,25 +23,25 @@
     "editor.selectionForeground": "#ffffff",
     "editor.selectionHighlightBackground": "#ebc177d0",
     "editorLineNumber.foreground": "#aaa",
-    "list.activeSelectionBackground": "#f7f7f7",
+    "list.activeSelectionBackground": "#fcfcfc",
     "list.activeSelectionForeground": "#e04949e0",
-    "list.inactiveSelectionBackground": "#f7f7f7",
+    "list.inactiveSelectionBackground": "#fcfcfc",
     "list.inactiveSelectionForeground": "#e04949e0",
-    "scrollbar.shadow": "#f7f7f7",
-    "sideBar.background": "#f7f7f7",
-    "sideBarSectionHeader.background": "#f7f7f7",
-    "sideBarSectionHeader.border": "#f7f7f7",
-    "statusBar.background": "#f7f7f7",
+    "scrollbar.shadow": "#fcfcfc",
+    "sideBar.background": "#fcfcfc",
+    "sideBarSectionHeader.background": "#fcfcfc",
+    "sideBarSectionHeader.border": "#fcfcfc",
+    "statusBar.background": "#fcfcfc",
     "statusBar.foreground": "#333",
-    "titleBar.activeBackground": "#f7f7f7",
-    "titleBar.inactiveBackground": "#f7f7f7",
-    "widget.shadow": "#f7f7f7"
+    "titleBar.activeBackground": "#fcfcfc",
+    "titleBar.inactiveBackground": "#fcfcfc",
+    "widget.shadow": "#fcfcfc"
   },
   "workbench.colorTheme": "Default Light+",
   //*/
   // =========================================================================================================
   // black
-  ///*
+  /*
   "workbench.colorCustomizations": {
     "editorIndentGuide.background1": "#242424",
     "editorIndentGuide.activeBackground1": "#888",
@@ -73,15 +73,15 @@
   //*/
   "files.autoSave": "afterDelay",
   "[markdown]": {
-    "editor.fontFamily": "JetBrains Mono,VictorMono-semibold,MiSans-Medium",
+    "editor.fontFamily": "VictorMono-semibold,MiSans-Regular",
     "editor.fontWeight": "normal",
-    "editor.fontSize": 13,
+    "editor.fontSize": 14,
     "editor.lineHeight": 1.5,
     "editor.wordWrap": "off",
     "editor.rulers": [20000],
   },
-  "editor.fontFamily": "VictorMono-SemiBold,Fantasque Sans Mono,JetBrains Mono,MiSans-Medium",
-  "editor.fontSize": 14,
+  "editor.fontFamily": "VictorMono-semibold,MiSans-Regular",
+  "editor.fontSize": 15,
   "editor.lineHeight": 1.7,
   "terminal.integrated.fontFamily": "VictorMono-SemiBold",
   "terminal.integrated.fontSize": 12,
@@ -99,7 +99,6 @@
   "C_Cpp.intelliSenseUpdateDelay": 3000,
   "C_Cpp.loggingLevel": "Information",
   "[cpp]": {
-    // "editor.defaultFormatter": "ms-vscode.cpptools",
     "editor.quickSuggestions": {
       "comments": "on",
       "strings": "on",
@@ -112,7 +111,6 @@
     },
     "editor.suggest.insertMode": "replace"
   },
-  "breadcrumbs.enabled": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": "on",
@@ -162,7 +160,6 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.limit.value": 110,
   "workbench.editor.showTabs": "single",
-  "workbench.editor.tabCloseButton": "off",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
@@ -178,13 +175,12 @@
   "markdown.preview.lineHeight": 1.7,
   "editor.tabSize": 2,
   "redhat.telemetry.enabled": false,
-  "terminal.integrated.tabs.enabled": false,
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "window.commandCenter": true,
   "workbench.layoutControl.enabled": false,
   "editor.bracketPairColorization.enabled": false,
-  "gitlens.statusBar.format": "${author}  ${agoOrDate} ${' via 'pullRequest}",
   "debug.console.fontSize": 11,
+  "gitlens.statusBar.format": "${author} ${YYYY-MM-DD HH:mm} ${' via 'pullRequest}",
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.currentLine.scrollable": false,
@@ -201,5 +197,14 @@
   "editor.renderLineHighlight": "all",
   "editor.wrappingIndent": "none",
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  "workbench.activityBar.location": "hidden"
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "security.promptForLocalFileProtocolHandling": false,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "editor.stickyScroll.enabled": false,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "cmake.options.statusBarVisibility": "compact",
+  "terminal.integrated.tabs.enabled": false
 }

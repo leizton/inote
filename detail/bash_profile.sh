@@ -2,32 +2,18 @@ export PS1='\n\n\[\033[1;31m\]\t $(mypwd)] $(parse_git_branch)\[\033[0;m\]\n> '
 
 function mypwd() {
   a=`pwd`
-  b="${a:0:10}"
-  if [ $b = "/Users/awk" ]; then
-    a=`echo "~${a:10}"`
-  fi
-  if expr "$a" : '~/acode/reco_leaf/*' > /dev/null; then
-    a=`echo "${a:18}"`
-  fi
-  if expr "$a" : '~/acode/reco_video/*' > /dev/null; then
-    a=`echo "${a:19}"`
-  fi
   echo $a
 }
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export HISTFILESIZE=100000
-export HISTSIZE=10000
-shopt -s histappend
-
+# util
 alias vi_bash="vi ~/.bash_profile"
 alias new_bash="source ~/.bash_profile"
-
-export gcc_home="/usr/local/Cellar/gcc/13.1.0"
-export PATH="$gcc_home/bin:$PATH"
-
-export proto_home=/usr/local/protobuf
-export PATH=$proto_home/bin:$PATH
+alias ll="ls -ali";
+alias ls="ls -G";
+alias grep="grep --color";
+alias lsdu="ls | xargs du -h -s";
+alias lldu="ls -a | xargs du -h -s";
+alias dus="du -h -s";
 
 function now() {
   code="import time;from datetime import datetime"
@@ -51,57 +37,6 @@ function ts1() {
   code="$code;t=int(time.mktime(dt.timetuple()))"
   code="$code;print(t);print(s)"
   python3 -c "$code"
-}
-
-# ag
-agbin='/usr/local/bin/ag -u'
-function af() {
-  if [ $# -gt 1 ]; then
-    find "$1" -name "*$2*"
-  else
-    find . -name "*$1*"
-  fi
-}
-function def_m() {
-  $agbin "$1(<.*>)?::$2\("
-}
-function ag() {
-  $agbin -Q "$1"
-}
-function agi() {
-  $agbin -sQ "$1"
-}
-function agw() {
-  $agbin "\W$1\W"
-}
-function agwc() {
-  $agbin "\W$1[^a-zA-Z:]"
-}
-function agwi() {
-  $agbin "\W$1\W"
-}
-function agr() {
-  $agbin "$1"
-}
-function agf() {
-  $agbin "$1" -G "$2"
-}
-function _agr_cpp() {
-  $agbin "$1" -G "h"
-  $agbin "$1" -G "cc"
-  $agbin "$1" -G "cpp"
-}
-function agclz() {
-  _agr_cpp "struct .*$1"
-  _agr_cpp "class .*$1"
-}
-function agd() {
-  _agr_cpp ": public $1\W"
-}
-function agm() {
-  _agr_cpp "\w+\->$1(<[\w:]+>)?\("
-  _agr_cpp "\w+\.$1(<[\w:]+>)?\("
-  _agr_cpp "^[\x20\t]+$1(<[\w:]+>)?\("
 }
 
 # docker
@@ -147,15 +82,6 @@ function docker_stop_torch() {
   docker rm torch
 }
 
-# util
-alias ll="ls -ali";
-alias ls="ls -G";
-alias grep="grep --color";
-
-alias lsdu='ls | xargs du -h -s';
-alias lldu='ls -a | xargs du -h -s';
-alias dus='du -h -s';
-
 # git
 alias gits='git status'
 alias gitph="git push";
@@ -184,9 +110,6 @@ function gitphu() {
 }
 function parse_git_branch() {
   b=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ -n "$b" ]; then
-    b="$b "
-  fi
   echo "$b"
 }
 function gitl1() {
@@ -261,12 +184,3 @@ function gitlzuser() {
   git config user.name 'leizton'
   git config user.email 'leizton@126.com'
 }
-
-# HomeBrew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-# HomeBrew END
-
-# Added by Toolbox App
-export PATH="$PATH:/usr/local/bin"
