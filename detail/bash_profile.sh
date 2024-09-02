@@ -1,9 +1,3 @@
-export PS1='\n\n\[\033[1;31m\]\t $(mypwd)] $(parse_git_branch)\[\033[0;m\]\n> '
-
-function mypwd() {
-  pwd
-}
-
 # util
 alias vi_bash="vi ~/.bash_profile"
 alias new_bash="source ~/.bash_profile"
@@ -182,3 +176,11 @@ function gitlzuser() {
   git config user.name 'leizton'
   git config user.email 'leizton@126.com'
 }
+
+# bash
+# export PS1='\n\n\[\033[1;31m\]\t $(mypwd)] $(parse_git_branch)\[\033[0;m\]\n> '
+
+# zsh
+function newline1() { tm=`date +"%A %d %H:%M"`; echo "\n$tm" }
+function newline2() { echo "\n>" }
+export PS1="%F{red} $(newline1) %~] $(parse_git_branch) $(newline2) %f"
