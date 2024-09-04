@@ -16,20 +16,9 @@ function now() {
   code="$code;s=s.strftime('%Y-%m-%d %H:%M:%S');print(t);print(tms);print(s)"
   python3 -c "$code"
 }
-function ts() {
-  code="import time;from datetime import datetime"
-  code="$code;t='$1';t=t[:-3] if len(t) > 11 else t"
-  code="$code;s=datetime.fromtimestamp(float(t))"
-  code="$code;s=s.strftime('%Y-%m-%d %H:%M:%S');print(t);print(s)"
-  python3 -c "$code"
-}
-function ts1() {
-  code="import time;from datetime import datetime"
-  code="$code;s='$1 $2';s=s[:-4] if len(s) > 19 else s"
-  code="$code;dt=datetime.strptime(s, '%Y-%m-%d %H:%M:%S')"
-  code="$code;t=int(time.mktime(dt.timetuple()))"
-  code="$code;print(t);print(s)"
-  python3 -c "$code"
+
+function af() {
+  find . -name "*$1*"
 }
 
 # docker
@@ -177,10 +166,15 @@ function gitlzuser() {
   git config user.email 'leizton@126.com'
 }
 
+export PATH="/usr/local/bin:$PATH"
+
 # bash
-# export PS1='\n\n\[\033[1;31m\]\t $(mypwd)] $(parse_git_branch)\[\033[0;m\]\n> '
+# export PS1='\n\n\[\033[1;31m\]\t $(pwd)] $(parse_git_branch)\[\033[0;m\]\n> '
 
 # zsh
-function newline1() { tm=`date +"%A %d %H:%M"`; echo "\n$tm" }
+function newline1() { tm=`date +"%A %d %H:%M:%S"`; echo "\n$tm" }
 function newline2() { echo "\n>" }
-export PS1="%F{red} $(newline1) %~] $(parse_git_branch) $(newline2) %f"
+setopt PROMPT_SUBST
+autoload -U colors && colors
+# 一定要用单引号, 不能用双引号
+export PROMPT='%F{red} $(newline1) %~] $(parse_git_branch) $(newline2) %f'
