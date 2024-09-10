@@ -174,7 +174,6 @@
   },
   "markdown.preview.lineHeight": 1.7,
   "editor.tabSize": 2,
-  "redhat.telemetry.enabled": false,
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "window.commandCenter": true,
   "workbench.layoutControl.enabled": false,
@@ -189,11 +188,9 @@
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.statusBar.enabled": false,
-  "prettier.printWidth": 110,
   "git.openRepositoryInParentFolders": "always",
   "diffEditor.wordWrap": "off",
   "C_Cpp.vcFormat.wrap.preserveBlocks": "never",
-  "yaml.format.proseWrap": "never",
   "editor.renderLineHighlight": "all",
   "editor.wrappingIndent": "none",
   "terminal.integrated.enableMultiLinePasteWarning": false,
@@ -204,7 +201,10 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "editor.stickyScroll.enabled": false,
-  "github.copilot.editor.enableAutoCompletions": true,
   "cmake.options.statusBarVisibility": "compact",
-  "terminal.integrated.tabs.enabled": false
+  "terminal.integrated.tabs.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "cmake.showOptionsMovedNotification": false,
+  "markdown.preview.fontFamily": "MiSans-Regular,SF Mono SC",
+  "markdown.preview.fontSize": 15
 }
