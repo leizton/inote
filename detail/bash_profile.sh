@@ -68,7 +68,6 @@ function docker_stop_torch() {
 alias gits='git status'
 alias gitph="git push";
 alias gitphf="git push --force";
-alias gitplr="git pull --rebase";
 alias gith="git reset --hard HEAD";
 function gita() {
   if [ $# -gt 0 ]; then
@@ -158,6 +157,10 @@ function gitdf() {
 }
 function gitdfm() {
   git diff --stat master
+}
+function gitlzuser() {
+  git config user.name 'leizton'
+  git config user.email 'leizton@126.com'
 }
 
 # user custom
