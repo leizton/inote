@@ -21,6 +21,29 @@ function af() {
   find . -name "*$1*"
 }
 
+# hdfs
+function hdfs() {
+  command="$1"
+  shift # 移除第一个参数
+  case "$command" in
+    "ls")
+      hadoop fs -ls $*
+      ;;
+    "cp")
+      hadoop fs -copyToLocal $*
+      ;;
+    "rm")
+      hadoop fs -rm -r -f $*
+      ;;
+    "put")
+      hadoop fs -put $*
+      ;;
+    *)
+      echo "unsupport $command"
+      ;;
+  esac
+}
+
 # docker
 # docker ps -a
 # docker images
